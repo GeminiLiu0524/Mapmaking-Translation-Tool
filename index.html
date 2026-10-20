@@ -196,6 +196,7 @@ ${t.comment}`:t.comment}this.doc.range[2]=t.offset;break}default:this.errors.pus
   color-scheme:dark;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.5;
   padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:0 32px}
 button,input,select,textarea{font:inherit;color:inherit}
@@ -204,11 +205,11 @@ button{cursor:pointer}
 .mono{font-family:var(--f-mono)}
 
 /* header */
-.top{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding-block:16px 12px;border-bottom:1px solid var(--line)}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px;padding-block:10px;border-bottom:1px solid var(--line)}
 .brand{display:flex;align-items:center;gap:12px;min-width:0}
-.mark{width:40px;height:40px;display:grid;place-items:center;background:var(--chat);color:#ffaa00;font-family:var(--f-display);font-size:24px;font-weight:700;text-shadow:3px 3px 0 #3f2a00;border-radius:4px;flex:none}
-.brand h1{margin:0;font-size:19px;font-weight:700;letter-spacing:.02em;text-wrap:balance}
-.brand p{margin:0;color:var(--muted);font-size:12.5px}
+.mark{width:34px;height:34px;display:grid;place-items:center;background:var(--chat);color:#ffaa00;font-family:var(--f-display);font-size:24px;font-weight:700;text-shadow:3px 3px 0 #3f2a00;border-radius:4px;flex:none}
+.brand h1{margin:0;font-size:18px;font-weight:700;letter-spacing:.02em;text-wrap:balance}
+.ver{font-size:12px;color:var(--muted);white-space:nowrap}
 .actions{display:flex;flex-wrap:wrap;gap:8px;margin-left:auto;align-items:center}
 .btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--raise);padding:7px 12px;border-radius:6px;font-size:13.5px;white-space:nowrap}
 .btn:hover{border-color:var(--muted)}
@@ -222,7 +223,9 @@ select{color:var(--ink);background-color:var(--raise)}
 option,optgroup{color:var(--ink);background-color:var(--raise)}
 option:checked{background-color:var(--accent-soft);color:var(--ink)}
 #btn-clear{white-space:normal;text-align:left}
-.dirty-pill{font-size:12.5px;color:var(--dirty);font-weight:500;padding:4px 10px;border-radius:999px;background:var(--accent-soft)}
+.dirty-pill{font-size:12.5px;color:var(--dirty);font-weight:500;padding:5px 11px;border-radius:999px;background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--dirty) 40%,transparent);white-space:nowrap}
+.dirty-pill:hover{border-color:var(--dirty)}
+.btn .ic{width:16px;height:16px;flex:none}
 
 .banner{margin-top:12px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:10px 14px;border:1px dashed var(--accent);border-radius:8px;background:color-mix(in srgb, var(--accent-soft) 55%, transparent);font-size:13.5px}
 .banner b{font-weight:700}
@@ -285,8 +288,9 @@ thead th.kh{left:0;z-index:4}
 .th-lang .code{font-family:var(--f-display);font-size:15px}
 .th-lang .nm{color:var(--muted);font-size:12px}
 .th-lang .lang-bar{height:3px}
-tbody th.kcell{position:sticky;left:0;z-index:2;background:var(--surface);text-align:left;font-weight:400;vertical-align:top;padding:9px 10px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);width:270px;min-width:220px;max-width:300px}
-.kname{font-family:var(--f-mono);font-size:12.5px;word-break:break-all;line-height:1.4}
+tbody th.kcell{position:sticky;left:0;z-index:2;background:var(--surface);text-align:left;font-weight:400;vertical-align:top;padding:15px 8px 9px 10px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);width:270px;min-width:220px;max-width:300px}
+.khead{display:flex;gap:6px;align-items:flex-start}
+.kname{font-family:var(--f-mono);font-size:12.5px;word-break:break-all;line-height:18px;flex:1;min-width:0}
 .kname .pre{color:var(--muted)}
 .kmeta{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;align-items:center}
 .tag{font-size:11px;padding:1px 6px;border-radius:4px;border:1px solid transparent;line-height:1.5;white-space:nowrap}
@@ -296,8 +300,12 @@ tbody th.kcell{position:sticky;left:0;z-index:2;background:var(--surface);text-a
 .tag.dirty{color:var(--dirty);background:color-mix(in srgb,var(--dirty) 15%,transparent)}
 .tag.muted{color:var(--muted);border-color:var(--line)}
 button.tag{cursor:pointer;font:inherit;font-size:11px}
-.row-tools{display:flex;gap:2px;margin-left:auto}
-.icon-btn{border:0;background:none;color:var(--muted);font-size:12px;padding:2px 5px;border-radius:4px}
+.row-tools{display:flex;gap:1px;flex:none;margin-top:-3px}
+tr[data-k]:not(:hover):not(:focus-within) .row-tools{visibility:hidden}
+@media (hover:none){tr[data-k] .row-tools{visibility:visible!important}}
+.icon-btn{border:0;background:none;color:var(--muted);font-size:12px;padding:3px;border-radius:4px;display:inline-grid;place-items:center}
+.icon-btn .ic{width:15px;height:15px}
+.icon-btn.on{color:var(--info)}
 .icon-btn:hover{background:var(--line);color:var(--ink)}
 .icon-btn.danger.armed{background:var(--miss);color:#fff}
 
@@ -307,13 +315,13 @@ td.cell.f-miss{box-shadow:inset 3px 0 0 var(--miss)}
 td.cell.f-warn{box-shadow:inset 3px 0 0 var(--warn)}
 td.cell.f-info{box-shadow:inset 3px 0 0 var(--info)}
 td.cell.is-base{background:color-mix(in srgb,var(--accent-soft) 22%,transparent)}
-td.cell.editing{cursor:default;background:var(--raise);min-width:340px}
-.cell-tags{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:5px}
+td.cell.editing{background:var(--raise);box-shadow:inset 0 0 0 2px var(--accent)}
+.cell-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
 .cell-tags:empty{display:none}
-.chat{background:var(--chat);border-radius:4px;padding:6px 9px;color:#fff;font-family:var(--f-body);font-size:14px;line-height:1.55;white-space:pre-wrap;word-break:break-word;letter-spacing:.01em}
+.chat{background:var(--chat);border-radius:4px;padding:6px 9px;color:#fff;font-family:var(--f-body);font-size:14px;line-height:22px;white-space:pre-wrap;word-break:break-word;letter-spacing:.01em}
 .chat .empty{color:#7c8276;font-style:italic;text-shadow:none}
 .chat.none{background:transparent;border:1px dashed var(--line);color:var(--muted);font-size:12.5px}
-.rawv{font-family:var(--f-mono);font-size:12.5px;line-height:1.55;white-space:pre-wrap;word-break:break-all;padding:5px 2px}
+.rawv{font-family:var(--f-mono);font-size:12.5px;line-height:22px;white-space:pre-wrap;word-break:break-all;padding:6px 2px}
 .tk{border-radius:3px;padding:0 2px;background:color-mix(in srgb,var(--sw, #888) 26%,transparent);box-shadow:inset 0 -2px 0 var(--sw, #888)}
 .tk.fmt{background:color-mix(in srgb,var(--muted) 18%,transparent);box-shadow:none}
 .ph{display:inline-block;font-family:var(--f-mono);font-size:.82em;padding:0 4px;margin:0 1px;border-radius:3px;background:#3a4a63;color:#cfe0ff;text-shadow:none;line-height:1.4;vertical-align:1px}
@@ -338,18 +346,47 @@ tr.uses td{background:var(--raise);padding:8px 12px 12px;border-bottom:1px solid
 .kcols .count{margin-left:3px;font-size:11px}
 
 /* editor */
-.ed{display:flex;flex-direction:column;gap:7px}
-.ed-tools{display:flex;flex-wrap:wrap;gap:3px;align-items:center}
 .swb{width:20px;height:20px;border-radius:3px;border:1px solid color-mix(in srgb,var(--ink) 25%,transparent);background:var(--sw);padding:0}
-.swb:hover{transform:translateY(-1px);box-shadow:0 2px 0 color-mix(in srgb,var(--ink) 30%,transparent)}
-.fb{min-width:24px;height:22px;border:1px solid var(--line);background:var(--surface);border-radius:3px;font-size:12px;padding:0 5px}
-.sep{width:1px;height:18px;background:var(--line);margin:0 3px}
-.ed textarea{font-family:var(--f-mono);font-size:13px;line-height:1.5;resize:vertical;min-height:72px;width:100%}
-.ed-colors{display:flex;flex-wrap:wrap;gap:5px;align-items:center;font-size:12px;color:var(--muted)}
-.cchip{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);background:var(--surface);border-radius:4px;padding:2px 7px 2px 4px;font-family:var(--f-mono);font-size:11.5px}
-.cchip i{width:13px;height:13px;border-radius:2px;background:var(--sw);box-shadow:inset 0 0 0 1px rgba(0,0,0,.2)}
-.ed-act{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.ed-act .hint{margin-left:auto}
+.swb:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 2px 0 color-mix(in srgb,var(--ink) 30%,transparent)}
+.fb{min-width:26px;height:26px;border:1px solid var(--line);background:var(--surface);border-radius:4px;font-size:12.5px;padding:0 5px;display:inline-grid;place-items:center}
+.fb .ic{width:15px;height:15px}
+.fb.wide{display:inline-flex;gap:5px;padding:0 9px}
+.fb.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.edbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--raise);flex:none}
+.edbar.off .eb-group{opacity:.45}
+.edbar button:disabled{cursor:default}
+.eb-group{display:flex;flex-wrap:wrap;gap:3px;align-items:center}
+.eb-pal{gap:2px}
+.edbar .swb.on{outline:2px solid var(--accent);outline-offset:1px}
+.eb-hint{margin-left:auto;font-size:12px;color:var(--muted)}
+.ed-ce{outline:none;caret-color:#fff;min-height:34px;cursor:text}
+.ed-ce.is-empty::before{content:attr(data-ph);color:#7c8276;font-style:italic;pointer-events:none}
+.ed-ce.is-empty br{display:none}
+.ed-ce .obf-ed{background:rgba(255,255,255,.14);border-radius:2px}
+.ed-ce .ph{cursor:default;user-select:all}
+.cell textarea#cell-editor{width:100%;display:block;font-family:var(--f-mono);font-size:12.5px;line-height:22px;padding:5px 8px;resize:none;overflow:hidden;min-height:34px}
+.ed-pv{margin-top:6px}
+td.cell .fill-btn{position:absolute;top:3px;right:3px;z-index:1;width:24px;height:24px;display:grid;place-items:center;border:1px solid var(--line);background:var(--raise);color:var(--muted);border-radius:5px;padding:0;opacity:0;transition:opacity .12s}
+td.cell .fill-btn .ic{width:14px;height:14px}
+td.cell:hover .fill-btn,td.cell .fill-btn:focus-visible{opacity:1}
+td.cell .fill-btn:hover{color:var(--ink);border-color:var(--muted)}
+@media (hover:none){td.cell .fill-btn{opacity:.85}}
+@keyframes cellflash{0%{box-shadow:inset 0 0 0 3px var(--accent)}100%{box-shadow:inset 0 0 0 3px transparent}}
+td.cell.flash{animation:cellflash 1.3s ease-out}
+.edfloat{position:fixed;z-index:35;display:flex;gap:6px;padding:4px;background:var(--raise);border:1px solid var(--line);border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+/* projects */
+.proj-list{display:flex;flex-direction:column;gap:2px;max-height:240px;overflow:auto}
+.proj{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:1px;border-radius:6px;padding:1px}
+.proj.on{background:var(--accent-soft)}
+.proj-open{border:0;background:none;text-align:left;display:flex;flex-direction:column;padding:4px 6px;min-width:0;border-radius:5px}
+.proj-open:hover{background:color-mix(in srgb,var(--line) 55%,transparent)}
+.proj-name{font-weight:500;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.proj-meta{font-size:11.5px;color:var(--muted)}
+.proj .icon-btn{visibility:hidden}
+.proj:hover .icon-btn,.proj:focus-within .icon-btn,.proj .icon-btn.armed{visibility:visible}
+@media (hover:none){.proj .icon-btn{visibility:visible}}
+.proj-input{width:100%;min-width:0;margin:2px}
+.inline-form.wrap{flex-wrap:wrap}
 
 /* popover & dialogs */
 .pop{position:fixed;z-index:50;background:var(--raise);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 32px rgba(0,0,0,.22);padding:12px;width:248px;display:flex;flex-direction:column;gap:9px}
@@ -373,12 +410,6 @@ tr.uses td{background:var(--raise);padding:8px 12px 12px;border-bottom:1px solid
 .dialog textarea{width:100%;font-family:var(--f-mono);font-size:12px;min-height:160px}
 .err{color:var(--miss);font-size:12.5px;margin:0}
 .drop{position:fixed;inset:0;z-index:60;display:grid;place-items:center;background:color-mix(in srgb,var(--bg) 82%,transparent);border:3px dashed var(--accent);font-size:18px;font-weight:700;pointer-events:none}
-.remind{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 12px;background:var(--raise);border-top:2px solid var(--accent);box-shadow:0 -6px 20px rgba(0,0,0,.12);font-size:13.5px;
-  padding-block:10px calc(10px + env(safe-area-inset-bottom, 0px));padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
-.remind b{color:var(--dirty)}
-.remind .hint{flex-basis:100%;text-align:center}
-body.has-remind{padding-bottom:96px}
-body.has-remind .toast{bottom:calc(84px + env(safe-area-inset-bottom, 0px))}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom, 0px));transform:translateX(-50%);z-index:70;background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:6px;font-size:13px;max-width:calc(100% - 32px)}
 .more{padding:12px;text-align:center}
 .empty-state{padding:40px 16px;text-align:center;color:var(--muted)}
@@ -388,30 +419,42 @@ body.has-remind .toast{bottom:calc(84px + env(safe-area-inset-bottom, 0px))}
 .src-head h2{margin:0;font-size:13px;font-weight:700;letter-spacing:.06em}
 .mode{font-size:12.5px;color:var(--muted)}
 .mode b{color:var(--ink);font-weight:500}
-.src-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px}
-.src{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.src-grid{display:flex;flex-wrap:wrap;gap:8px}
+.src{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:5px 6px 5px 10px;display:flex;flex-direction:column;gap:4px;min-width:0;flex:1 1 280px;max-width:100%}
 .src.child{border-style:dashed}
-.src-top{display:flex;align-items:center;gap:8px;min-width:0}
+.src-top{display:flex;flex-wrap:wrap;align-items:center;gap:3px 8px;min-width:0}
+.src-top .icon-btn{margin-left:auto}
 .kind{font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;flex:none;letter-spacing:.04em}
 .kind.map{background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok)}
 .kind.pack{background:color-mix(in srgb,var(--accent) 18%,transparent);color:var(--accent)}
 .kind.datapack{background:color-mix(in srgb,var(--info) 15%,transparent);color:var(--info)}
-.src-name{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.src-name{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;max-width:100%}
 .src-path{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);word-break:break-all}
-.src-stats{font-size:12.5px;font-variant-numeric:tabular-nums}
+.src-stats{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.src-stats b{color:var(--ink);font-weight:500}
 .src .chat{font-size:12.5px;padding:4px 8px}
-.rel{font-size:12px;color:var(--muted)}
+.rel{font-size:11.5px;color:var(--muted)}
 .rel b{color:var(--ink);font-weight:500}
 .warn-list{display:flex;flex-direction:column;gap:5px}
-.wn{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;font-size:12.5px;padding:5px 8px;border-radius:5px;line-height:1.45}
+.wn{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;font-size:12px;padding:3px 8px;border-radius:5px;line-height:1.45}
 .wn.miss{background:color-mix(in srgb,var(--miss) 11%,transparent);color:var(--ink)}
 .wn.warn{background:color-mix(in srgb,var(--warn) 12%,transparent)}
 .wn.info{background:color-mix(in srgb,var(--info) 10%,transparent)}
 .wn::before{content:"";width:7px;height:7px;border-radius:2px;flex:none;background:var(--c)}
 .wn.miss{--c:var(--miss)} .wn.warn{--c:var(--warn)} .wn.info{--c:var(--info)}
-.wn span{flex:1 1 180px;min-width:0}
-.src-empty{border:1px dashed var(--line);border-radius:8px;padding:12px;color:var(--muted);font-size:13px}
-@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+.wn span{flex:1 1 auto;min-width:0}
+.src-empty{border:1px dashed var(--line);border-radius:8px;padding:8px 12px;color:var(--muted);font-size:12.5px}
+@media (min-width:881px){
+  body{height:100dvh;display:flex;flex-direction:column;overflow:hidden;padding-bottom:12px}
+  .top,.banner{flex:none}
+  .layout{flex:1 1 auto;min-height:0;align-items:stretch;margin-top:12px}
+  .side{overflow:auto;min-height:0;padding-bottom:4px}
+  .main{min-height:0}
+  .sources{flex:none;max-height:26vh;overflow:auto}
+  .toolbar,.chips{flex:none}
+  .grid-wrap{flex:1 1 auto;min-height:0;max-height:none}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
@@ -420,17 +463,17 @@ body.has-remind .toast{bottom:calc(84px + env(safe-area-inset-bottom, 0px))}
 <header class="top">
   <div class="brand">
     <div class="mark" aria-hidden="true">§</div>
-    <div><h1 data-t>翻譯鍵工作台</h1><p><span data-t>從地圖或資源包提取翻譯鍵，並排比對語言、編輯文字與顏色代碼</span> · <span data-t>離線版</span> 1.6</p></div>
+    <h1 data-t>翻譯鍵工作台</h1><span class="ver"><span data-t>離線版</span> 1.7</span>
   </div>
   <div class="actions">
     <label class="ui-lang" title="Interface language / 介面語言"><span aria-hidden="true">文A</span><select id="ui-lang" aria-label="Interface language"><option value="zh_tw">繁體中文</option><option value="en">English (US)</option><option value="zh_cn">简体中文</option></select></label>
-    <span id="dirty" class="dirty-pill" hidden></span>
-    <button class="btn" id="btn-lang-files" type="button" title="只載入語言檔（.json / .lang / .yml），不掃描地圖" data-t data-t-title>載入語言檔</button>
-    <button class="btn" id="btn-files" type="button" data-t>載入檔案</button>
-    <button class="btn" id="btn-folder" type="button" data-t>載入資料夾</button>
-    <button class="btn" id="btn-folder-rw" type="button" hidden title="開啟後修改可以直接寫回原本的語言檔（Chrome / Edge）" data-t data-t-title>開啟資料夾並可存回</button>
-    <button class="btn" id="btn-add-key" type="button" data-t>＋ 新增鍵</button>
-    <button class="btn primary" id="btn-export" type="button" data-t>匯出語言檔</button>
+    <button class="btn" id="btn-lang-files" type="button" title="只載入語言檔（.json / .lang / .yml），不掃描地圖" data-t-title><i data-ic="lang"></i><span data-t>載入語言檔</span></button>
+    <button class="btn" id="btn-files" type="button" title="地圖或資源包的 .zip，或個別檔案" data-t-title><i data-ic="upload"></i><span data-t>載入檔案</span></button>
+    <button class="btn" id="btn-folder" type="button" title="地圖或資源包資料夾（唯讀）" data-t-title><i data-ic="folder"></i><span data-t>載入資料夾</span></button>
+    <button class="btn" id="btn-folder-rw" type="button" hidden title="開啟後修改可以直接寫回原本的語言檔（Chrome / Edge）" data-t-title><i data-ic="folderEdit"></i><span data-t>開啟資料夾並可存回</span></button>
+    <button class="btn" id="btn-add-key" type="button" title="新增翻譯鍵" data-t-title><i data-ic="plus"></i><span data-t>新增鍵</span></button>
+    <button id="dirty" class="dirty-pill" type="button" hidden title="開啟匯出視窗" data-t-title></button>
+    <button class="btn primary" id="btn-export" type="button"><i data-ic="download"></i><span data-t>匯出語言檔</span></button>
     <input id="in-files" type="file" multiple accept=".zip,.json,.lang,.yml,.yaml,.mcfunction,.mca,.mcr,.nbt,.snbt,.dat,.mcmeta" hidden>
     <input id="in-folder" type="file" webkitdirectory directory multiple hidden>
     <input id="in-lang" type="file" multiple accept=".json,.lang,.yml,.yaml" hidden>
@@ -440,18 +483,22 @@ body.has-remind .toast{bottom:calc(84px + env(safe-area-inset-bottom, 0px))}
 
 <div class="layout">
   <aside class="side">
-    <details class="panel" open id="p-session"><summary><span data-t>工作階段</span></summary>
+    <details class="panel" open id="p-proj"><summary><span data-t>專案</span> <span class="count" id="proj-count"></span></summary>
       <div class="body">
-        <div class="inline-form"><button class="btn sm" type="button" id="btn-save-session" data-t>儲存工作階段</button><button class="btn sm" type="button" id="btn-open-session" data-t>開啟工作階段</button></div>
-        <p class="hint" id="autosave-status">工作階段檔（.json）包含所有語言、修改、地圖掃描結果與地圖檔的顏色修改，下次開啟就能接著做，不必重新掃描地圖。</p>
+        <div class="proj-list" id="proj-list"></div>
+        <div class="inline-form wrap">
+          <button class="btn sm" type="button" id="btn-new-proj" title="從空白開始一個新專案" data-t-title><i data-ic="plus"></i><span data-t>新專案</span></button>
+          <button class="btn sm" type="button" id="btn-save-session" title="把目前專案存成 .json，可以備份、換電腦或分享" data-t-title><i data-ic="download"></i><span data-t>匯出</span></button>
+          <button class="btn sm" type="button" id="btn-open-session" title="把 .json 專案檔匯入成新專案" data-t-title><i data-ic="upload"></i><span data-t>匯入</span></button>
+        </div>
+        <p class="hint" id="autosave-status"></p>
         <input id="in-session" type="file" accept=".json,application/json" hidden>
       </div>
     </details>
-    <details class="panel" open id="p-langs"><summary><span data-t>語言</span> <span class="count" id="lang-count"></span></summary>
+    <details class="panel" open id="p-langs"><summary title="勾選顯示為欄位；「設為基準」的語言用來比對缺漏與未翻譯。" data-t-title><span data-t>語言</span> <span class="count" id="lang-count"></span></summary>
       <div class="body">
         <div id="lang-list"></div>
         <div class="inline-form"><input type="text" id="new-lang" placeholder="新增語言，例如 ko_kr" aria-label="新增語言代碼" data-t-ph data-t-aria><button class="btn sm" type="button" id="btn-new-lang" data-t>新增</button></div>
-        <p class="hint" data-t>勾選顯示為欄位；「設為基準」的語言用來比對缺漏與未翻譯。</p>
       </div>
     </details>
     <details class="panel" id="p-src"><summary><span data-t>語言檔</span> <span class="count" id="src-count"></span></summary>
@@ -463,21 +510,18 @@ body.has-remind .toast{bottom:calc(84px + env(safe-area-inset-bottom, 0px))}
     </details>
     <details class="panel" id="p-set"><summary data-t>設定</summary>
       <div class="body">
-        <label class="field"><span data-t>格式碼前綴</span>
+        <label class="field" title="原版語言檔只支援 § 色碼。hex 顏色寫在地圖的文字元件（SNBT / JSON 的 color）裡，會在每個鍵「用在哪裡」中顯示與修改。" data-t-title><span data-t>格式碼前綴</span>
           <select id="set-prefix"><option value="§" data-t>§（原版）</option><option value="&amp;" data-t>&amp;（插件，同時辨識 §）</option></select>
         </label>
-        <p class="hint" data-th>原版語言檔只支援 § 色碼。hex 顏色寫在地圖的文字元件（SNBT / JSON 的 <span class="mono">color</span>）裡，會在每個鍵「用在哪裡」中顯示與修改。</p>
-        <label class="field"><span data-t>「未定義」檢查略過這些前綴（每行一個）</span>
+        <label class="field" title="地圖用到原版鍵（例如 block.minecraft.stone）時，遊戲本身已提供翻譯，不必列為未定義。" data-t-title><span data-t>「未定義」檢查略過這些前綴（每行一個）</span>
           <textarea id="set-ignore" rows="5"></textarea>
         </label>
-        <p class="hint" data-t>可讀取 .json、舊版 .lang 與 .yml / .yaml 語言檔。YAML 的巢狀結構會攤平成以「.」連接的鍵。匯出時只改動有修改的地方，註解、空行與引號樣式都會保留。</p>
-        <p class="hint" data-t>地圖用到原版鍵（例如 block.minecraft.stone）時，遊戲本身已提供翻譯，不必列為未定義。</p>
       </div>
     </details>
   </aside>
 
   <section class="main">
-    <section class="sources" id="sources" aria-labelledby="src-title"></section>
+    <section class="sources" id="sources" aria-label="載入內容" data-t-aria></section>
     <div class="toolbar">
       <input type="search" id="q" placeholder="搜尋鍵或文字…" aria-label="搜尋" data-t-ph data-t-aria>
       <select id="prefix" aria-label="鍵前綴" data-t-aria></select>
@@ -487,6 +531,7 @@ body.has-remind .toast{bottom:calc(84px + env(safe-area-inset-bottom, 0px))}
       </div>
     </div>
     <div class="chips" id="chips"></div>
+    <div class="edbar off" id="edbar" role="toolbar" aria-label="編輯工具" data-t-aria></div>
     <div class="grid-wrap" id="grid-wrap"><table id="grid"></table></div>
   </section>
 </div>
@@ -494,10 +539,10 @@ body.has-remind .toast{bottom:calc(84px + env(safe-area-inset-bottom, 0px))}
 <div id="pop" class="pop" hidden></div>
 <div id="modal" class="scrim" hidden></div>
 <div id="drop" class="drop" hidden data-t>放開以載入地圖、資源包或語言檔</div>
-<div id="remind" class="remind" role="status" hidden></div>
+<div id="edfloat" class="edfloat" hidden><button type="button" class="btn sm primary" data-fa="save" title="Ctrl+Enter"><i data-ic="check"></i><span data-t>儲存</span></button><button type="button" class="btn sm" data-fa="cancel" title="Esc"><span data-t>取消</span></button></div>
 <div id="toast" class="toast" hidden></div>
 
-<script id="i18n">/*I18N*/const I18N = {"en": {"翻譯鍵工作台": "Lang Key Workbench", "（空字串）": "(empty string)", "沒有找到可讀取的檔案": "No readable files found", "文字元件顏色": "Text component color", "（未設定）": "(not set)", "選色器": "Color picker", "Hex 色碼": "Hex color", "套用": "Apply", "移除 color（改用預設顏色）": "Remove color (use default)", "請輸入 6 位 hex 色碼，例如 #ff7f50": "Enter a 6-digit hex color, e.g. #ff7f50", "已移除顏色，記得匯出地圖檔": "Color removed. Remember to export the map files", "（根目錄）": "(root)", "載入內容": "Loaded content", "還沒有載入地圖或資源包。可以分開載入（製圖中），也可以只載入一張已經內含資源包的地圖（釋出版）。": "No map or resource pack loaded yet. Load them separately (while mapmaking), or load just a map that already contains its resource pack (release build).", "<b>釋出版地圖<\/b>：資源包內嵌在地圖裡": "<b>Release map<\/b>: the resource pack is embedded in the map", "<b>製圖模式<\/b>：地圖與資源包分開載入": "<b>Mapmaking mode<\/b>: map and resource pack loaded separately", "<b>混合<\/b>：地圖內有資源包，另外也載入了獨立資源包": "<b>Mixed<\/b>: the map contains a resource pack, and a separate pack is also loaded", "<b>只有地圖<\/b>，沒有資源包": "<b>Map only<\/b>, no resource pack", "<b>只有資源包<\/b>，沒有地圖": "<b>Resource pack only<\/b>, no map", "沒有語言檔": "No lang files", "獨立資源包（不在地圖內）": "Standalone resource pack (not inside the map)", "移除這個來源載入的內容": "Remove everything loaded from this source", "移除": "Remove", "這張地圖沒有用到任何翻譯鍵（沒有 translate 文字元件），所以不需要語言檔。": "This map doesn't use any translation keys (no translate text components), so it needs no lang files.", "缺少語言檔": "Missing lang files", "載入資源包": "Load resource pack", "列出這些鍵": "List these keys", "地圖用到的鍵都有翻譯定義。": "Every key the map uses has a translation.", "這個資源包裡沒有 <span class=\"mono\">assets/*/lang/<\/span> 語言檔。": "This resource pack has no <span class=\"mono\">assets/*/lang/<\/span> lang files.", "只載入了資源包，無法判斷哪些鍵被地圖使用。載入地圖後會標出「未定義」與「未使用」。": "Only a resource pack is loaded, so there's no way to tell which keys the map uses. Load the map to see “Undefined” and “Unused” keys.", "載入地圖": "Load map", "這個資料包沒有用到翻譯鍵。": "This datapack doesn't use any translation keys.", "語言檔": "Lang files", "個別載入的語言檔": "Individually loaded lang files", "基準": "Base", "設為基準": "Set as base", "基準語言": "Base language", "還沒有語言檔。": "No lang files yet.", "新檔 · ": "New file · ", "尚未載入。": "Nothing loaded yet.", "只載入了語言檔。加入地圖資料夾或世界 .zip，就能找出地圖實際用到哪些鍵。": "Only lang files are loaded. Add a map folder or world .zip to find which keys the map actually uses.", "<b>這是範例資料。<\/b>把地圖資料夾、世界 .zip、資源包或 lang 檔拖進這個頁面，就會換成你的內容。": "<b>This is sample data.<\/b> Drag a map folder, world .zip, resource pack, or lang file onto this page to replace it with your own.", "開啟地圖或資源包資料夾": "Open map or resource pack folder", "選擇 .zip 或檔案": "Choose .zip or files", "所有前綴": "All prefixes", "基準語言沒有這個鍵 · 點一下新增": "Base language has no such key · Click to add", "沒有翻譯 · 點一下新增": "No translation · Click to add", "地圖使用但未定義": "Used by map but undefined", "地圖未使用": "Unused by map", "原版鍵": "Vanilla key", "複製鍵名": "Copy key name", "複製": "Copy", "從所有語言刪除這個鍵": "Delete this key from all languages", "刪除": "Delete", "修改這個文字元件的 color": "Edit this text component's color", "＋ 設定顏色": "+ Set color", "區域檔、結構或跳脫字串裡的顏色，請在遊戲或原檔中修改": "Color inside a region file, structure, or escaped string. Change it in-game or in the original file", "唯讀": "Read-only", "已修改": "Modified", "元件顏色": "Component color", "只列出前 60 處。": "Showing the first 60 only.", "在左側勾選至少一個語言來顯示欄位。": "Check at least one language on the left to show columns.", "翻譯鍵": "Translation key", "沒有符合目前篩選條件的鍵。": "No keys match the current filters.", "還沒有翻譯鍵。載入地圖或資源包開始。": "No translation keys yet. Load a map or resource pack to start.", "插入 %s 佔位符": "Insert %s placeholder", "儲存": "Save", "取消": "Cancel", "還原成原始值": "Revert to original", "Ctrl+Enter 儲存 · Esc 取消": "Ctrl+Enter to save · Esc to cancel", "§ 色碼，點一下修改：": "§ codes, click to change:", "沒有 § 色碼。用上方色塊插入。": "No § codes. Insert one with the swatches above.", "已儲存，記得匯出語言檔": "Saved. Remember to export the lang files", "語言檔只能用這 16 種 § 色碼。要用 hex 顏色，請在下方「用在哪裡」修改地圖文字元件的 color。": "Lang files can only use these 16 § colors. For hex colors, change the map text component's color under “Where it's used” below.", "沒有原檔位置": "Original file location unknown", "沒有寫入權限": "No write permission", "匯出語言檔": "Export lang files", "每個檔案保留原本的鍵順序與縮排，新增的鍵接在最後。打包的 .zip 保留 assets/…/lang/ 結構，可以直接覆蓋進資源包。": "Each file keeps its original key order and indentation; new keys go at the end. The .zip keeps the assets/…/lang/ structure, so you can drop it straight into the resource pack.", "新檔案 · ": "New file · ", "沒有修改": "No changes", "存回原檔": "Save to original", "下載": "Download", "沒有可匯出的語言檔。": "No lang files to export.", "地圖檔（文字元件顏色）": "Map files (text component colors)", "修改了 color": "Color changed", "修改過的全部存回原檔": "Save all changes to originals", "全部打包成 .zip": "Pack everything as .zip", "關閉": "Close", ".zip 裡語言檔放在 assets/…，修改過的地圖檔放在 map/…，保留原本的資料夾結構。": "In the .zip, lang files go under assets/… and changed map files under map/…, keeping the original folder structure.", "這個檢視無法下載檔案，請用「複製」貼回原檔。": "This view can't download files. Use “Copy” and paste into the original file.", "匯出內容": "Export content", "這個檢視無法下載，請改用複製": "This view can't download. Use copy instead", "已取消下載": "Download canceled", "已有一個下載視窗開著，請稍後再試": "A download prompt is already open. Try again shortly", "未知錯誤": "unknown error", "無法直接複製，內容已選取，請按 Ctrl+C": "Couldn't copy directly. The content is selected; press Ctrl+C", "沒有需要存回的修改": "No changes to save back", "新增翻譯鍵": "New translation key", "鍵名": "Key name", "例如 map.portal.locked": "e.g. map.portal.locked", "新增": "Add", "鍵名只能包含英數字、底線、點、連字號、冒號與斜線。": "Key names can only contain letters, digits, underscores, dots, hyphens, colons, and slashes.", "這不是翻譯鍵工作台的工作階段檔": "This isn't a Lang Key Workbench session file", "工作階段": "Session", "目前是範例資料，先載入你的地圖或資源包": "This is sample data. Load your own map or resource pack first", "無法讀取：檔案不是有效的 JSON": "Can't read it: the file isn't valid JSON", "已開啟工作階段": "Session opened", "無法開啟工作階段": "Couldn't open the session", "工作階段檔（.json）包含所有語言、修改、地圖掃描結果與地圖檔的顏色修改，下次開啟就能接著做，不必重新掃描地圖。": "A session file (.json) holds every language, your edits, the map scan results, and map color changes, so next time you can pick up where you left off without rescanning the map.", "這個瀏覽器無法自動暫存，請手動「儲存工作階段」。": "This browser can't autosave. Use “Save session” manually.", "修改會自動暫存在這個瀏覽器。": "Changes are autosaved in this browser.", "找到上次的工作階段": "Found your last session", "繼續上次的工作": "Resume last session", "不用，看範例": "No thanks, show the sample", "載入新的地圖或資源包後，自動暫存會被新的工作取代。": "Loading a new map or resource pack replaces the autosave with the new work.", "已儲存工作階段 ✓": "Session saved ✓", "儲存工作階段": "Save session", "先隱藏，下次有新修改時再提醒": "Hide for now; remind me on the next change", "稍後": "Later", "正在列出資料夾內容": "Listing folder contents", "沒有開啟資料夾": "No folder opened", "如果 Chrome 說「資料夾中包含系統檔案」，通常是因為資料夾在 <span class=\"mono\">.minecraft<\/span> 裡。<span class=\"mono\">.minecraft<\/span> 位於 <span class=\"mono\">AppData<\/span>，瀏覽器不允許網頁寫入那裡。": "If Chrome says the folder “contains system files”, the folder is usually inside <span class=\"mono\">.minecraft<\/span>, which lives in <span class=\"mono\">AppData<\/span>. Browsers don't let web pages write there.", "<b>只要讀取與比對：<\/b>改用「載入資料夾」，或直接把資料夾拖進這個頁面，任何位置都可以。": "<b>To just read and compare:<\/b> use “Load folder” instead, or drag the folder onto this page. Any location works.", "<b>想直接存回原檔：<\/b>先把資源包資料夾複製到桌面或文件裡的子資料夾（例如 <span class=\"mono\">文件\\packs\\my-pack<\/span>），再用「開啟資料夾並可存回」開啟它；改完後再複製回 <span class=\"mono\">resourcepacks<\/span>。不要選桌面、文件或磁碟根目錄本身，這些也會被擋。": "<b>To save straight to the original files:<\/b> copy the resource pack folder into a subfolder of your Desktop or Documents (e.g. <span class=\"mono\">Documents\\packs\\my-pack<\/span>), then open it with “Open folder (save back)”. Copy it back to <span class=\"mono\">resourcepacks<\/span> when you're done. Don't pick the Desktop, Documents, or a drive root itself; those are blocked too.", "改用「載入資料夾」": "Use “Load folder” instead", "已回到上次的工作": "Back to your last session", "確定移除？": "Remove?", "已清除範例資料": "Sample data cleared", "已移除": "Removed", "再按一次確認清除": "Click again to clear", "清除全部": "Clear all", "已清除": "Cleared", "語言代碼格式像 zh_tw、ko_kr": "Language codes look like zh_tw or ko_kr", "無法複製，請手動選取鍵名": "Couldn't copy. Select the key name manually", "確定？": "Sure?", "{0}，點一下更改": "{0}. Click to change", "{0} · 區塊 {1}, {2}（約 x {3}, z {4}）": "{0} · chunk {1}, {2} (about x {3}, z {4})", "正在讀取 {0} / {1}": "Reading {0} / {1}", "載入完成：{0} 個語言檔、掃描 {1} 個地圖檔，共 {2} 個鍵": "Done: {0} lang files, {1} map files scanned, {2} keys in total", "（{0} 個檔案無法讀取）": " ({0} files couldn't be read)", "寫入 {0}。語言檔開頭的 § 色碼會蓋過這個顏色。": "Writes to {0}. A § code at the start of the lang text overrides this color.", "已改成 {0}，記得匯出地圖檔": "Changed to {0}. Remember to export the map files", "（{0} 個區域檔）": " ({0} region files)", "使用 {0} 個翻譯鍵 · 掃描 {1} 個檔案": "Uses {0} translation keys · {1} files scanned", " · {0} 個資料包": " · {0} datapacks", "掃描 {0} 個檔案": "{0} files scanned", "內含資源包：{0}": "Contains resource pack: {0}", "{0} 個語言檔 · {1} · 共 {2} 條": "{0} lang files · {1} · {2} entries", "內嵌在地圖 {0} 裡": "Embedded in map {0}", "{0}：地圖用了 {1} 個翻譯鍵，但沒有載入任何 lang 檔。這張地圖可能沒附資源包，玩家會看到鍵名而不是文字。": "{0}: the map uses {1} translation keys, but no lang files are loaded. This map probably came without its resource pack, so players will see key names instead of text.", "{0} 個鍵在所有語言檔裡都找不到，遊戲內會直接顯示鍵名。": "{0} keys aren't in any lang file; the game will show the raw key names.", "{0} 個檔案": "{0} files", "顯示 {0}": "Show {0}", "{0} 個鍵": "{0} keys", "已翻譯 {0}/{1}（{2}%）": "{0}/{1} translated ({2}%)", "從 {0} 個地圖檔（函式、JSON、區域檔、結構）找到 {1} 個被使用的翻譯鍵。": "Found {1} translation keys in use across {0} map files (functions, JSON, region files, structures).", "{0} 處未匯出的修改": "{0} unexported changes", "用在 {0} 處": "Used in {0} places", "地圖文字元件的顏色：{0}": "Map text component colors: {0}", "{0} 色": "{0} colors", "再顯示 {0} 列（還有 {1} 列）": "Show {0} more rows ({1} remaining)", "{0} 的 {1}": "{1} in {0}", "地圖元件顏色 {0}（開頭沒有 § 時用這個顏色，在「用在哪裡」修改）": "Map component color {0} (used when the text doesn't start with §; change it under “Where it's used”)", "更改 {0}": "Change {0}", "{0} 處修改": "{0} changes", "已下載 {0}": "Downloaded {0}", "無法下載：{0}": "Couldn't download: {0}", "已複製 {0}": "Copied {0}", "無法寫入 {0}：{1}": "Couldn't write {0}: {1}", "已存回 {0} 個檔案": "Saved {0} files back", "{0}（基準語言）的文字": "Text in {0} (base language)", "{0} 已經有這個鍵了。": "{0} already has this key.", "已新增 {0}": "Added {0}", "（儲存於 {0}）": " (saved {0})", "已自動暫存在這個瀏覽器（{0}）。換電腦或清除瀏覽資料前，請儲存工作階段檔。": "Autosaved in this browser ({0}). Save a session file before switching computers or clearing browser data.", "{0}（{1}，{2} 個語言檔{3}）。": "{0} ({1}, {2} lang files{3}).", "{0} 處修改還沒匯出": "{0} changes not exported", "{0}，遊戲裡還看不到這些變更。": "{0}. They won't show up in the game yet.", "有 {0} 處未匯出，再按一次清除": "{0} changes not exported. Click again to clear", "{0} 已經存在": "{0} already exists", "已新增 {0}，點表格中的空格開始翻譯": "Added {0}. Click an empty cell in the table to start translating", "已從 {0} 個語言刪除 {1}": "Deleted {1} from {0} languages", "黑": "Black", "深藍": "Dark Blue", "深綠": "Dark Green", "深青": "Dark Aqua", "深紅": "Dark Red", "深紫": "Dark Purple", "金": "Gold", "灰": "Gray", "深灰": "Dark Gray", "藍": "Blue", "綠": "Green", "青": "Aqua", "紅": "Red", "淺紫": "Light Purple", "黃": "Yellow", "白": "White", "亂碼": "Obfuscated", "粗體": "Bold", "刪除線": "Strikethrough", "底線": "Underline", "斜體": "Italic", "重設": "Reset", "全部": "All", "缺翻譯": "Missing", "與基準相同": "Same as base", "佔位符不符": "Placeholder mismatch", "格式碼不同": "Different codes", "地圖": "Map", "資源包": "Resource pack", "資料包": "Datapack", "從地圖或資源包提取翻譯鍵，並排比對語言、編輯文字與顏色代碼": "Extract translation keys from maps and resource packs, compare languages side by side, and edit text and color codes", "離線版": "Offline", "載入檔案": "Load files", "載入資料夾": "Load folder", "開啟資料夾並可存回": "Open folder (save back)", "＋ 新增鍵": "+ New key", "開啟工作階段": "Open session", "語言": "Languages", "勾選顯示為欄位；「設為基準」的語言用來比對缺漏與未翻譯。": "Check to show as a column. The base language is what missing and untranslated entries are compared against.", "設定": "Settings", "格式碼前綴": "Format code prefix", "§（原版）": "§ (vanilla)", "&（插件，同時辨識 §）": "& (plugins; § also recognized)", "原版語言檔只支援 § 色碼。hex 顏色寫在地圖的文字元件（SNBT / JSON 的 <span class=\"mono\">color<\/span>）裡，會在每個鍵「用在哪裡」中顯示與修改。": "Vanilla lang files only support § codes. Hex colors live in the map's text components (<span class=\"mono\">color<\/span> in SNBT / JSON) and are shown and edited under each key's “Where it's used”.", "「未定義」檢查略過這些前綴（每行一個）": "Skip these prefixes in the “Undefined” check (one per line)", "地圖用到原版鍵（例如 block.minecraft.stone）時，遊戲本身已提供翻譯，不必列為未定義。": "When the map uses vanilla keys (e.g. block.minecraft.stone), the game already translates them, so they're not flagged as undefined.", "遊戲預覽": "In-game preview", "原始碼": "Raw", "放開以載入地圖、資源包或語言檔": "Drop to load a map, resource pack, or lang file", "新增語言，例如 ko_kr": "Add a language, e.g. ko_kr", "搜尋鍵或文字…": "Search keys or text…", "新增語言代碼": "New language code", "搜尋": "Search", "鍵前綴": "Key prefix", "顯示方式": "Display mode", "開啟後修改可以直接寫回原本的語言檔（Chrome / Edge）": "Edits can be written straight back to the original lang files (Chrome / Edge)", "選擇地圖資料夾": "Choose map folder", "，{0}": ", {0}", "YAML 解析器沒有載入，.yml 檔會被略過": "The YAML parser didn't load, so .yml files will be skipped", "輸出格式": "Output format", "保留原格式": "Keep original format", "全部轉成 JSON（.json）": "Convert all to JSON (.json)", "全部轉成 YAML（.yml）": "Convert all to YAML (.yml)", "全部轉成舊版 .lang": "Convert all to legacy .lang", "轉換格式只影響下載、複製和打包；「存回原檔」一律寫成原本的格式。": "Conversion only affects download, copy, and the .zip. “Save to original” always writes the original format.", "載入語言檔": "Load lang files", "只載入語言檔（.json / .lang / .yml），不掃描地圖": "Load lang files only (.json / .lang / .yml), without scanning a map", "只載入語言檔": "Lang files only", "指定語言": "Choose languages", "這些檔案的名稱看不出是哪個語言，請填入語言代碼（例如 zh_tw、en_us）。": "These file names don't say which language they are. Enter a language code for each (e.g. zh_tw, en_us).", "語言代碼": "Language code", "載入": "Load", "請為每個檔案填入語言代碼，格式像 zh_tw、ko_kr": "Enter a language code for every file, like zh_tw or ko_kr", "可讀取 .json、舊版 .lang 與 .yml / .yaml 語言檔。YAML 的巢狀結構會攤平成以「.」連接的鍵。匯出時只改動有修改的地方，註解、空行與引號樣式都會保留。": "Reads .json, legacy .lang, and .yml / .yaml lang files. Nested YAML is flattened into dot-separated keys. Export only touches what you changed, so comments, blank lines, and quoting styles are kept.", "不需翻譯": "No translation needed", "取消不需翻譯": "Needs translation again", "確認這個鍵不需要翻譯（例如專有名詞），之後不再提示缺翻譯或與基準相同": "Mark this key as not needing translation (e.g. proper nouns). Missing and same-as-base warnings stop for it.", "已標記為不需翻譯": "Marked as not needing translation", "已取消「不需翻譯」": "Removed \"no translation needed\""}, "zh_cn": {"翻譯鍵工作台": "翻译键工作台", "（空字串）": "（空字符串）", "沒有找到可讀取的檔案": "没有找到可读取的文件", "文字元件顏色": "文本组件颜色", "（未設定）": "（未设置）", "選色器": "选色器", "Hex 色碼": "Hex 颜色代码", "套用": "应用", "移除 color（改用預設顏色）": "移除 color（改用默认颜色）", "請輸入 6 位 hex 色碼，例如 #ff7f50": "请输入 6 位 hex 颜色代码，例如 #ff7f50", "已移除顏色，記得匯出地圖檔": "已移除颜色，记得导出地图文件", "（根目錄）": "（根目录）", "載入內容": "加载内容", "還沒有載入地圖或資源包。可以分開載入（製圖中），也可以只載入一張已經內含資源包的地圖（釋出版）。": "还没有加载地图或资源包。可以分开加载（制图中），也可以只加载一张已经内含资源包的地图（发布版）。", "<b>釋出版地圖<\/b>：資源包內嵌在地圖裡": "<b>发布版地图<\/b>：资源包内嵌在地图里", "<b>製圖模式<\/b>：地圖與資源包分開載入": "<b>制图模式<\/b>：地图与资源包分开加载", "<b>混合<\/b>：地圖內有資源包，另外也載入了獨立資源包": "<b>混合<\/b>：地图内有资源包，另外也加载了独立资源包", "<b>只有地圖<\/b>，沒有資源包": "<b>只有地图<\/b>，没有资源包", "<b>只有資源包<\/b>，沒有地圖": "<b>只有资源包<\/b>，没有地图", "沒有語言檔": "没有语言文件", "獨立資源包（不在地圖內）": "独立资源包（不在地图内）", "移除這個來源載入的內容": "移除这个来源加载的内容", "移除": "移除", "這張地圖沒有用到任何翻譯鍵（沒有 translate 文字元件），所以不需要語言檔。": "这张地图没有用到任何翻译键（没有 translate 文本组件），所以不需要语言文件。", "缺少語言檔": "缺少语言文件", "載入資源包": "加载资源包", "列出這些鍵": "列出这些键", "地圖用到的鍵都有翻譯定義。": "地图用到的键都有翻译定义。", "這個資源包裡沒有 <span class=\"mono\">assets/*/lang/<\/span> 語言檔。": "这个资源包里没有 <span class=\"mono\">assets/*/lang/<\/span> 语言文件。", "只載入了資源包，無法判斷哪些鍵被地圖使用。載入地圖後會標出「未定義」與「未使用」。": "只加载了资源包，无法判断哪些键被地图使用。加载地图后会标出“未定义”与“未使用”。", "載入地圖": "加载地图", "這個資料包沒有用到翻譯鍵。": "这个数据包没有用到翻译键。", "語言檔": "语言文件", "個別載入的語言檔": "个别加载的语言文件", "基準": "基准", "設為基準": "设为基准", "基準語言": "基准语言", "還沒有語言檔。": "还没有语言文件。", "新檔 · ": "新文件 · ", "尚未載入。": "尚未加载。", "只載入了語言檔。加入地圖資料夾或世界 .zip，就能找出地圖實際用到哪些鍵。": "只加载了语言文件。加入地图文件夹或世界 .zip，就能找出地图实际用到哪些键。", "<b>這是範例資料。<\/b>把地圖資料夾、世界 .zip、資源包或 lang 檔拖進這個頁面，就會換成你的內容。": "<b>这是示例数据。<\/b>把地图文件夹、世界 .zip、资源包或 lang 文件拖进这个页面，就会换成你的内容。", "開啟地圖或資源包資料夾": "打开地图或资源包文件夹", "選擇 .zip 或檔案": "选择 .zip 或文件", "所有前綴": "所有前缀", "基準語言沒有這個鍵 · 點一下新增": "基准语言没有这个键 · 点一下添加", "沒有翻譯 · 點一下新增": "没有翻译 · 点一下添加", "地圖使用但未定義": "地图使用但未定义", "地圖未使用": "地图未使用", "原版鍵": "原版键", "複製鍵名": "复制键名", "複製": "复制", "從所有語言刪除這個鍵": "从所有语言删除这个键", "刪除": "删除", "修改這個文字元件的 color": "修改这个文本组件的 color", "＋ 設定顏色": "＋ 设置颜色", "區域檔、結構或跳脫字串裡的顏色，請在遊戲或原檔中修改": "区域文件、结构或转义字符串里的颜色，请在游戏或原文件中修改", "唯讀": "只读", "已修改": "已修改", "元件顏色": "组件颜色", "只列出前 60 處。": "只列出前 60 处。", "在左側勾選至少一個語言來顯示欄位。": "在左侧勾选至少一个语言来显示列。", "翻譯鍵": "翻译键", "沒有符合目前篩選條件的鍵。": "没有符合目前筛选条件的键。", "還沒有翻譯鍵。載入地圖或資源包開始。": "还没有翻译键。加载地图或资源包开始。", "插入 %s 佔位符": "插入 %s 占位符", "儲存": "保存", "取消": "取消", "還原成原始值": "还原成原始值", "Ctrl+Enter 儲存 · Esc 取消": "Ctrl+Enter 保存 · Esc 取消", "§ 色碼，點一下修改：": "§ 颜色代码，点一下修改：", "沒有 § 色碼。用上方色塊插入。": "没有 § 颜色代码。用上方色块插入。", "已儲存，記得匯出語言檔": "已保存，记得导出语言文件", "語言檔只能用這 16 種 § 色碼。要用 hex 顏色，請在下方「用在哪裡」修改地圖文字元件的 color。": "语言文件只能用这 16 种 § 颜色代码。要用 hex 颜色，请在下方“用在哪里”修改地图文本组件的 color。", "沒有原檔位置": "没有原文件位置", "沒有寫入權限": "没有写入权限", "匯出語言檔": "导出语言文件", "每個檔案保留原本的鍵順序與縮排，新增的鍵接在最後。打包的 .zip 保留 assets/…/lang/ 結構，可以直接覆蓋進資源包。": "每个文件保留原本的键顺序与缩进，添加的键接在最后。打包的 .zip 保留 assets/…/lang/ 结构，可以直接覆盖进资源包。", "新檔案 · ": "新文件 · ", "沒有修改": "没有修改", "存回原檔": "写回原文件", "下載": "下载", "沒有可匯出的語言檔。": "没有可导出的语言文件。", "地圖檔（文字元件顏色）": "地图文件（文本组件颜色）", "修改了 color": "修改了 color", "修改過的全部存回原檔": "修改过的全部写回原文件", "全部打包成 .zip": "全部打包成 .zip", "關閉": "关闭", ".zip 裡語言檔放在 assets/…，修改過的地圖檔放在 map/…，保留原本的資料夾結構。": ".zip 里语言文件放在 assets/…，修改过的地图文件放在 map/…，保留原本的文件夹结构。", "這個檢視無法下載檔案，請用「複製」貼回原檔。": "当前视图无法下载文件，请用“复制”贴回原文件。", "匯出內容": "导出内容", "這個檢視無法下載，請改用複製": "当前视图无法下载，请改用复制", "已取消下載": "已取消下载", "已有一個下載視窗開著，請稍後再試": "已有一个下载窗口开着，请稍后再试", "未知錯誤": "未知错误", "無法直接複製，內容已選取，請按 Ctrl+C": "无法直接复制，内容已选中，请按 Ctrl+C", "沒有需要存回的修改": "没有需要写回的修改", "新增翻譯鍵": "添加翻译键", "鍵名": "键名", "例如 map.portal.locked": "例如 map.portal.locked", "新增": "添加", "鍵名只能包含英數字、底線、點、連字號、冒號與斜線。": "键名只能包含英数字、下划线、点、连字号、冒号与斜线。", "這不是翻譯鍵工作台的工作階段檔": "这不是翻译键工作台的会话文件", "工作階段": "会话", "目前是範例資料，先載入你的地圖或資源包": "目前是示例数据，先加载你的地图或资源包", "無法讀取：檔案不是有效的 JSON": "无法读取：文件不是有效的 JSON", "已開啟工作階段": "已打开会话", "無法開啟工作階段": "无法打开会话", "工作階段檔（.json）包含所有語言、修改、地圖掃描結果與地圖檔的顏色修改，下次開啟就能接著做，不必重新掃描地圖。": "会话文件（.json）包含所有语言、修改、地图扫描结果与地图文件的颜色修改，下次打开就能接着做，不必重新扫描地图。", "這個瀏覽器無法自動暫存，請手動「儲存工作階段」。": "这个浏览器无法自动保存，请手动“保存会话”。", "修改會自動暫存在這個瀏覽器。": "修改会自动保存在这个浏览器。", "找到上次的工作階段": "找到上次的会话", "繼續上次的工作": "继续上次的工作", "不用，看範例": "不用，看示例", "載入新的地圖或資源包後，自動暫存會被新的工作取代。": "加载新的地图或资源包后，自动保存会被新的工作取代。", "已儲存工作階段 ✓": "已保存会话 ✓", "儲存工作階段": "保存会话", "先隱藏，下次有新修改時再提醒": "先隐藏，下次有新修改时再提醒", "稍後": "稍后", "正在列出資料夾內容": "正在列出文件夹内容", "沒有開啟資料夾": "没有打开文件夹", "如果 Chrome 說「資料夾中包含系統檔案」，通常是因為資料夾在 <span class=\"mono\">.minecraft<\/span> 裡。<span class=\"mono\">.minecraft<\/span> 位於 <span class=\"mono\">AppData<\/span>，瀏覽器不允許網頁寫入那裡。": "如果 Chrome 说“文件夹中包含系统文件”，通常是因为文件夹在 <span class=\"mono\">.minecraft<\/span> 里。<span class=\"mono\">.minecraft<\/span> 位于 <span class=\"mono\">AppData<\/span>，浏览器不允许网页写入那里。", "<b>只要讀取與比對：<\/b>改用「載入資料夾」，或直接把資料夾拖進這個頁面，任何位置都可以。": "<b>只要读取与对比：<\/b>改用“加载文件夹”，或直接把文件夹拖进这个页面，任何位置都可以。", "<b>想直接存回原檔：<\/b>先把資源包資料夾複製到桌面或文件裡的子資料夾（例如 <span class=\"mono\">文件\\packs\\my-pack<\/span>），再用「開啟資料夾並可存回」開啟它；改完後再複製回 <span class=\"mono\">resourcepacks<\/span>。不要選桌面、文件或磁碟根目錄本身，這些也會被擋。": "<b>想直接写回原文件：<\/b>先把资源包文件夹复制到桌面或文档里的子文件夹（例如 <span class=\"mono\">文档\\packs\\my-pack<\/span>），再用“打开文件夹（可写回）”打开它；改完后再复制回 <span class=\"mono\">resourcepacks<\/span>。不要选桌面、文档或磁盘根目录本身，这些也会被挡。", "改用「載入資料夾」": "改用“加载文件夹”", "已回到上次的工作": "已回到上次的工作", "確定移除？": "确定移除？", "已清除範例資料": "已清除示例数据", "已移除": "已移除", "再按一次確認清除": "再按一次确认清除", "清除全部": "清除全部", "已清除": "已清除", "語言代碼格式像 zh_tw、ko_kr": "语言代码格式像 zh_tw、ko_kr", "無法複製，請手動選取鍵名": "无法复制，请手动选中键名", "確定？": "确定？", "{0}，點一下更改": "{0}，点一下更改", "{0} · 區塊 {1}, {2}（約 x {3}, z {4}）": "{0} · 区块 {1}, {2}（约 x {3}, z {4}）", "正在讀取 {0} / {1}": "正在读取 {0} / {1}", "載入完成：{0} 個語言檔、掃描 {1} 個地圖檔，共 {2} 個鍵": "加载完成：{0} 个语言文件、扫描 {1} 个地图文件，共 {2} 个键", "（{0} 個檔案無法讀取）": "（{0} 个文件无法读取）", "寫入 {0}。語言檔開頭的 § 色碼會蓋過這個顏色。": "写入 {0}。语言文件开头的 § 颜色代码会覆盖这个颜色。", "已改成 {0}，記得匯出地圖檔": "已改成 {0}，记得导出地图文件", "（{0} 個區域檔）": "（{0} 个区域文件）", "使用 {0} 個翻譯鍵 · 掃描 {1} 個檔案": "使用 {0} 个翻译键 · 扫描 {1} 个文件", " · {0} 個資料包": " · {0} 个数据包", "掃描 {0} 個檔案": "扫描 {0} 个文件", "內含資源包：{0}": "内含资源包：{0}", "{0} 個語言檔 · {1} · 共 {2} 條": "{0} 个语言文件 · {1} · 共 {2} 条", "內嵌在地圖 {0} 裡": "内嵌在地图 {0} 里", "{0}：地圖用了 {1} 個翻譯鍵，但沒有載入任何 lang 檔。這張地圖可能沒附資源包，玩家會看到鍵名而不是文字。": "{0}：地图用了 {1} 个翻译键，但没有加载任何 lang 文件。这张地图可能没附资源包，玩家会看到键名而不是文本。", "{0} 個鍵在所有語言檔裡都找不到，遊戲內會直接顯示鍵名。": "{0} 个键在所有语言文件里都找不到，游戏内会直接显示键名。", "{0} 個檔案": "{0} 个文件", "顯示 {0}": "显示 {0}", "{0} 個鍵": "{0} 个键", "已翻譯 {0}/{1}（{2}%）": "已翻译 {0}/{1}（{2}%）", "從 {0} 個地圖檔（函式、JSON、區域檔、結構）找到 {1} 個被使用的翻譯鍵。": "从 {0} 个地图文件（函数、JSON、区域文件、结构）找到 {1} 个被使用的翻译键。", "{0} 處未匯出的修改": "{0} 处未导出的修改", "用在 {0} 處": "用在 {0} 处", "地圖文字元件的顏色：{0}": "地图文本组件的颜色：{0}", "{0} 色": "{0} 色", "再顯示 {0} 列（還有 {1} 列）": "再显示 {0} 列（还有 {1} 列）", "{0} 的 {1}": "{0} 的 {1}", "地圖元件顏色 {0}（開頭沒有 § 時用這個顏色，在「用在哪裡」修改）": "地图组件颜色 {0}（开头没有 § 时用这个颜色，在“用在哪里”修改）", "更改 {0}": "更改 {0}", "{0} 處修改": "{0} 处修改", "已下載 {0}": "已下载 {0}", "無法下載：{0}": "无法下载：{0}", "已複製 {0}": "已复制 {0}", "無法寫入 {0}：{1}": "无法写入 {0}：{1}", "已存回 {0} 個檔案": "已写回 {0} 个文件", "{0}（基準語言）的文字": "{0}（基准语言）的文本", "{0} 已經有這個鍵了。": "{0} 已经有这个键了。", "已新增 {0}": "已添加 {0}", "（儲存於 {0}）": "（保存于 {0}）", "已自動暫存在這個瀏覽器（{0}）。換電腦或清除瀏覽資料前，請儲存工作階段檔。": "已自动保存在这个浏览器（{0}）。换电脑或清除浏览数据前，请保存会话文件。", "{0}（{1}，{2} 個語言檔{3}）。": "{0}（{1}，{2} 个语言文件{3}）。", "{0} 處修改還沒匯出": "{0} 处修改还没导出", "{0}，遊戲裡還看不到這些變更。": "{0}，游戏里还看不到这些变更。", "有 {0} 處未匯出，再按一次清除": "有 {0} 处未导出，再按一次清除", "{0} 已經存在": "{0} 已经存在", "已新增 {0}，點表格中的空格開始翻譯": "已添加 {0}，点表格中的空格开始翻译", "已從 {0} 個語言刪除 {1}": "已从 {0} 个语言删除 {1}", "黑": "黑", "深藍": "深蓝", "深綠": "深绿", "深青": "深青", "深紅": "深红", "深紫": "深紫", "金": "金", "灰": "灰", "深灰": "深灰", "藍": "蓝", "綠": "绿", "青": "青", "紅": "红", "淺紫": "浅紫", "黃": "黄", "白": "白", "亂碼": "混淆", "粗體": "粗体", "刪除線": "删除线", "底線": "下划线", "斜體": "斜体", "重設": "重置", "全部": "全部", "缺翻譯": "缺翻译", "與基準相同": "与基准相同", "佔位符不符": "占位符不符", "格式碼不同": "格式代码不同", "地圖": "地图", "資源包": "资源包", "資料包": "数据包", "從地圖或資源包提取翻譯鍵，並排比對語言、編輯文字與顏色代碼": "从地图或资源包提取翻译键，并排对比语言、编辑文本与颜色代码", "離線版": "离线版", "載入檔案": "加载文件", "載入資料夾": "加载文件夹", "開啟資料夾並可存回": "打开文件夹（可写回）", "＋ 新增鍵": "＋ 添加键", "開啟工作階段": "打开会话", "語言": "语言", "勾選顯示為欄位；「設為基準」的語言用來比對缺漏與未翻譯。": "勾选后显示为列；“设为基准”的语言用来对比缺漏与未翻译。", "設定": "设置", "格式碼前綴": "格式代码前缀", "§（原版）": "§（原版）", "&（插件，同時辨識 §）": "&（插件，同时识别 §）", "原版語言檔只支援 § 色碼。hex 顏色寫在地圖的文字元件（SNBT / JSON 的 <span class=\"mono\">color<\/span>）裡，會在每個鍵「用在哪裡」中顯示與修改。": "原版语言文件只支持 § 颜色代码。hex 颜色写在地图的文本组件（SNBT / JSON 的 <span class=\"mono\">color<\/span>）里，会在每个键“用在哪里”中显示与修改。", "「未定義」檢查略過這些前綴（每行一個）": "“未定义”检查跳过这些前缀（每行一个）", "地圖用到原版鍵（例如 block.minecraft.stone）時，遊戲本身已提供翻譯，不必列為未定義。": "地图用到原版键（例如 block.minecraft.stone）时，游戏本身已提供翻译，不必列为未定义。", "遊戲預覽": "游戏预览", "原始碼": "源码", "放開以載入地圖、資源包或語言檔": "放开以加载地图、资源包或语言文件", "新增語言，例如 ko_kr": "添加语言，例如 ko_kr", "搜尋鍵或文字…": "搜索键或文本…", "新增語言代碼": "添加语言代码", "搜尋": "搜索", "鍵前綴": "键前缀", "顯示方式": "显示方式", "開啟後修改可以直接寫回原本的語言檔（Chrome / Edge）": "打开后修改可以直接写回原本的语言文件（Chrome / Edge）", "選擇地圖資料夾": "选择地图文件夹", "，{0}": "，{0}", "YAML 解析器沒有載入，.yml 檔會被略過": "YAML 解析器没有加载，.yml 文件会被跳过", "輸出格式": "输出格式", "保留原格式": "保留原格式", "全部轉成 JSON（.json）": "全部转成 JSON（.json）", "全部轉成 YAML（.yml）": "全部转成 YAML（.yml）", "全部轉成舊版 .lang": "全部转成旧版 .lang", "轉換格式只影響下載、複製和打包；「存回原檔」一律寫成原本的格式。": "转换格式只影响下载、复制和打包；“写回原文件”始终写成原本的格式。", "載入語言檔": "加载语言文件", "只載入語言檔（.json / .lang / .yml），不掃描地圖": "只加载语言文件（.json / .lang / .yml），不扫描地图", "只載入語言檔": "只加载语言文件", "指定語言": "指定语言", "這些檔案的名稱看不出是哪個語言，請填入語言代碼（例如 zh_tw、en_us）。": "这些文件的名称看不出是哪个语言，请填入语言代码（例如 zh_tw、en_us）。", "語言代碼": "语言代码", "載入": "加载", "請為每個檔案填入語言代碼，格式像 zh_tw、ko_kr": "请为每个文件填入语言代码，格式像 zh_tw、ko_kr", "可讀取 .json、舊版 .lang 與 .yml / .yaml 語言檔。YAML 的巢狀結構會攤平成以「.」連接的鍵。匯出時只改動有修改的地方，註解、空行與引號樣式都會保留。": "可读取 .json、旧版 .lang 与 .yml / .yaml 语言文件。YAML 的嵌套结构会展平成以“.”连接的键。导出时只改动有修改的地方，注释、空行与引号样式都会保留。", "不需翻譯": "不需翻译", "取消不需翻譯": "取消不需翻译", "確認這個鍵不需要翻譯（例如專有名詞），之後不再提示缺翻譯或與基準相同": "确认这个键不需要翻译（例如专有名词），之后不再提示缺翻译或与基准相同", "已標記為不需翻譯": "已标记为不需翻译", "已取消「不需翻譯」": "已取消“不需翻译”"}};/*/I18N*/</script>
+<script id="i18n">/*I18N*/const I18N = {"en": {"翻譯鍵工作台": "Lang Key Workbench", "（空字串）": "(empty string)", "沒有找到可讀取的檔案": "No readable files found", "文字元件顏色": "Text component color", "（未設定）": "(not set)", "選色器": "Color picker", "Hex 色碼": "Hex color", "套用": "Apply", "移除 color（改用預設顏色）": "Remove color (use default)", "請輸入 6 位 hex 色碼，例如 #ff7f50": "Enter a 6-digit hex color, e.g. #ff7f50", "已移除顏色，記得匯出地圖檔": "Color removed. Remember to export the map files", "（根目錄）": "(root)", "載入內容": "Loaded content", "還沒有載入地圖或資源包。可以分開載入（製圖中），也可以只載入一張已經內含資源包的地圖（釋出版）。": "No map or resource pack loaded yet. Load them separately (while mapmaking), or load just a map that already contains its resource pack (release build).", "<b>釋出版地圖<\/b>：資源包內嵌在地圖裡": "<b>Release map<\/b>: the resource pack is embedded in the map", "<b>製圖模式<\/b>：地圖與資源包分開載入": "<b>Mapmaking mode<\/b>: map and resource pack loaded separately", "<b>混合<\/b>：地圖內有資源包，另外也載入了獨立資源包": "<b>Mixed<\/b>: the map contains a resource pack, and a separate pack is also loaded", "<b>只有地圖<\/b>，沒有資源包": "<b>Map only<\/b>, no resource pack", "<b>只有資源包<\/b>，沒有地圖": "<b>Resource pack only<\/b>, no map", "沒有語言檔": "No lang files", "獨立資源包（不在地圖內）": "Standalone resource pack (not inside the map)", "移除這個來源載入的內容": "Remove everything loaded from this source", "移除": "Remove", "這張地圖沒有用到任何翻譯鍵（沒有 translate 文字元件），所以不需要語言檔。": "This map doesn't use any translation keys (no translate text components), so it needs no lang files.", "缺少語言檔": "Missing lang files", "載入資源包": "Load resource pack", "列出這些鍵": "List these keys", "地圖用到的鍵都有翻譯定義。": "Every key the map uses has a translation.", "這個資源包裡沒有 <span class=\"mono\">assets/*/lang/<\/span> 語言檔。": "This resource pack has no <span class=\"mono\">assets/*/lang/<\/span> lang files.", "只載入了資源包，無法判斷哪些鍵被地圖使用。載入地圖後會標出「未定義」與「未使用」。": "Only a resource pack is loaded, so there's no way to tell which keys the map uses. Load the map to see “Undefined” and “Unused” keys.", "載入地圖": "Load map", "這個資料包沒有用到翻譯鍵。": "This datapack doesn't use any translation keys.", "語言檔": "Lang files", "個別載入的語言檔": "Individually loaded lang files", "基準": "Base", "設為基準": "Set as base", "基準語言": "Base language", "還沒有語言檔。": "No lang files yet.", "新檔 · ": "New file · ", "尚未載入。": "Nothing loaded yet.", "只載入了語言檔。加入地圖資料夾或世界 .zip，就能找出地圖實際用到哪些鍵。": "Only lang files are loaded. Add a map folder or world .zip to find which keys the map actually uses.", "<b>這是範例資料。<\/b>把地圖資料夾、世界 .zip、資源包或 lang 檔拖進這個頁面，就會換成你的內容。": "<b>This is sample data.<\/b> Drag a map folder, world .zip, resource pack, or lang file onto this page to replace it with your own.", "開啟地圖或資源包資料夾": "Open map or resource pack folder", "選擇 .zip 或檔案": "Choose .zip or files", "所有前綴": "All prefixes", "基準語言沒有這個鍵 · 點一下新增": "Base language has no such key · Click to add", "沒有翻譯 · 點一下新增": "No translation · Click to add", "地圖使用但未定義": "Used by map but undefined", "地圖未使用": "Unused by map", "原版鍵": "Vanilla key", "複製鍵名": "Copy key name", "複製": "Copy", "從所有語言刪除這個鍵": "Delete this key from all languages", "刪除": "Delete", "修改這個文字元件的 color": "Edit this text component's color", "＋ 設定顏色": "+ Set color", "區域檔、結構或跳脫字串裡的顏色，請在遊戲或原檔中修改": "Color inside a region file, structure, or escaped string. Change it in-game or in the original file", "唯讀": "Read-only", "已修改": "Modified", "元件顏色": "Component color", "只列出前 60 處。": "Showing the first 60 only.", "在左側勾選至少一個語言來顯示欄位。": "Check at least one language on the left to show columns.", "翻譯鍵": "Translation key", "沒有符合目前篩選條件的鍵。": "No keys match the current filters.", "還沒有翻譯鍵。載入地圖或資源包開始。": "No translation keys yet. Load a map or resource pack to start.", "插入 %s 佔位符": "Insert %s placeholder", "儲存": "Save", "取消": "Cancel", "還原成原始值": "Revert to original", "Ctrl+Enter 儲存 · Esc 取消": "Ctrl+Enter to save · Esc to cancel", "§ 色碼，點一下修改：": "§ codes, click to change:", "沒有 § 色碼。用上方色塊插入。": "No § codes. Insert one with the swatches above.", "已儲存，記得匯出語言檔": "Saved. Remember to export the lang files", "語言檔只能用這 16 種 § 色碼。要用 hex 顏色，請在下方「用在哪裡」修改地圖文字元件的 color。": "Lang files can only use these 16 § colors. For hex colors, change the map text component's color under “Where it's used” below.", "沒有原檔位置": "Original file location unknown", "沒有寫入權限": "No write permission", "匯出語言檔": "Export lang files", "每個檔案保留原本的鍵順序與縮排，新增的鍵接在最後。打包的 .zip 保留 assets/…/lang/ 結構，可以直接覆蓋進資源包。": "Each file keeps its original key order and indentation; new keys go at the end. The .zip keeps the assets/…/lang/ structure, so you can drop it straight into the resource pack.", "新檔案 · ": "New file · ", "沒有修改": "No changes", "存回原檔": "Save to original", "下載": "Download", "沒有可匯出的語言檔。": "No lang files to export.", "地圖檔（文字元件顏色）": "Map files (text component colors)", "修改了 color": "Color changed", "修改過的全部存回原檔": "Save all changes to originals", "全部打包成 .zip": "Pack everything as .zip", "關閉": "Close", ".zip 裡語言檔放在 assets/…，修改過的地圖檔放在 map/…，保留原本的資料夾結構。": "In the .zip, lang files go under assets/… and changed map files under map/…, keeping the original folder structure.", "這個檢視無法下載檔案，請用「複製」貼回原檔。": "This view can't download files. Use “Copy” and paste into the original file.", "匯出內容": "Export content", "這個檢視無法下載，請改用複製": "This view can't download. Use copy instead", "已取消下載": "Download canceled", "已有一個下載視窗開著，請稍後再試": "A download prompt is already open. Try again shortly", "未知錯誤": "unknown error", "無法直接複製，內容已選取，請按 Ctrl+C": "Couldn't copy directly. The content is selected; press Ctrl+C", "沒有需要存回的修改": "No changes to save back", "新增翻譯鍵": "New translation key", "鍵名": "Key name", "例如 map.portal.locked": "e.g. map.portal.locked", "新增": "Add", "鍵名只能包含英數字、底線、點、連字號、冒號與斜線。": "Key names can only contain letters, digits, underscores, dots, hyphens, colons, and slashes.", "這不是翻譯鍵工作台的工作階段檔": "This isn't a Lang Key Workbench session file", "工作階段": "Session", "目前是範例資料，先載入你的地圖或資源包": "This is sample data. Load your own map or resource pack first", "無法讀取：檔案不是有效的 JSON": "Can't read it: the file isn't valid JSON", "已開啟工作階段": "Session opened", "無法開啟工作階段": "Couldn't open the session", "工作階段檔（.json）包含所有語言、修改、地圖掃描結果與地圖檔的顏色修改，下次開啟就能接著做，不必重新掃描地圖。": "A session file (.json) holds every language, your edits, the map scan results, and map color changes, so next time you can pick up where you left off without rescanning the map.", "這個瀏覽器無法自動暫存，請手動「儲存工作階段」。": "This browser can't autosave. Use “Save session” manually.", "修改會自動暫存在這個瀏覽器。": "Changes are autosaved in this browser.", "找到上次的工作階段": "Found your last session", "繼續上次的工作": "Resume last session", "不用，看範例": "No thanks, show the sample", "載入新的地圖或資源包後，自動暫存會被新的工作取代。": "Loading a new map or resource pack replaces the autosave with the new work.", "已儲存工作階段 ✓": "Session saved ✓", "儲存工作階段": "Save session", "先隱藏，下次有新修改時再提醒": "Hide for now; remind me on the next change", "稍後": "Later", "正在列出資料夾內容": "Listing folder contents", "沒有開啟資料夾": "No folder opened", "如果 Chrome 說「資料夾中包含系統檔案」，通常是因為資料夾在 <span class=\"mono\">.minecraft<\/span> 裡。<span class=\"mono\">.minecraft<\/span> 位於 <span class=\"mono\">AppData<\/span>，瀏覽器不允許網頁寫入那裡。": "If Chrome says the folder “contains system files”, the folder is usually inside <span class=\"mono\">.minecraft<\/span>, which lives in <span class=\"mono\">AppData<\/span>. Browsers don't let web pages write there.", "<b>只要讀取與比對：<\/b>改用「載入資料夾」，或直接把資料夾拖進這個頁面，任何位置都可以。": "<b>To just read and compare:<\/b> use “Load folder” instead, or drag the folder onto this page. Any location works.", "<b>想直接存回原檔：<\/b>先把資源包資料夾複製到桌面或文件裡的子資料夾（例如 <span class=\"mono\">文件\\packs\\my-pack<\/span>），再用「開啟資料夾並可存回」開啟它；改完後再複製回 <span class=\"mono\">resourcepacks<\/span>。不要選桌面、文件或磁碟根目錄本身，這些也會被擋。": "<b>To save straight to the original files:<\/b> copy the resource pack folder into a subfolder of your Desktop or Documents (e.g. <span class=\"mono\">Documents\\packs\\my-pack<\/span>), then open it with “Open folder (save back)”. Copy it back to <span class=\"mono\">resourcepacks<\/span> when you're done. Don't pick the Desktop, Documents, or a drive root itself; those are blocked too.", "改用「載入資料夾」": "Use “Load folder” instead", "已回到上次的工作": "Back to your last session", "確定移除？": "Remove?", "已清除範例資料": "Sample data cleared", "已移除": "Removed", "再按一次確認清除": "Click again to clear", "清除全部": "Clear all", "已清除": "Cleared", "語言代碼格式像 zh_tw、ko_kr": "Language codes look like zh_tw or ko_kr", "無法複製，請手動選取鍵名": "Couldn't copy. Select the key name manually", "確定？": "Sure?", "{0}，點一下更改": "{0}. Click to change", "{0} · 區塊 {1}, {2}（約 x {3}, z {4}）": "{0} · chunk {1}, {2} (about x {3}, z {4})", "正在讀取 {0} / {1}": "Reading {0} / {1}", "載入完成：{0} 個語言檔、掃描 {1} 個地圖檔，共 {2} 個鍵": "Done: {0} lang files, {1} map files scanned, {2} keys in total", "（{0} 個檔案無法讀取）": " ({0} files couldn't be read)", "寫入 {0}。語言檔開頭的 § 色碼會蓋過這個顏色。": "Writes to {0}. A § code at the start of the lang text overrides this color.", "已改成 {0}，記得匯出地圖檔": "Changed to {0}. Remember to export the map files", "（{0} 個區域檔）": " ({0} region files)", "使用 {0} 個翻譯鍵 · 掃描 {1} 個檔案": "Uses {0} translation keys · {1} files scanned", " · {0} 個資料包": " · {0} datapacks", "掃描 {0} 個檔案": "{0} files scanned", "內含資源包：{0}": "Contains resource pack: {0}", "{0} 個語言檔 · {1} · 共 {2} 條": "{0} lang files · {1} · {2} entries", "內嵌在地圖 {0} 裡": "Embedded in map {0}", "{0}：地圖用了 {1} 個翻譯鍵，但沒有載入任何 lang 檔。這張地圖可能沒附資源包，玩家會看到鍵名而不是文字。": "{0}: the map uses {1} translation keys, but no lang files are loaded. This map probably came without its resource pack, so players will see key names instead of text.", "{0} 個鍵在所有語言檔裡都找不到，遊戲內會直接顯示鍵名。": "{0} keys aren't in any lang file; the game will show the raw key names.", "{0} 個檔案": "{0} files", "顯示 {0}": "Show {0}", "{0} 個鍵": "{0} keys", "已翻譯 {0}/{1}（{2}%）": "{0}/{1} translated ({2}%)", "從 {0} 個地圖檔（函式、JSON、區域檔、結構）找到 {1} 個被使用的翻譯鍵。": "Found {1} translation keys in use across {0} map files (functions, JSON, region files, structures).", "{0} 處未匯出的修改": "{0} unexported changes", "用在 {0} 處": "Used in {0} places", "地圖文字元件的顏色：{0}": "Map text component colors: {0}", "{0} 色": "{0} colors", "再顯示 {0} 列（還有 {1} 列）": "Show {0} more rows ({1} remaining)", "{0} 的 {1}": "{1} in {0}", "地圖元件顏色 {0}（開頭沒有 § 時用這個顏色，在「用在哪裡」修改）": "Map component color {0} (used when the text doesn't start with §; change it under “Where it's used”)", "更改 {0}": "Change {0}", "{0} 處修改": "{0} changes", "已下載 {0}": "Downloaded {0}", "無法下載：{0}": "Couldn't download: {0}", "已複製 {0}": "Copied {0}", "無法寫入 {0}：{1}": "Couldn't write {0}: {1}", "已存回 {0} 個檔案": "Saved {0} files back", "{0}（基準語言）的文字": "Text in {0} (base language)", "{0} 已經有這個鍵了。": "{0} already has this key.", "已新增 {0}": "Added {0}", "（儲存於 {0}）": " (saved {0})", "已自動暫存在這個瀏覽器（{0}）。換電腦或清除瀏覽資料前，請儲存工作階段檔。": "Autosaved in this browser ({0}). Save a session file before switching computers or clearing browser data.", "{0}（{1}，{2} 個語言檔{3}）。": "{0} ({1}, {2} lang files{3}).", "{0} 處修改還沒匯出": "{0} changes not exported", "{0}，遊戲裡還看不到這些變更。": "{0}. They won't show up in the game yet.", "有 {0} 處未匯出，再按一次清除": "{0} changes not exported. Click again to clear", "{0} 已經存在": "{0} already exists", "已新增 {0}，點表格中的空格開始翻譯": "Added {0}. Click an empty cell in the table to start translating", "已從 {0} 個語言刪除 {1}": "Deleted {1} from {0} languages", "黑": "Black", "深藍": "Dark Blue", "深綠": "Dark Green", "深青": "Dark Aqua", "深紅": "Dark Red", "深紫": "Dark Purple", "金": "Gold", "灰": "Gray", "深灰": "Dark Gray", "藍": "Blue", "綠": "Green", "青": "Aqua", "紅": "Red", "淺紫": "Light Purple", "黃": "Yellow", "白": "White", "亂碼": "Obfuscated", "粗體": "Bold", "刪除線": "Strikethrough", "底線": "Underline", "斜體": "Italic", "重設": "Reset", "全部": "All", "缺翻譯": "Missing", "與基準相同": "Same as base", "佔位符不符": "Placeholder mismatch", "格式碼不同": "Different codes", "地圖": "Map", "資源包": "Resource pack", "資料包": "Datapack", "從地圖或資源包提取翻譯鍵，並排比對語言、編輯文字與顏色代碼": "Extract translation keys from maps and resource packs, compare languages side by side, and edit text and color codes", "離線版": "Offline", "載入檔案": "Load files", "載入資料夾": "Load folder", "開啟資料夾並可存回": "Open folder (save back)", "＋ 新增鍵": "+ New key", "開啟工作階段": "Open session", "語言": "Languages", "勾選顯示為欄位；「設為基準」的語言用來比對缺漏與未翻譯。": "Check to show as a column. The base language is what missing and untranslated entries are compared against.", "設定": "Settings", "格式碼前綴": "Format code prefix", "§（原版）": "§ (vanilla)", "&（插件，同時辨識 §）": "& (plugins; § also recognized)", "原版語言檔只支援 § 色碼。hex 顏色寫在地圖的文字元件（SNBT / JSON 的 <span class=\"mono\">color<\/span>）裡，會在每個鍵「用在哪裡」中顯示與修改。": "Vanilla lang files only support § codes. Hex colors live in the map's text components (<span class=\"mono\">color<\/span> in SNBT / JSON) and are shown and edited under each key's “Where it's used”.", "「未定義」檢查略過這些前綴（每行一個）": "Skip these prefixes in the “Undefined” check (one per line)", "地圖用到原版鍵（例如 block.minecraft.stone）時，遊戲本身已提供翻譯，不必列為未定義。": "When the map uses vanilla keys (e.g. block.minecraft.stone), the game already translates them, so they're not flagged as undefined.", "遊戲預覽": "In-game preview", "原始碼": "Raw", "放開以載入地圖、資源包或語言檔": "Drop to load a map, resource pack, or lang file", "新增語言，例如 ko_kr": "Add a language, e.g. ko_kr", "搜尋鍵或文字…": "Search keys or text…", "新增語言代碼": "New language code", "搜尋": "Search", "鍵前綴": "Key prefix", "顯示方式": "Display mode", "開啟後修改可以直接寫回原本的語言檔（Chrome / Edge）": "Edits can be written straight back to the original lang files (Chrome / Edge)", "選擇地圖資料夾": "Choose map folder", "，{0}": ", {0}", "YAML 解析器沒有載入，.yml 檔會被略過": "The YAML parser didn't load, so .yml files will be skipped", "輸出格式": "Output format", "保留原格式": "Keep original format", "全部轉成 JSON（.json）": "Convert all to JSON (.json)", "全部轉成 YAML（.yml）": "Convert all to YAML (.yml)", "全部轉成舊版 .lang": "Convert all to legacy .lang", "轉換格式只影響下載、複製和打包；「存回原檔」一律寫成原本的格式。": "Conversion only affects download, copy, and the .zip. “Save to original” always writes the original format.", "載入語言檔": "Load lang files", "只載入語言檔（.json / .lang / .yml），不掃描地圖": "Load lang files only (.json / .lang / .yml), without scanning a map", "只載入語言檔": "Lang files only", "指定語言": "Choose languages", "這些檔案的名稱看不出是哪個語言，請填入語言代碼（例如 zh_tw、en_us）。": "These file names don't say which language they are. Enter a language code for each (e.g. zh_tw, en_us).", "語言代碼": "Language code", "載入": "Load", "請為每個檔案填入語言代碼，格式像 zh_tw、ko_kr": "Enter a language code for every file, like zh_tw or ko_kr", "可讀取 .json、舊版 .lang 與 .yml / .yaml 語言檔。YAML 的巢狀結構會攤平成以「.」連接的鍵。匯出時只改動有修改的地方，註解、空行與引號樣式都會保留。": "Reads .json, legacy .lang, and .yml / .yaml lang files. Nested YAML is flattened into dot-separated keys. Export only touches what you changed, so comments, blank lines, and quoting styles are kept.", "不需翻譯": "No translation needed", "取消不需翻譯": "Needs translation again", "確認這個鍵不需要翻譯（例如專有名詞），之後不再提示缺翻譯或與基準相同": "Mark this key as not needing translation (e.g. proper nouns). Missing and same-as-base warnings stop for it.", "已標記為不需翻譯": "Marked as not needing translation", "已取消「不需翻譯」": "Removed \"no translation needed\"", "沒有用到翻譯鍵": "No translation keys used", "列出": "Show", "只有資源包，無法判斷地圖用了哪些鍵": "Pack only, so it can't tell which keys the map uses", "填入基準": "Fill from base", "未定義": "Undefined", "未使用": "Unused", "地圖裡用到這個鍵的位置與文字元件顏色": "Where the map uses this key, and the text component colors", "原版遊戲已經提供翻譯": "The vanilla game already translates this", "點一下取消「不需翻譯」": "Click to remove \"no translation needed\"", "輸入文字": "Type text", "已填入基準，Ctrl+Z 可以復原": "Filled from base. Ctrl+Z undoes it", "顏色": "Color", "格式": "Format", "清除顏色與格式": "Clear color and formatting", "復原": "Undo", "重做": "Redo", "用基準語言的文字取代": "Replace with the base language text", "點一下格子開始編輯": "Click a cell to edit", "游標停在色碼後面時，點顏色會直接替換": "With the cursor right after a color code, picking a color replaces it", "反白文字後套用顏色或格式": "Select text, then pick a color or format", "專案": "Projects", "已匯入成新專案": "Imported as a new project", "未命名專案": "Untitled project", "無法開啟這個專案": "Couldn't open this project", "已建立新專案，載入地圖或資源包開始": "New project created. Load a map or resource pack to start", "已刪除專案": "Project deleted", "目前的專案": "Current project", "切換到這個專案": "Switch to this project", "改名": "Rename", "刪除專案": "Delete project", "載入地圖或資源包後，會自動建立專案並存在這個瀏覽器。": "Load a map or resource pack and a project is created and saved in this browser.", "這個瀏覽器無法自動儲存，請用「匯出」把專案存成 .json。": "This browser can't autosave. Use Export to save the project as .json.", "修改會自動儲存在這個瀏覽器。": "Changes are saved in this browser automatically.", "開新專案": "New project", "要放進哪個專案？": "Which project should this go into?", "你載入的是另一張地圖，建議開新專案，兩張地圖的翻譯才不會混在一起。": "This is another map. A new project keeps the two maps' translations apart.", "目前專案已經有地圖和資源包了，建議開新專案。": "This project already has a map and a resource pack, so a new project is suggested.", "加入目前專案可以把地圖和資源包放在一起比對；開新專案則從空白開始。": "Adding to this project compares the map and pack together. A new project starts empty.", "專案名稱": "Project name", "再按一次刪除": "Click again to delete", "再按一次移除": "Click again to remove", "再按一次刪除這個鍵": "Click again to delete this key", "上次的自動暫存已轉成專案": "Your last autosave is now a project", "{0} 個鍵 · {1} 個檔案": "{0} keys · {1} files", "內含 {0}": "Contains {0}", "{0} 個語言檔 · {1} 條": "{0} lang files · {1} entries", "在 {0} 裡": "Inside {0}", "地圖用了 {0} 個翻譯鍵，但沒有載入任何 lang 檔。這張地圖可能沒附資源包，玩家會看到鍵名而不是文字。": "The map uses {0} translation keys, but no lang file is loaded. It may be missing its resource pack, so players would see key names instead of text.", "{0} 個鍵未定義": "{0} keys undefined", "{0} 處未匯出": "{0} unexported", "已選取 {0} 個字": "Selected: {0}", "已自動儲存在這個瀏覽器（{0}）": "Saved in this browser ({0})", "加入目前專案「{0}」": "Add to \"{0}\"", "新增鍵": "Add key", "新專案": "New", "匯出": "Export", "匯入": "Import", "編輯工具": "Editing tools", "地圖或資源包的 .zip，或個別檔案": "A map or resource pack .zip, or single files", "地圖或資源包資料夾（唯讀）": "A map or resource pack folder (read-only)", "開啟匯出視窗": "Open the export dialog", "從空白開始一個新專案": "Start an empty project", "把目前專案存成 .json，可以備份、換電腦或分享": "Save this project as .json to back it up, move it, or share it", "把 .json 專案檔匯入成新專案": "Import a .json project file as a new project", "原版語言檔只支援 § 色碼。hex 顏色寫在地圖的文字元件（SNBT / JSON 的 color）裡，會在每個鍵「用在哪裡」中顯示與修改。": "Vanilla lang files only support § color codes. Hex colors live in the map's text components (the color in SNBT / JSON), shown and edited under each key's \"Used in\".", "地圖使用但未定義：地圖裡用到這個鍵，但所有語言檔都沒有它，遊戲會直接顯示鍵名": "Used by the map but undefined: no lang file has this key, so the game shows the key name", "地圖未使用：語言檔裡有這個鍵，但掃描過的地圖檔都沒有用到": "Not used by the map: a lang file has this key, but no scanned map file uses it", "標記為不需翻譯的鍵（例如專有名詞）": "Keys marked as not needing translation (e.g. proper nouns)", "和基準語言的文字一模一樣，可能還沒翻譯": "Identical to the base language, so it may not be translated yet", "%s 這類佔位符的數量或編號和基準不同，遊戲裡可能顯示錯誤": "Placeholders like %s differ from the base in count or numbering, which can break the text in game", "§ 格式碼（顏色、粗體等）和基準不同": "§ format codes (colors, bold, etc.) differ from the base"}, "zh_cn": {"翻譯鍵工作台": "翻译键工作台", "（空字串）": "（空字符串）", "沒有找到可讀取的檔案": "没有找到可读取的文件", "文字元件顏色": "文本组件颜色", "（未設定）": "（未设置）", "選色器": "选色器", "Hex 色碼": "Hex 颜色代码", "套用": "应用", "移除 color（改用預設顏色）": "移除 color（改用默认颜色）", "請輸入 6 位 hex 色碼，例如 #ff7f50": "请输入 6 位 hex 颜色代码，例如 #ff7f50", "已移除顏色，記得匯出地圖檔": "已移除颜色，记得导出地图文件", "（根目錄）": "（根目录）", "載入內容": "加载内容", "還沒有載入地圖或資源包。可以分開載入（製圖中），也可以只載入一張已經內含資源包的地圖（釋出版）。": "还没有加载地图或资源包。可以分开加载（制图中），也可以只加载一张已经内含资源包的地图（发布版）。", "<b>釋出版地圖<\/b>：資源包內嵌在地圖裡": "<b>发布版地图<\/b>：资源包内嵌在地图里", "<b>製圖模式<\/b>：地圖與資源包分開載入": "<b>制图模式<\/b>：地图与资源包分开加载", "<b>混合<\/b>：地圖內有資源包，另外也載入了獨立資源包": "<b>混合<\/b>：地图内有资源包，另外也加载了独立资源包", "<b>只有地圖<\/b>，沒有資源包": "<b>只有地图<\/b>，没有资源包", "<b>只有資源包<\/b>，沒有地圖": "<b>只有资源包<\/b>，没有地图", "沒有語言檔": "没有语言文件", "獨立資源包（不在地圖內）": "独立资源包（不在地图内）", "移除這個來源載入的內容": "移除这个来源加载的内容", "移除": "移除", "這張地圖沒有用到任何翻譯鍵（沒有 translate 文字元件），所以不需要語言檔。": "这张地图没有用到任何翻译键（没有 translate 文本组件），所以不需要语言文件。", "缺少語言檔": "缺少语言文件", "載入資源包": "加载资源包", "列出這些鍵": "列出这些键", "地圖用到的鍵都有翻譯定義。": "地图用到的键都有翻译定义。", "這個資源包裡沒有 <span class=\"mono\">assets/*/lang/<\/span> 語言檔。": "这个资源包里没有 <span class=\"mono\">assets/*/lang/<\/span> 语言文件。", "只載入了資源包，無法判斷哪些鍵被地圖使用。載入地圖後會標出「未定義」與「未使用」。": "只加载了资源包，无法判断哪些键被地图使用。加载地图后会标出“未定义”与“未使用”。", "載入地圖": "加载地图", "這個資料包沒有用到翻譯鍵。": "这个数据包没有用到翻译键。", "語言檔": "语言文件", "個別載入的語言檔": "个别加载的语言文件", "基準": "基准", "設為基準": "设为基准", "基準語言": "基准语言", "還沒有語言檔。": "还没有语言文件。", "新檔 · ": "新文件 · ", "尚未載入。": "尚未加载。", "只載入了語言檔。加入地圖資料夾或世界 .zip，就能找出地圖實際用到哪些鍵。": "只加载了语言文件。加入地图文件夹或世界 .zip，就能找出地图实际用到哪些键。", "<b>這是範例資料。<\/b>把地圖資料夾、世界 .zip、資源包或 lang 檔拖進這個頁面，就會換成你的內容。": "<b>这是示例数据。<\/b>把地图文件夹、世界 .zip、资源包或 lang 文件拖进这个页面，就会换成你的内容。", "開啟地圖或資源包資料夾": "打开地图或资源包文件夹", "選擇 .zip 或檔案": "选择 .zip 或文件", "所有前綴": "所有前缀", "基準語言沒有這個鍵 · 點一下新增": "基准语言没有这个键 · 点一下添加", "沒有翻譯 · 點一下新增": "没有翻译 · 点一下添加", "地圖使用但未定義": "地图使用但未定义", "地圖未使用": "地图未使用", "原版鍵": "原版键", "複製鍵名": "复制键名", "複製": "复制", "從所有語言刪除這個鍵": "从所有语言删除这个键", "刪除": "删除", "修改這個文字元件的 color": "修改这个文本组件的 color", "＋ 設定顏色": "＋ 设置颜色", "區域檔、結構或跳脫字串裡的顏色，請在遊戲或原檔中修改": "区域文件、结构或转义字符串里的颜色，请在游戏或原文件中修改", "唯讀": "只读", "已修改": "已修改", "元件顏色": "组件颜色", "只列出前 60 處。": "只列出前 60 处。", "在左側勾選至少一個語言來顯示欄位。": "在左侧勾选至少一个语言来显示列。", "翻譯鍵": "翻译键", "沒有符合目前篩選條件的鍵。": "没有符合目前筛选条件的键。", "還沒有翻譯鍵。載入地圖或資源包開始。": "还没有翻译键。加载地图或资源包开始。", "插入 %s 佔位符": "插入 %s 占位符", "儲存": "保存", "取消": "取消", "還原成原始值": "还原成原始值", "Ctrl+Enter 儲存 · Esc 取消": "Ctrl+Enter 保存 · Esc 取消", "§ 色碼，點一下修改：": "§ 颜色代码，点一下修改：", "沒有 § 色碼。用上方色塊插入。": "没有 § 颜色代码。用上方色块插入。", "已儲存，記得匯出語言檔": "已保存，记得导出语言文件", "語言檔只能用這 16 種 § 色碼。要用 hex 顏色，請在下方「用在哪裡」修改地圖文字元件的 color。": "语言文件只能用这 16 种 § 颜色代码。要用 hex 颜色，请在下方“用在哪里”修改地图文本组件的 color。", "沒有原檔位置": "没有原文件位置", "沒有寫入權限": "没有写入权限", "匯出語言檔": "导出语言文件", "每個檔案保留原本的鍵順序與縮排，新增的鍵接在最後。打包的 .zip 保留 assets/…/lang/ 結構，可以直接覆蓋進資源包。": "每个文件保留原本的键顺序与缩进，添加的键接在最后。打包的 .zip 保留 assets/…/lang/ 结构，可以直接覆盖进资源包。", "新檔案 · ": "新文件 · ", "沒有修改": "没有修改", "存回原檔": "写回原文件", "下載": "下载", "沒有可匯出的語言檔。": "没有可导出的语言文件。", "地圖檔（文字元件顏色）": "地图文件（文本组件颜色）", "修改了 color": "修改了 color", "修改過的全部存回原檔": "修改过的全部写回原文件", "全部打包成 .zip": "全部打包成 .zip", "關閉": "关闭", ".zip 裡語言檔放在 assets/…，修改過的地圖檔放在 map/…，保留原本的資料夾結構。": ".zip 里语言文件放在 assets/…，修改过的地图文件放在 map/…，保留原本的文件夹结构。", "這個檢視無法下載檔案，請用「複製」貼回原檔。": "当前视图无法下载文件，请用“复制”贴回原文件。", "匯出內容": "导出内容", "這個檢視無法下載，請改用複製": "当前视图无法下载，请改用复制", "已取消下載": "已取消下载", "已有一個下載視窗開著，請稍後再試": "已有一个下载窗口开着，请稍后再试", "未知錯誤": "未知错误", "無法直接複製，內容已選取，請按 Ctrl+C": "无法直接复制，内容已选中，请按 Ctrl+C", "沒有需要存回的修改": "没有需要写回的修改", "新增翻譯鍵": "添加翻译键", "鍵名": "键名", "例如 map.portal.locked": "例如 map.portal.locked", "新增": "添加", "鍵名只能包含英數字、底線、點、連字號、冒號與斜線。": "键名只能包含英数字、下划线、点、连字号、冒号与斜线。", "這不是翻譯鍵工作台的工作階段檔": "这不是翻译键工作台的会话文件", "工作階段": "会话", "目前是範例資料，先載入你的地圖或資源包": "目前是示例数据，先加载你的地图或资源包", "無法讀取：檔案不是有效的 JSON": "无法读取：文件不是有效的 JSON", "已開啟工作階段": "已打开会话", "無法開啟工作階段": "无法打开会话", "工作階段檔（.json）包含所有語言、修改、地圖掃描結果與地圖檔的顏色修改，下次開啟就能接著做，不必重新掃描地圖。": "会话文件（.json）包含所有语言、修改、地图扫描结果与地图文件的颜色修改，下次打开就能接着做，不必重新扫描地图。", "這個瀏覽器無法自動暫存，請手動「儲存工作階段」。": "这个浏览器无法自动保存，请手动“保存会话”。", "修改會自動暫存在這個瀏覽器。": "修改会自动保存在这个浏览器。", "找到上次的工作階段": "找到上次的会话", "繼續上次的工作": "继续上次的工作", "不用，看範例": "不用，看示例", "載入新的地圖或資源包後，自動暫存會被新的工作取代。": "加载新的地图或资源包后，自动保存会被新的工作取代。", "已儲存工作階段 ✓": "已保存会话 ✓", "儲存工作階段": "保存会话", "先隱藏，下次有新修改時再提醒": "先隐藏，下次有新修改时再提醒", "稍後": "稍后", "正在列出資料夾內容": "正在列出文件夹内容", "沒有開啟資料夾": "没有打开文件夹", "如果 Chrome 說「資料夾中包含系統檔案」，通常是因為資料夾在 <span class=\"mono\">.minecraft<\/span> 裡。<span class=\"mono\">.minecraft<\/span> 位於 <span class=\"mono\">AppData<\/span>，瀏覽器不允許網頁寫入那裡。": "如果 Chrome 说“文件夹中包含系统文件”，通常是因为文件夹在 <span class=\"mono\">.minecraft<\/span> 里。<span class=\"mono\">.minecraft<\/span> 位于 <span class=\"mono\">AppData<\/span>，浏览器不允许网页写入那里。", "<b>只要讀取與比對：<\/b>改用「載入資料夾」，或直接把資料夾拖進這個頁面，任何位置都可以。": "<b>只要读取与对比：<\/b>改用“加载文件夹”，或直接把文件夹拖进这个页面，任何位置都可以。", "<b>想直接存回原檔：<\/b>先把資源包資料夾複製到桌面或文件裡的子資料夾（例如 <span class=\"mono\">文件\\packs\\my-pack<\/span>），再用「開啟資料夾並可存回」開啟它；改完後再複製回 <span class=\"mono\">resourcepacks<\/span>。不要選桌面、文件或磁碟根目錄本身，這些也會被擋。": "<b>想直接写回原文件：<\/b>先把资源包文件夹复制到桌面或文档里的子文件夹（例如 <span class=\"mono\">文档\\packs\\my-pack<\/span>），再用“打开文件夹（可写回）”打开它；改完后再复制回 <span class=\"mono\">resourcepacks<\/span>。不要选桌面、文档或磁盘根目录本身，这些也会被挡。", "改用「載入資料夾」": "改用“加载文件夹”", "已回到上次的工作": "已回到上次的工作", "確定移除？": "确定移除？", "已清除範例資料": "已清除示例数据", "已移除": "已移除", "再按一次確認清除": "再按一次确认清除", "清除全部": "清除全部", "已清除": "已清除", "語言代碼格式像 zh_tw、ko_kr": "语言代码格式像 zh_tw、ko_kr", "無法複製，請手動選取鍵名": "无法复制，请手动选中键名", "確定？": "确定？", "{0}，點一下更改": "{0}，点一下更改", "{0} · 區塊 {1}, {2}（約 x {3}, z {4}）": "{0} · 区块 {1}, {2}（约 x {3}, z {4}）", "正在讀取 {0} / {1}": "正在读取 {0} / {1}", "載入完成：{0} 個語言檔、掃描 {1} 個地圖檔，共 {2} 個鍵": "加载完成：{0} 个语言文件、扫描 {1} 个地图文件，共 {2} 个键", "（{0} 個檔案無法讀取）": "（{0} 个文件无法读取）", "寫入 {0}。語言檔開頭的 § 色碼會蓋過這個顏色。": "写入 {0}。语言文件开头的 § 颜色代码会覆盖这个颜色。", "已改成 {0}，記得匯出地圖檔": "已改成 {0}，记得导出地图文件", "（{0} 個區域檔）": "（{0} 个区域文件）", "使用 {0} 個翻譯鍵 · 掃描 {1} 個檔案": "使用 {0} 个翻译键 · 扫描 {1} 个文件", " · {0} 個資料包": " · {0} 个数据包", "掃描 {0} 個檔案": "扫描 {0} 个文件", "內含資源包：{0}": "内含资源包：{0}", "{0} 個語言檔 · {1} · 共 {2} 條": "{0} 个语言文件 · {1} · 共 {2} 条", "內嵌在地圖 {0} 裡": "内嵌在地图 {0} 里", "{0}：地圖用了 {1} 個翻譯鍵，但沒有載入任何 lang 檔。這張地圖可能沒附資源包，玩家會看到鍵名而不是文字。": "{0}：地图用了 {1} 个翻译键，但没有加载任何 lang 文件。这张地图可能没附资源包，玩家会看到键名而不是文本。", "{0} 個鍵在所有語言檔裡都找不到，遊戲內會直接顯示鍵名。": "{0} 个键在所有语言文件里都找不到，游戏内会直接显示键名。", "{0} 個檔案": "{0} 个文件", "顯示 {0}": "显示 {0}", "{0} 個鍵": "{0} 个键", "已翻譯 {0}/{1}（{2}%）": "已翻译 {0}/{1}（{2}%）", "從 {0} 個地圖檔（函式、JSON、區域檔、結構）找到 {1} 個被使用的翻譯鍵。": "从 {0} 个地图文件（函数、JSON、区域文件、结构）找到 {1} 个被使用的翻译键。", "{0} 處未匯出的修改": "{0} 处未导出的修改", "用在 {0} 處": "用在 {0} 处", "地圖文字元件的顏色：{0}": "地图文本组件的颜色：{0}", "{0} 色": "{0} 色", "再顯示 {0} 列（還有 {1} 列）": "再显示 {0} 列（还有 {1} 列）", "{0} 的 {1}": "{0} 的 {1}", "地圖元件顏色 {0}（開頭沒有 § 時用這個顏色，在「用在哪裡」修改）": "地图组件颜色 {0}（开头没有 § 时用这个颜色，在“用在哪里”修改）", "更改 {0}": "更改 {0}", "{0} 處修改": "{0} 处修改", "已下載 {0}": "已下载 {0}", "無法下載：{0}": "无法下载：{0}", "已複製 {0}": "已复制 {0}", "無法寫入 {0}：{1}": "无法写入 {0}：{1}", "已存回 {0} 個檔案": "已写回 {0} 个文件", "{0}（基準語言）的文字": "{0}（基准语言）的文本", "{0} 已經有這個鍵了。": "{0} 已经有这个键了。", "已新增 {0}": "已添加 {0}", "（儲存於 {0}）": "（保存于 {0}）", "已自動暫存在這個瀏覽器（{0}）。換電腦或清除瀏覽資料前，請儲存工作階段檔。": "已自动保存在这个浏览器（{0}）。换电脑或清除浏览数据前，请保存会话文件。", "{0}（{1}，{2} 個語言檔{3}）。": "{0}（{1}，{2} 个语言文件{3}）。", "{0} 處修改還沒匯出": "{0} 处修改还没导出", "{0}，遊戲裡還看不到這些變更。": "{0}，游戏里还看不到这些变更。", "有 {0} 處未匯出，再按一次清除": "有 {0} 处未导出，再按一次清除", "{0} 已經存在": "{0} 已经存在", "已新增 {0}，點表格中的空格開始翻譯": "已添加 {0}，点表格中的空格开始翻译", "已從 {0} 個語言刪除 {1}": "已从 {0} 个语言删除 {1}", "黑": "黑", "深藍": "深蓝", "深綠": "深绿", "深青": "深青", "深紅": "深红", "深紫": "深紫", "金": "金", "灰": "灰", "深灰": "深灰", "藍": "蓝", "綠": "绿", "青": "青", "紅": "红", "淺紫": "浅紫", "黃": "黄", "白": "白", "亂碼": "混淆", "粗體": "粗体", "刪除線": "删除线", "底線": "下划线", "斜體": "斜体", "重設": "重置", "全部": "全部", "缺翻譯": "缺翻译", "與基準相同": "与基准相同", "佔位符不符": "占位符不符", "格式碼不同": "格式代码不同", "地圖": "地图", "資源包": "资源包", "資料包": "数据包", "從地圖或資源包提取翻譯鍵，並排比對語言、編輯文字與顏色代碼": "从地图或资源包提取翻译键，并排对比语言、编辑文本与颜色代码", "離線版": "离线版", "載入檔案": "加载文件", "載入資料夾": "加载文件夹", "開啟資料夾並可存回": "打开文件夹（可写回）", "＋ 新增鍵": "＋ 添加键", "開啟工作階段": "打开会话", "語言": "语言", "勾選顯示為欄位；「設為基準」的語言用來比對缺漏與未翻譯。": "勾选后显示为列；“设为基准”的语言用来对比缺漏与未翻译。", "設定": "设置", "格式碼前綴": "格式代码前缀", "§（原版）": "§（原版）", "&（插件，同時辨識 §）": "&（插件，同时识别 §）", "原版語言檔只支援 § 色碼。hex 顏色寫在地圖的文字元件（SNBT / JSON 的 <span class=\"mono\">color<\/span>）裡，會在每個鍵「用在哪裡」中顯示與修改。": "原版语言文件只支持 § 颜色代码。hex 颜色写在地图的文本组件（SNBT / JSON 的 <span class=\"mono\">color<\/span>）里，会在每个键“用在哪里”中显示与修改。", "「未定義」檢查略過這些前綴（每行一個）": "“未定义”检查跳过这些前缀（每行一个）", "地圖用到原版鍵（例如 block.minecraft.stone）時，遊戲本身已提供翻譯，不必列為未定義。": "地图用到原版键（例如 block.minecraft.stone）时，游戏本身已提供翻译，不必列为未定义。", "遊戲預覽": "游戏预览", "原始碼": "源码", "放開以載入地圖、資源包或語言檔": "放开以加载地图、资源包或语言文件", "新增語言，例如 ko_kr": "添加语言，例如 ko_kr", "搜尋鍵或文字…": "搜索键或文本…", "新增語言代碼": "添加语言代码", "搜尋": "搜索", "鍵前綴": "键前缀", "顯示方式": "显示方式", "開啟後修改可以直接寫回原本的語言檔（Chrome / Edge）": "打开后修改可以直接写回原本的语言文件（Chrome / Edge）", "選擇地圖資料夾": "选择地图文件夹", "，{0}": "，{0}", "YAML 解析器沒有載入，.yml 檔會被略過": "YAML 解析器没有加载，.yml 文件会被跳过", "輸出格式": "输出格式", "保留原格式": "保留原格式", "全部轉成 JSON（.json）": "全部转成 JSON（.json）", "全部轉成 YAML（.yml）": "全部转成 YAML（.yml）", "全部轉成舊版 .lang": "全部转成旧版 .lang", "轉換格式只影響下載、複製和打包；「存回原檔」一律寫成原本的格式。": "转换格式只影响下载、复制和打包；“写回原文件”始终写成原本的格式。", "載入語言檔": "加载语言文件", "只載入語言檔（.json / .lang / .yml），不掃描地圖": "只加载语言文件（.json / .lang / .yml），不扫描地图", "只載入語言檔": "只加载语言文件", "指定語言": "指定语言", "這些檔案的名稱看不出是哪個語言，請填入語言代碼（例如 zh_tw、en_us）。": "这些文件的名称看不出是哪个语言，请填入语言代码（例如 zh_tw、en_us）。", "語言代碼": "语言代码", "載入": "加载", "請為每個檔案填入語言代碼，格式像 zh_tw、ko_kr": "请为每个文件填入语言代码，格式像 zh_tw、ko_kr", "可讀取 .json、舊版 .lang 與 .yml / .yaml 語言檔。YAML 的巢狀結構會攤平成以「.」連接的鍵。匯出時只改動有修改的地方，註解、空行與引號樣式都會保留。": "可读取 .json、旧版 .lang 与 .yml / .yaml 语言文件。YAML 的嵌套结构会展平成以“.”连接的键。导出时只改动有修改的地方，注释、空行与引号样式都会保留。", "不需翻譯": "不需翻译", "取消不需翻譯": "取消不需翻译", "確認這個鍵不需要翻譯（例如專有名詞），之後不再提示缺翻譯或與基準相同": "确认这个键不需要翻译（例如专有名词），之后不再提示缺翻译或与基准相同", "已標記為不需翻譯": "已标记为不需翻译", "已取消「不需翻譯」": "已取消“不需翻译”", "沒有用到翻譯鍵": "没有用到翻译键", "列出": "列出", "只有資源包，無法判斷地圖用了哪些鍵": "只有资源包，无法判断地图用了哪些键", "填入基準": "填入基准", "未定義": "未定义", "未使用": "未使用", "地圖裡用到這個鍵的位置與文字元件顏色": "地图里用到这个键的位置与文本组件颜色", "原版遊戲已經提供翻譯": "原版游戏已经提供翻译", "點一下取消「不需翻譯」": "点一下取消“不需翻译”", "輸入文字": "输入文字", "已填入基準，Ctrl+Z 可以復原": "已填入基准，Ctrl+Z 可以撤销", "顏色": "颜色", "格式": "格式", "清除顏色與格式": "清除颜色与格式", "復原": "撤销", "重做": "重做", "用基準語言的文字取代": "用基准语言的文字替换", "點一下格子開始編輯": "点一下格子开始编辑", "游標停在色碼後面時，點顏色會直接替換": "光标停在色码后面时，点颜色会直接替换", "反白文字後套用顏色或格式": "选中文字后套用颜色或格式", "專案": "项目", "已匯入成新專案": "已导入为新项目", "未命名專案": "未命名项目", "無法開啟這個專案": "无法打开这个项目", "已建立新專案，載入地圖或資源包開始": "已创建新项目，加载地图或资源包开始", "已刪除專案": "已删除项目", "目前的專案": "当前项目", "切換到這個專案": "切换到这个项目", "改名": "改名", "刪除專案": "删除项目", "載入地圖或資源包後，會自動建立專案並存在這個瀏覽器。": "加载地图或资源包后，会自动创建项目并保存在这个浏览器。", "這個瀏覽器無法自動儲存，請用「匯出」把專案存成 .json。": "这个浏览器无法自动保存，请用“导出”把项目存成 .json。", "修改會自動儲存在這個瀏覽器。": "修改会自动保存在这个浏览器。", "開新專案": "新建项目", "要放進哪個專案？": "要放进哪个项目？", "你載入的是另一張地圖，建議開新專案，兩張地圖的翻譯才不會混在一起。": "你加载的是另一张地图，建议新建项目，两张地图的翻译才不会混在一起。", "目前專案已經有地圖和資源包了，建議開新專案。": "当前项目已经有地图和资源包了，建议新建项目。", "加入目前專案可以把地圖和資源包放在一起比對；開新專案則從空白開始。": "加入当前项目可以把地图和资源包放在一起比对；新建项目则从空白开始。", "專案名稱": "项目名称", "再按一次刪除": "再按一次删除", "再按一次移除": "再按一次移除", "再按一次刪除這個鍵": "再按一次删除这个键", "上次的自動暫存已轉成專案": "上次的自动暂存已转成项目", "{0} 個鍵 · {1} 個檔案": "{0} 个键 · {1} 个文件", "內含 {0}": "内含 {0}", "{0} 個語言檔 · {1} 條": "{0} 个语言文件 · {1} 条", "在 {0} 裡": "在 {0} 里", "地圖用了 {0} 個翻譯鍵，但沒有載入任何 lang 檔。這張地圖可能沒附資源包，玩家會看到鍵名而不是文字。": "地图用了 {0} 个翻译键，但没有加载任何 lang 文件。这张地图可能没附资源包，玩家会看到键名而不是文字。", "{0} 個鍵未定義": "{0} 个键未定义", "{0} 處未匯出": "{0} 处未导出", "已選取 {0} 個字": "已选中 {0} 个字", "已自動儲存在這個瀏覽器（{0}）": "已自动保存在这个浏览器（{0}）", "加入目前專案「{0}」": "加入当前项目“{0}”", "新增鍵": "新增键", "新專案": "新项目", "匯出": "导出", "匯入": "导入", "編輯工具": "编辑工具", "地圖或資源包的 .zip，或個別檔案": "地图或资源包的 .zip，或单个文件", "地圖或資源包資料夾（唯讀）": "地图或资源包文件夹（只读）", "開啟匯出視窗": "打开导出窗口", "從空白開始一個新專案": "从空白开始一个新项目", "把目前專案存成 .json，可以備份、換電腦或分享": "把当前项目存成 .json，可以备份、换电脑或分享", "把 .json 專案檔匯入成新專案": "把 .json 项目文件导入为新项目", "原版語言檔只支援 § 色碼。hex 顏色寫在地圖的文字元件（SNBT / JSON 的 color）裡，會在每個鍵「用在哪裡」中顯示與修改。": "原版语言文件只支持 § 色码。hex 颜色写在地图的文本组件（SNBT / JSON 的 color）里，会在每个键“用在哪里”中显示与修改。", "地圖使用但未定義：地圖裡用到這個鍵，但所有語言檔都沒有它，遊戲會直接顯示鍵名": "地图使用但未定义：地图里用到这个键，但所有语言文件都没有它，游戏会直接显示键名", "地圖未使用：語言檔裡有這個鍵，但掃描過的地圖檔都沒有用到": "地图未使用：语言文件里有这个键，但扫描过的地图文件都没有用到", "標記為不需翻譯的鍵（例如專有名詞）": "标记为不需翻译的键（例如专有名词）", "和基準語言的文字一模一樣，可能還沒翻譯": "和基准语言的文字一模一样，可能还没翻译", "%s 這類佔位符的數量或編號和基準不同，遊戲裡可能顯示錯誤": "%s 这类占位符的数量或编号和基准不同，游戏里可能显示错误", "§ 格式碼（顏色、粗體等）和基準不同": "§ 格式码（颜色、粗体等）和基准不同"}};/*/I18N*/</script>
 <script>
 "use strict";
 /* ---------- constants ---------- */
@@ -565,6 +610,27 @@ const langName = c => LANG_NAMES[c.toLowerCase()] || '';
 function shade(h){ return [0,2,4].map(i=>Math.floor(parseInt(h.slice(i,i+2),16)/4).toString(16).padStart(2,'0')).join(''); }
 function toast(msg){ const t=$('#toast'); t.textContent=msg; t.hidden=false; clearTimeout(toast._t); toast._t=setTimeout(()=>t.hidden=true, 2600); }
 const tick = () => new Promise(r=>setTimeout(r,0));
+const ICON = {
+  file:'<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/>',
+  lang:'<path d="M4 5h8M8 3v2M5.5 9c1.4 2.8 3.7 4.7 6.5 5.8M10.5 5c-1 4.2-3.4 7.3-6.5 9"/><path d="M13 21l4-9 4 9M14.4 18h5.2"/>',
+  upload:'<path d="M12 15V3M7 8l5-5 5 5"/><path d="M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/>',
+  folder:'<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
+  folderEdit:'<path d="M11 19H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v1.5"/><path d="M14 21v-2.5l5-5 2.5 2.5-5 5z"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  download:'<path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>',
+  copy:'<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/>',
+  trash:'<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13M9 7V4h6v3"/>',
+  notr:'<circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/>',
+  undo:'<path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/>',
+  redo:'<path d="M15 14l5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/>',
+  fill:'<path d="M20 12H9M14 7l-5 5 5 5"/><path d="M4 5v14"/>',
+  edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>',
+  check:'<path d="M5 12l5 5 9-10"/>',
+  x:'<path d="M6 6l12 12M18 6L6 18"/>',
+  save:'<path d="M5 3h11l5 5v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M7 3v5h8M7 21v-7h10v7"/>'
+};
+const ico = n => `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[n]}</svg>`;
+
 
 /* ---------- tokenizer ---------- */
 let _re = null, _reKey = '';
@@ -834,6 +900,7 @@ function loadSample(){
 function resetAll(){
   S.files.clear(); S.langs = {}; S.usages.clear(); S.paths = []; S.hints.clear(); S.texts.clear(); S.handles.clear(); S.dirs.clear(); S.scanned = 0; S.scanFiles = 0; S.deleted = 0;
   S.visible = []; S.editing = null; S.expanded.clear(); S.sticky.clear(); S.noTr.clear(); S.filter = 'all'; S.prefix = ''; S.q = ''; $('#q').value=''; S.sample = false;
+  S.lastEdit = null; HIST.clear(); hideFloat();
 }
 
 /* ---------- scanning ---------- */
@@ -996,7 +1063,7 @@ async function collectZip(bytes, prefix, out, depth){
     out.push({path, kind, bytes: () => f.async('uint8array'), depth: depth+1});
   });
 }
-async function ingest(items){
+async function ingest(items, target){
   if(!items.length){ toast(tr('沒有找到可讀取的檔案')); return; }
   if(!window.jsyaml && !window.YAML && items.some(it => /\.ya?ml$/i.test(it.path))) toast(tr('YAML 解析器沒有載入，.yml 檔會被略過'));
   if(items.length === 1 && /\.json$/i.test(items[0].path) && !items[0].path.includes('/')){
@@ -1004,9 +1071,15 @@ async function ingest(items){
     if(text.slice(0, 200).includes('"app":"' + SESSION_APP + '"')){ openSessionText(text); return; }
     items = [{...items[0], bytes: async () => enc.encode(text)}];
   }
-  if(S.busy) return; S.busy = true;
+  if(S.busy) return;
+  if(S.editing) commitEditor(true);
+  if(!target && !S.sample && PROJ.cur && hasContent()){ askTarget(items); return; }
   const wasSample = S.sample;
-  if(wasSample) resetAll();
+  if(target === 'new'){ await projSave(); resetAll(); projCreate(''); }
+  else if(wasSample){ resetAll(); projCreate(''); }
+  else if(!PROJ.cur) projCreate('');
+  S.busy = true;
+  if(items.dirs) for(const [p, h] of items.dirs) S.dirs.set(p, h);
   const queue = [];
   for(const it of items){ const kind = it.forceLang ? 'lang' : classify(it.path); if(kind) queue.push({...it, kind, depth:0}); else S.paths.push({path:it.path, kind:null}); }
   let done = 0, langN = 0, scanN = 0, errs = 0;
@@ -1049,7 +1122,7 @@ async function ingest(items){
   }
   S.busy = false; S.limit = 150;
   const msg = T`載入完成：${langN} 個語言檔、掃描 ${scanN} 個地圖檔，共 ${allKeys().length} 個鍵` + (errs ? T`（${errs} 個檔案無法讀取）` : '');
-  renderAll(); toast(msg);
+  renderAll(); renderProjects(); scheduleAutosave(); toast(msg);
 }
 function progress(title, path, frac){
   $('#banner').hidden = false;
@@ -1193,54 +1266,38 @@ function renderSources(){
   const dps = list.filter(s => s.type === 'datapack' && !(s.parent && s.parent.type === 'map'));
   const anyLang = [...S.files.values()].some(f => !f.isNew);
   if(!list.length && !anyLang){
-    el.innerHTML = `<div class="src-head"><h2 id="src-title">${tr('載入內容')}</h2></div><div class="src-empty">${tr('還沒有載入地圖或資源包。可以分開載入（製圖中），也可以只載入一張已經內含資源包的地圖（釋出版）。')}</div>`;
+    el.innerHTML = `<div class="src-empty">${tr('還沒有載入地圖或資源包。可以分開載入（製圖中），也可以只載入一張已經內含資源包的地圖（釋出版）。')}</div>`;
     return;
   }
-  let mode = '';
-  const embedded = packs.filter(p => p.parent && p.parent.type === 'map');
-  const separate = packs.filter(p => !(p.parent && p.parent.type === 'map'));
-  if(maps.length && embedded.length && !separate.length) mode = tr('<b>釋出版地圖</b>：資源包內嵌在地圖裡');
-  else if(maps.length && separate.length && !embedded.length) mode = tr('<b>製圖模式</b>：地圖與資源包分開載入');
-  else if(maps.length && separate.length && embedded.length) mode = tr('<b>混合</b>：地圖內有資源包，另外也載入了獨立資源包');
-  else if(maps.length) mode = tr('<b>只有地圖</b>，沒有資源包');
-  else if(packs.length) mode = tr('<b>只有資源包</b>，沒有地圖');
   const card = (s, warns) => {
     const kindLabel = tr({map:'地圖', pack:'資源包', datapack:'資料包'}[s.type]);
     let stats = '', rel = '';
     if(s.type === 'map'){
-      const regs = s.regions ? T`（${s.regions} 個區域檔）` : '';
-      stats = s.keys.size ? T`使用 ${`<b>${s.keys.size}</b>`} 個翻譯鍵 · 掃描 ${s.scanned} 個檔案` + regs + (s.datapacks ? T` · ${s.datapacks} 個資料包` : '') : T`掃描 ${s.scanned} 個檔案` + regs;
-      if(s.packs.length) rel = T`內含資源包：${s.packs.map(p => `<b>${esc(p.file)}</b>`).join(tr('、'))}`;
+      stats = s.keys.size ? T`${`<b>${s.keys.size}</b>`} 個鍵 · ${s.scanned} 個檔案` : T`${s.scanned} 個檔案`;
+      if(s.packs.length) rel = T`內含 ${s.packs.map(p => esc(p.file)).join(tr('、'))}`;
     } else if(s.type === 'pack'){
-      stats = s.langFiles.length ? T`${`<b>${s.langFiles.length}</b>`} 個語言檔 · ${s.codes.map(esc).join(tr('、'))} · 共 ${s.nkeys} 條` : tr('沒有語言檔');
-      if(s.parent && s.parent.type === 'map') rel = T`內嵌在地圖 ${`<b>${esc(s.parent.name)}</b>`} 裡`;
-      else if(maps.length) rel = tr('獨立資源包（不在地圖內）');
-    } else {
-      stats = T`使用 ${`<b>${s.keys.size}</b>`} 個翻譯鍵 · 掃描 ${s.scanned} 個檔案`;
-    }
-    return `<article class="src${s.parent && s.parent.type !== s.type ? ' child' : ''}">
-      <div class="src-top"><span class="kind ${s.type}">${kindLabel}</span><span class="src-name" title="${esc(s.name)}">${esc(s.name)}</span><button type="button" class="icon-btn" data-sact="remove" data-root="${esc(s.root)}" title="${tr('移除這個來源載入的內容')}">${tr('移除')}</button></div>
-      ${s.desc ? `<div class="chat">${renderMC(s.desc, false)}</div>` : ''}
-      <div class="src-path">${esc(s.root || s.file)}</div>
-      <div class="src-stats">${stats}</div>
-      ${rel ? `<div class="rel">${rel}</div>` : ''}
+      stats = s.langFiles.length ? T`${`<b>${s.langFiles.length}</b>`} 個語言檔 · ${s.nkeys} 條` : tr('沒有語言檔');
+      if(s.parent && s.parent.type === 'map') rel = T`在 ${esc(s.parent.name)} 裡`;
+    } else stats = T`${`<b>${s.keys.size}</b>`} 個鍵 · ${s.scanned} 個檔案`;
+    const tip = [s.root || s.file, s.type === 'pack' && s.codes && s.codes.length ? s.codes.join(', ') : '', s.desc ? s.desc.replace(/[§&][0-9a-fk-or]/gi, '') : ''].filter(Boolean).join('\n');
+    return `<article class="src${s.parent && s.parent.type !== s.type ? ' child' : ''}" title="${esc(tip)}">
+      <div class="src-top"><span class="kind ${s.type}">${kindLabel}</span><span class="src-name">${esc(s.name)}</span><span class="src-stats">${stats}</span>${rel ? `<span class="rel">${rel}</span>` : ''}<button type="button" class="icon-btn" data-sact="remove" data-root="${esc(s.root)}" title="${tr('移除這個來源載入的內容')}" aria-label="${tr('移除這個來源載入的內容')}">${ico('x')}</button></div>
       ${warns.length ? `<div class="warn-list">${warns.join('')}</div>` : ''}
     </article>`;
   };
-  const wn = (cls, text, btn) => `<div class="wn ${cls}"><span>${text}</span>${btn || ''}</div>`;
+  const wn = (cls, text, btn, tip) => `<div class="wn ${cls}"${tip ? ` title="${esc(tip)}"` : ''}><span>${text}</span>${btn || ''}</div>`;
   const cards = [];
   for(const m of maps){
     const w = [];
-    if(!m.keys.size) w.push(wn('info', tr('這張地圖沒有用到任何翻譯鍵（沒有 translate 文字元件），所以不需要語言檔。')));
-    else if(!anyLang) w.push(wn('miss', T`${`<b>${tr('缺少語言檔')}</b>`}：地圖用了 ${m.keys.size} 個翻譯鍵，但沒有載入任何 lang 檔。這張地圖可能沒附資源包，玩家會看到鍵名而不是文字。`, `<button type="button" class="btn sm" data-sact="load-pack">${tr('載入資源包')}</button>`));
-    else if(m.undef.length) w.push(wn('warn', T`${m.undef.length} 個鍵在所有語言檔裡都找不到，遊戲內會直接顯示鍵名。`, `<button type="button" class="btn sm" data-sact="filter-undef">${tr('列出這些鍵')}</button>`));
-    else w.push(wn('info', tr('地圖用到的鍵都有翻譯定義。')));
+    if(!m.keys.size) w.push(wn('info', tr('沒有用到翻譯鍵'), '', tr('這張地圖沒有用到任何翻譯鍵（沒有 translate 文字元件），所以不需要語言檔。')));
+    else if(!anyLang) w.push(wn('miss', `<b>${tr('缺少語言檔')}</b>`, `<button type="button" class="btn sm" data-sact="load-pack">${tr('載入資源包')}</button>`, T`地圖用了 ${m.keys.size} 個翻譯鍵，但沒有載入任何 lang 檔。這張地圖可能沒附資源包，玩家會看到鍵名而不是文字。`));
+    else if(m.undef.length) w.push(wn('warn', T`${m.undef.length} 個鍵未定義`, `<button type="button" class="btn sm" data-sact="filter-undef">${tr('列出')}</button>`, T`${m.undef.length} 個鍵在所有語言檔裡都找不到，遊戲內會直接顯示鍵名。`));
     cards.push(card(m, w));
   }
   for(const p of packs){
     const w = [];
     if(!p.langFiles.length) w.push(wn('warn', tr('這個資源包裡沒有 <span class="mono">assets/*/lang/</span> 語言檔。')));
-    else if(!maps.length && !dps.length) w.push(wn('info', tr('只載入了資源包，無法判斷哪些鍵被地圖使用。載入地圖後會標出「未定義」與「未使用」。'), `<button type="button" class="btn sm" data-sact="load-map">${tr('載入地圖')}</button>`));
+    else if(!maps.length && !dps.length) w.push(wn('info', tr('只有資源包，無法判斷地圖用了哪些鍵'), `<button type="button" class="btn sm" data-sact="load-map">${tr('載入地圖')}</button>`, tr('只載入了資源包，無法判斷哪些鍵被地圖使用。載入地圖後會標出「未定義」與「未使用」。')));
     cards.push(card(p, w));
   }
   for(const d of dps){
@@ -1249,8 +1306,8 @@ function renderSources(){
     cards.push(card(d, w));
   }
   const loose = [...S.files.values()].filter(f => !f.isNew && !packs.some(p => p.langFiles.includes(f)));
-  if(loose.length) cards.push(`<article class="src"><div class="src-top"><span class="kind pack">${tr('語言檔')}</span><span class="src-name">${tr('個別載入的語言檔')}</span></div><div class="src-stats">${T`${loose.length} 個檔案`} · ${[...new Set(loose.map(f => f.code))].map(esc).join(tr('、'))}</div></article>`);
-  el.innerHTML = `<div class="src-head"><h2 id="src-title">${tr('載入內容')}</h2>${mode ? `<span class="mode">${mode}</span>` : ''}</div><div class="src-grid">${cards.join('')}</div>`;
+  if(loose.length) cards.push(`<article class="src" title="${esc(loose.map(f => f.path).join('\n'))}"><div class="src-top"><span class="kind pack">${tr('語言檔')}</span><span class="src-name">${tr('個別載入的語言檔')}</span><span class="src-stats">${T`${loose.length} 個檔案`} · ${[...new Set(loose.map(f => f.code))].map(esc).join(tr('、'))}</span></div></article>`);
+  el.innerHTML = `<div class="src-grid">${cards.join('')}</div>`;
 }
 function removeSource(root){
   for(const [p, f] of [...S.files]) if(under(p, root)){
@@ -1308,11 +1365,11 @@ function renderSide(){
   const usedKeys = S.usages.size;
   $('#scan-summary').textContent = S.scanned ? T`從 ${S.scanFiles} 個地圖檔（函式、JSON、區域檔、結構）找到 ${usedKeys} 個被使用的翻譯鍵。` : tr('只載入了語言檔。加入地圖資料夾或世界 .zip，就能找出地圖實際用到哪些鍵。');
   const dc = dirtyCount();
-  $('#dirty').hidden = !dc; $('#dirty').textContent = T`${dc} 處未匯出的修改`;
+  $('#dirty').hidden = !dc || S.sample; $('#dirty').textContent = T`${dc} 處未匯出`;
   $('#set-prefix').value = S.pfx;
   if(document.activeElement !== $('#set-ignore')) $('#set-ignore').value = S.ignore.join('\n');
   try{ renderSources(); }catch(e){ console.warn(e); }
-  renderRemind(); scheduleAutosave(); updateAutosaveStatus();
+  scheduleAutosave(); updateAutosaveStatus();
 }
 function renderBanner(){
   const b = $('#banner');
@@ -1325,7 +1382,8 @@ function renderBanner(){
 /* ---------- rendering: table ---------- */
 const FILTERS = [
   ['all','全部',''],['missing','缺翻譯','var(--miss)'],['same','與基準相同','var(--warn)'],['ph','佔位符不符','var(--miss)'],
-  ['fmt','格式碼不同','var(--warn)'],['undef','地圖使用但未定義','var(--miss)'],['unused','地圖未使用','var(--info)'],['notr','不需翻譯','var(--info)'],['dirty','已修改','var(--dirty)']];
+  ['fmt','格式碼不同','var(--warn)'],['undef','未定義','var(--miss)'],['unused','未使用','var(--info)'],['notr','不需翻譯','var(--info)'],['dirty','已修改','var(--dirty)']];
+const FILTER_TIP = {undef:'地圖使用但未定義：地圖裡用到這個鍵，但所有語言檔都沒有它，遊戲會直接顯示鍵名', unused:'地圖未使用：語言檔裡有這個鍵，但掃描過的地圖檔都沒有用到', notr:'標記為不需翻譯的鍵（例如專有名詞）', same:'和基準語言的文字一模一樣，可能還沒翻譯', ph:'%s 這類佔位符的數量或編號和基準不同，遊戲裡可能顯示錯誤', fmt:'§ 格式碼（顏色、粗體等）和基準不同'};
 let rowsCache = [];
 function computeRows(){
   const q = S.q.trim().toLowerCase();
@@ -1349,7 +1407,7 @@ function renderChips(counts){
   $('#chips').innerHTML = FILTERS.map(([id, label, c]) => {
     if(id === 'unused' && !S.scanned) return '';
     if(id !== 'all' && id !== S.filter && !counts[id]) return '';
-    return `<button type="button" class="chip" data-filter="${id}" aria-pressed="${S.filter===id}">${c?`<span class="dot" style="--c:${c}"></span>`:''}${tr(label)}<span class="n">${counts[id]}</span></button>`;
+    return `<button type="button" class="chip" data-filter="${id}" aria-pressed="${S.filter===id}"${FILTER_TIP[id] ? ` title="${tr(FILTER_TIP[id])}"` : ''}>${c?`<span class="dot" style="--c:${c}"></span>`:''}${tr(label)}<span class="n">${counts[id]}</span></button>`;
   }).join('');
   const prefixes = new Map();
   for(const k of allKeys()){ const p = k.split('.')[0]; prefixes.set(p, (prefixes.get(p)||0)+1); }
@@ -1358,34 +1416,38 @@ function renderChips(counts){
 const CELL_TAG = {missing:['miss','缺翻譯'], same:['warn','與基準相同'], ph:['miss','佔位符不符'], fmt:['warn','格式碼不同'], dirty:['dirty','已修改']};
 function cellHTML(k, c, flags){
   const e = S.langs[c] && S.langs[c].entries.get(k);
-  if(S.editing && S.editing.k === k && S.editing.c === c) return editorHTML(k, c);
-  const tags = flags.map(f => CELL_TAG[f] ? `<span class="tag ${CELL_TAG[f][0]}">${tr(CELL_TAG[f][1])}</span>` : '').join('');
+  const editing = S.editing && S.editing.k === k && S.editing.c === c;
+  const tags = flags.map(f => CELL_TAG[f] ? `<span class="tag ${CELL_TAG[f][0]}"${FILTER_TIP[f] ? ` title="${tr(FILTER_TIP[f])}"` : ''}>${tr(CELL_TAG[f][1])}</span>` : '').join('');
   let body;
-  if(!e) body = `<div class="chat none">${c === S.base ? tr('基準語言沒有這個鍵 · 點一下新增') : tr('沒有翻譯 · 點一下新增')}</div>`;
+  if(editing) body = cellEditorHTML(k, c);
+  else if(!e) body = `<div class="chat none">${c === S.base ? tr('基準語言沒有這個鍵 · 點一下新增') : tr('沒有翻譯 · 點一下新增')}</div>`;
   else body = S.view === 'raw' ? `<div class="rawv">${renderRaw(e.v)}</div>` : `<div class="chat">${renderMC(e.v, false, baseHex(k))}</div>`;
-  return `<div class="cell-tags">${tags}</div>${body}`;
+  const bv = c !== S.base && !editing ? baseValue(k) : null;
+  const fill = bv != null && bv !== (e ? e.v : '') ? `<button type="button" class="fill-btn" data-act="fill" title="${tr('填入基準')}" aria-label="${tr('填入基準')}">${ico('fill')}</button>` : '';
+  return `${fill}${body}<div class="cell-tags">${tags}</div>`;
 }
 function cellClass(c, flags){
   let cl = 'cell';
   if(c === S.base) cl += ' is-base';
   if(flags.includes('missing') || flags.includes('ph')) cl += ' f-miss';
   else if(flags.includes('same') || flags.includes('fmt')) cl += ' f-warn';
-  if(S.editing && S.editing.c === c) {}
   return cl;
 }
 function keyCellHTML(k, info){
   const dot = k.lastIndexOf('.');
   const name = dot > 0 ? `<span class="pre">${esc(k.slice(0, dot+1))}</span>${esc(k.slice(dot+1))}` : esc(k);
   const tags = [];
-  if(info.agg.has('undef')) tags.push('<span class="tag miss">' + tr('地圖使用但未定義') + '</span>');
-  if(info.agg.has('unused')) tags.push('<span class="tag info">' + tr('地圖未使用') + '</span>');
-  if(info.used){ const n = S.usages.get(k).reduce((a,u)=>a+u.n,0); tags.push(`<button type="button" class="tag muted" data-act="uses" aria-expanded="${S.expanded.has(k)}">${S.expanded.has(k)?'▾':'▸'} ${T`用在 ${n} 處`}</button>`); }
-  if(info.used && !info.inBase && isIgnored(k)) tags.push('<span class="tag muted">' + tr('原版鍵') + '</span>');
+  if(info.agg.has('undef')) tags.push(`<span class="tag miss" title="${tr(FILTER_TIP.undef)}">${tr('未定義')}</span>`);
+  if(info.agg.has('unused')) tags.push(`<span class="tag info" title="${tr(FILTER_TIP.unused)}">${tr('未使用')}</span>`);
+  if(info.used){ const n = S.usages.get(k).reduce((a,u)=>a+u.n,0); tags.push(`<button type="button" class="tag muted" data-act="uses" aria-expanded="${S.expanded.has(k)}" title="${tr('地圖裡用到這個鍵的位置與文字元件顏色')}">${S.expanded.has(k)?'▾':'▸'} ${T`用在 ${n} 處`}</button>`); }
+  if(info.used && !info.inBase && isIgnored(k)) tags.push(`<span class="tag muted" title="${tr('原版遊戲已經提供翻譯')}">${tr('原版鍵')}</span>`);
   const nt = S.noTr.has(k);
-  if(nt) tags.push('<span class="tag info">' + tr('不需翻譯') + '</span>');
-  const cols = keyColors(k);
-  if(cols.length) tags.push(`<span class="kcols" title="${T`地圖文字元件的顏色：${esc(cols.join(tr('、')))}`}">${cols.slice(0,4).map(c => `<span class="sw" style="--sw:#${colorHex(c)}"></span>`).join('')}${cols.length > 1 ? `<span class="count">${T`${cols.length} 色`}</span>` : ''}</span>`);
-  return `<th class="kcell" scope="row"><div class="kname">${name}</div><div class="kmeta">${tags.join('')}<span class="row-tools"><button type="button" class="icon-btn" data-act="notr" title="${tr('確認這個鍵不需要翻譯（例如專有名詞），之後不再提示缺翻譯或與基準相同')}">${nt ? tr('取消不需翻譯') : tr('不需翻譯')}</button><button type="button" class="icon-btn" data-act="copykey" title="${tr('複製鍵名')}">${tr('複製')}</button><button type="button" class="icon-btn danger" data-act="del" title="${tr('從所有語言刪除這個鍵')}">${tr('刪除')}</button></span></div></th>`;
+  if(nt) tags.push(`<button type="button" class="tag info" data-act="notr" title="${tr('點一下取消「不需翻譯」')}">${tr('不需翻譯')}</button>`);
+  const tools = `<span class="row-tools">
+    <button type="button" class="icon-btn${nt ? ' on' : ''}" data-act="notr" title="${nt ? tr('取消不需翻譯') : tr('確認這個鍵不需要翻譯（例如專有名詞），之後不再提示缺翻譯或與基準相同')}" aria-label="${nt ? tr('取消不需翻譯') : tr('不需翻譯')}" aria-pressed="${nt}">${ico('notr')}</button>
+    <button type="button" class="icon-btn" data-act="copykey" title="${tr('複製鍵名')}" aria-label="${tr('複製鍵名')}">${ico('copy')}</button>
+    <button type="button" class="icon-btn danger" data-act="del" title="${tr('從所有語言刪除這個鍵')}" aria-label="${tr('從所有語言刪除這個鍵')}">${ico('trash')}</button></span>`;
+  return `<th class="kcell" scope="row"><div class="khead"><div class="kname">${name}</div>${tools}</div>${tags.length ? `<div class="kmeta">${tags.join('')}</div>` : ''}</th>`;
 }
 function usesRowHTML(k){
   const list = S.usages.get(k) || [];
@@ -1421,105 +1483,419 @@ function renderTable(){
   }
   if(rows.length > S.limit) body += `<tr><td colspan="${S.visible.length+1}" class="more"><button class="btn sm" type="button" data-act="more">${T`再顯示 ${Math.min(150, rows.length - S.limit)} 列（還有 ${rows.length - S.limit} 列）`}</button></td></tr>`;
   t.innerHTML = head + `<tbody>${body}</tbody>`;
-  if(S.editing) afterEditorRender();
+  if(S.editing) afterEditorRender(); else hideFloat();
+  renderEdbar();
 }
 function renderAll(){ renderBanner(); renderSide(); renderTable();
   document.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === S.view)); }
 
 /* ---------- editor ---------- */
-function editorHTML(k, c){
-  const pal = MC.map(([ch,h,n]) => `<button type="button" class="swb" style="--sw:#${h}" data-act="ins" data-code="${ch}" title="${S.pfx}${ch} ${tr(n)}"></button>`).join('');
-  const fm = ['l','o','n','m','k','r'].map(ch => `<button type="button" class="fb" data-act="ins" data-code="${ch}" title="${S.pfx}${ch} ${tr(FMT[ch])}" style="${ch==='l'?'font-weight:700':ch==='o'?'font-style:italic':ch==='n'?'text-decoration:underline':ch==='m'?'text-decoration:line-through':''}">${ch==='k'?'?':ch==='r'?'↺':ch.toUpperCase()}</button>`).join('');
-  const e = S.langs[c] && S.langs[c].entries.get(k);
-  const canRevert = e && e.orig !== undefined && S.editing.draft !== e.orig;
-  return `<div class="ed">
-    <div class="ed-tools">${pal}<span class="sep"></span>${fm}<span class="sep"></span><button type="button" class="fb" data-act="insph" title="${tr('插入 %s 佔位符')}">%s</button></div>
-    <textarea id="cell-editor" rows="3" spellcheck="false" aria-label="${T`${esc(c)} 的 ${esc(k)}`}">${esc(S.editing.draft)}</textarea>
-    <div class="chat" id="ed-pv">${renderMC(S.editing.draft, true, baseHex(k))}</div>
-    <div class="ed-colors" id="ed-colors"></div>
-    <div class="ed-act"><button type="button" class="btn sm primary" data-act="save">${tr('儲存')}</button><button type="button" class="btn sm" data-act="cancel">${tr('取消')}</button>${canRevert?`<button type="button" class="btn sm ghost" data-act="revert">${tr('還原成原始值')}</button>`:''}<span class="hint">${tr('Ctrl+Enter 儲存 · Esc 取消')}</span></div>
-  </div>`;
+// The game-preview editor works on "visible characters": each one carries its style and its span in the
+// source string. Edits are diffed against the old characters and only the changed stretch of the source is
+// rewritten, so untouched § codes stay exactly as they were.
+const FLAGS = ['l','m','n','o','k'];
+const stEq = (a, b) => (a.c || null) === (b.c || null) && FLAGS.every(f => !!a[f] === !!b[f]);
+const stKey = st => (st.c || '-') + FLAGS.filter(f => st[f]).join('');
+function stFromKey(k){ const st = {}; if(!k) return st; if(k[0] !== '-') st.c = k[0]; for(const f of k.slice(1)) st[f] = 1; return st; }
+function pfxOf(s){ return S.pfx === '&' && !/§[0-9a-fk-or]/i.test(s) && /&[0-9a-fk-or]/i.test(s) ? '&' : '§'; }
+function parseEd(s, init){
+  const out = []; let st = init ? {...init} : {};
+  for(const t of tokenize(s)){
+    if(t.t === 'code'){ if(COLOR[t.ch]) st = {c:t.ch}; else if(t.ch === 'r') st = {}; else st = {...st, [t.ch]:1}; continue; }
+    if(t.t === 'ph' || t.raw === '%%'){ out.push({t:t.raw, st, s:t.i, e:t.i + t.raw.length, atom:true}); continue; }
+    for(let j = 0; j < t.s.length; j++) out.push({t:t.s[j], st, s:t.i + j, e:t.i + j + 1});
+  }
+  return out;
 }
-function colorChipsHTML(s){
-  const toks = tokenize(s); const parts = [];
-  toks.forEach((t, ti) => {
-    if(t.t === 'code' && COLOR[t.ch]) parts.push(`<button type="button" class="cchip" data-act="pop" data-ti="${ti}"><i style="--sw:#${COLOR[t.ch]}"></i>${esc(t.raw)} ${tr(CNAME[t.ch])}</button>`);
-  });
-  const bh = S.editing && baseHex(S.editing.k);
-  const baseNote = bh ? `<span>${T`地圖元件顏色 ${`<span class="sw" style="--sw:#${bh}"></span><span class="mono">${esc(keyColors(S.editing.k)[0])}</span>`}（開頭沒有 § 時用這個顏色，在「用在哪裡」修改）`}</span>` : '';
-  return (parts.length ? `<span>${tr('§ 色碼，點一下修改：')}</span>${parts.join('')}` : '<span>' + tr('沒有 § 色碼。用上方色塊插入。') + '</span>') + baseNote;
+const bare = ch => ({t:ch.t, st:ch.st, atom:!!ch.atom});
+// the shortest run of codes that turns style X into style Y
+function trans(X, Y, P){
+  const lost = FLAGS.some(f => X[f] && !Y[f]);
+  let out = '';
+  if((X.c || null) !== (Y.c || null) || lost){
+    out = P + (Y.c || 'r');
+    for(const f of FLAGS) if(Y[f]) out += P + f;
+  } else for(const f of FLAGS) if(Y[f] && !X[f]) out += P + f;
+  return out;
+}
+function charsToSource(chars, P, from){
+  let st = from || {}, out = '';
+  for(const ch of chars){ out += trans(st, ch.st, P) + ch.t; st = ch.st; }
+  return out;
+}
+// rewrite only the part of `src` that differs between the old and new characters
+function spliceEd(src, old, neu){
+  const n = old.length, m = neu.length;
+  const same = (a, b) => a.t === b.t && !!a.atom === !!b.atom && stEq(a.st, b.st);
+  let p = 0; while(p < n && p < m && same(old[p], neu[p])) p++;
+  if(p === n && p === m) return src;
+  let q = 0; while(q < n - p && q < m - p && same(old[n-1-q], neu[m-1-q])) q++;
+  const P = pfxOf(src), ins = neu.slice(p, m - q);
+  const firstSt = ins.length ? ins[0].st : (q ? old[n-q].st : null);
+  let pos, st;
+  if(p < n && firstSt && stEq(firstSt, old[p].st)){ pos = old[p].s; st = old[p].st; }
+  else { pos = p ? old[p-1].e : 0; st = p ? old[p-1].st : {}; }
+  let out = '';
+  for(const ch of ins){ out += trans(st, ch.st, P) + ch.t; st = ch.st; }
+  let end;
+  if(q){
+    const j = n - q, gs = j ? old[j-1].e : 0;
+    if(pos > gs){ end = old[j].s; out += trans(st, old[j].st, P); }
+    else if(stEq(st, j ? old[j-1].st : {})) end = gs;
+    else { end = old[j].s; out += trans(st, old[j].st, P); }
+  } else end = n ? Math.max(pos, old[n-1].e) : pos;
+  return src.slice(0, pos) + out + src.slice(end);
+}
+function edCss(st, base){ return styleOf({c: st.c ? COLOR[st.c] : '', l:st.l, m:st.m, n:st.n, o:st.o}, base); }
+function renderEd(chars, base){
+  let h = '', run = '', rk = null, rst = null;
+  const flush = () => { if(run){ h += `<span data-s="${rk}"${rst.k ? ' class="obf-ed"' : ''} style="${edCss(rst, base)}">${esc(run)}</span>`; run = ''; } };
+  for(const ch of chars){
+    if(ch.atom){
+      flush(); rk = null;
+      h += ch.t === '%%' ? `<span class="pct" contenteditable="false" data-raw="%%" data-s="${stKey(ch.st)}" style="${edCss(ch.st, base)}">%</span>`
+        : `<span class="ph" contenteditable="false" data-raw="${esc(ch.t)}" data-s="${stKey(ch.st)}">${esc(ch.t)}</span>`;
+      continue;
+    }
+    const k = stKey(ch.st); if(k !== rk){ flush(); rk = k; rst = ch.st; }
+    run += ch.t;
+  }
+  flush();
+  if(!chars.length || chars[chars.length-1].t === '\n') h += '<br data-end="1">';
+  return h;
+}
+// read characters back from the editable DOM (after typing with an input method, spell-check fixes, etc.)
+function readEd(root){
+  const out = [];
+  const walk = (node, inh) => {
+    for(const n of node.childNodes){
+      if(n.nodeType === 3){ for(let j = 0; j < n.data.length; j++) out.push({t:n.data[j], sk:inh}); continue; }
+      if(n.nodeType !== 1) continue;
+      if(n.dataset.raw){ out.push({t:n.dataset.raw, atom:true, sk:n.dataset.s || inh}); continue; }
+      if(n.tagName === 'BR'){ if(!n.dataset.end) out.push({t:'\n', sk:inh}); continue; }
+      if(/^(DIV|P)$/.test(n.tagName) && out.length && out[out.length-1].t !== '\n') out.push({t:'\n', sk:inh});
+      walk(n, n.dataset.s || inh);
+    }
+  };
+  walk(root, null);
+  for(let i = 0; i < out.length; i++) if(!out[i].sk && i) out[i].sk = out[i-1].sk;
+  for(let i = out.length - 1; i >= 0; i--) if(!out[i].sk) out[i].sk = out[i+1] ? out[i+1].sk : '-';
+  return out.map(x => ({t:x.t, atom:!!x.atom, st:stFromKey(x.sk)}));
+}
+function edIndex(root, node, off){
+  const r = document.createRange(); r.setStart(root, 0);
+  try{ r.setEnd(node, off); }catch(e){ return 0; }
+  const d = document.createElement('div'); d.appendChild(r.cloneContents());
+  return readEd(d).length;
+}
+function edPoint(root, i){
+  let n = 0; const kids = [...root.childNodes];
+  for(let x = 0; x < kids.length; x++){
+    const c = kids[x];
+    if(c.nodeType === 1 && (c.dataset.raw || c.tagName === 'BR')){
+      if(c.dataset.end) return [root, x];
+      if(i <= n) return [root, x];
+      n++; continue;
+    }
+    const tn = c.nodeType === 3 ? c : c.firstChild;
+    const L = tn && tn.nodeType === 3 ? tn.data.length : 0;
+    if(tn && i <= n + L) return [tn, i - n];
+    n += L;
+  }
+  return [root, kids.length];
+}
+function edGetSel(){
+  const ed = S.editing; if(!ed) return [0, 0];
+  if(ed.mode === 'raw'){ const ta = $('#cell-editor'); return ta ? [ta.selectionStart, ta.selectionEnd] : [0, 0]; }
+  const root = $('#ed-ce'), s = getSelection();
+  if(root && s.rangeCount && root.contains(s.anchorNode) && root.contains(s.focusNode)){
+    const r = s.getRangeAt(0);
+    const a = edIndex(root, r.startContainer, r.startOffset), b = edIndex(root, r.endContainer, r.endOffset);
+    return [Math.min(a, b), Math.max(a, b)];
+  }
+  if(ed.sel) return ed.sel;
+  const n = parseEd(ed.draft).length; return [n, n];
+}
+function edSetSel(a, b){
+  const ed = S.editing; if(!ed) return;
+  if(b === undefined) b = a;
+  if(ed.mode === 'raw'){ const ta = $('#cell-editor'); if(ta){ ta.focus({preventScroll:true}); ta.setSelectionRange(a, b); } ed.sel = [a, b]; return; }
+  const root = $('#ed-ce'); if(!root) return;
+  const n = parseEd(ed.draft).length; a = Math.max(0, Math.min(a, n)); b = Math.max(0, Math.min(b, n));
+  root.focus({preventScroll:true});
+  const [an, ao] = edPoint(root, a), [bn, bo] = edPoint(root, b);
+  const s = getSelection(); s.removeAllRanges(); const r = document.createRange();
+  r.setStart(an, ao); r.setEnd(bn, bo); s.addRange(r);
+  ed.sel = [a, b];
+}
+function caretStyle(chars, a, b){
+  const ed = S.editing;
+  if(ed && ed.pending && a === b) return ed.pending;
+  a = Math.min(a, chars.length); b = Math.min(b, chars.length);
+  if(a !== b && chars[a]) return chars[a].st;
+  return a > 0 ? chars[a-1].st : (chars[0] ? chars[0].st : {});
+}
+
+/* per-cell undo history: one stack per language + key, kept while the page is open */
+const HIST = new Map();
+function histFor(c, k){ const id = c + '\u0001' + k; let h = HIST.get(id); if(!h){ h = {stack:[], i:-1, t:0, kind:null}; HIST.set(id, h); } return h; }
+function histPush(h, v, kind){
+  if(h.i >= 0 && h.stack[h.i] === v) return;
+  const now = Date.now();
+  h.stack.length = h.i + 1;
+  if(kind === 'type' && h.kind === 'type' && now - h.t < 900 && h.i > 0) h.stack[h.i] = v;
+  else { h.stack.push(v); h.i++; if(h.stack.length > 300){ h.stack.shift(); h.i--; } }
+  h.t = now; h.kind = kind;
+}
+function histGo(d){
+  const ed = S.editing; if(!ed) return;
+  const h = histFor(ed.c, ed.k), j = h.i + d;
+  if(j < 0 || j >= h.stack.length) return;
+  h.i = j; h.kind = null; ed.draft = h.stack[j]; ed.pending = null;
+  const n = ed.mode === 'raw' ? ed.draft.length : parseEd(ed.draft).length;
+  edPaint([n, n]);
+}
+
+function cellEditorHTML(k, c){
+  const ed = S.editing, label = T`${esc(c)} 的 ${esc(k)}`;
+  if(ed.mode === 'raw') return `<textarea id="cell-editor" rows="2" spellcheck="false" aria-label="${label}">${esc(ed.draft)}</textarea><div class="chat ed-pv" id="ed-pv">${renderMC(ed.draft, false, baseHex(k))}</div>`;
+  const chars = parseEd(ed.draft);
+  return `<div class="chat ed-ce${chars.length ? '' : ' is-empty'}" id="ed-ce" contenteditable="true" spellcheck="false" role="textbox" aria-multiline="true" aria-label="${label}" data-ph="${tr('輸入文字')}">${renderEd(chars, baseHex(k))}</div>`;
 }
 function afterEditorRender(){
-  const ta = $('#cell-editor'); if(!ta) return;
-  $('#ed-colors').innerHTML = colorChipsHTML(S.editing.draft);
-  if(!S.editing.focused){ ta.focus(); const L = ta.value.length; ta.setSelectionRange(L, L); S.editing.focused = true; }
-  else if(S.editing.sel){ try{ ta.setSelectionRange(S.editing.sel[0], S.editing.sel[1]); }catch(e){} }
+  const ed = S.editing; if(!ed) return;
+  if(ed.mode === 'raw') autoGrow($('#cell-editor'));
+  const n = ed.mode === 'raw' ? ed.draft.length : parseEd(ed.draft).length;
+  let sel = ed.caret != null ? [ed.caret, ed.caret] : (ed.sel || [n, n]);
+  ed.caret = null;
+  edSetSel(Math.min(sel[0], n), Math.min(sel[1], n));
+  renderEdbar(); placeFloat();
 }
-function edRefresh(){
-  const ta = $('#cell-editor'); if(!ta) return;
-  S.editing.draft = ta.value;
-  $('#ed-pv').innerHTML = renderMC(ta.value, true, baseHex(S.editing.k));
-  $('#ed-colors').innerHTML = colorChipsHTML(ta.value);
+function autoGrow(ta){ if(!ta) return; ta.style.height = 'auto'; ta.style.height = (ta.scrollHeight + 2) + 'px'; }
+// repaint the open editor after the draft changed, keeping the caret
+function edPaint(sel){
+  const ed = S.editing; if(!ed) return;
+  if(ed.mode === 'raw'){
+    const ta = $('#cell-editor'); if(!ta) return;
+    if(ta.value !== ed.draft) ta.value = ed.draft;
+    autoGrow(ta);
+    $('#ed-pv').innerHTML = renderMC(ed.draft, false, baseHex(ed.k));
+    if(sel) edSetSel(sel[0], sel[1]);
+  } else {
+    const root = $('#ed-ce'); if(!root) return;
+    const chars = parseEd(ed.draft);
+    root.innerHTML = renderEd(chars, baseHex(ed.k));
+    root.classList.toggle('is-empty', !chars.length);
+    if(sel) edSetSel(sel[0], sel[1]);
+  }
+  renderEdbar(); placeFloat();
 }
-function openEditor(k, c){
-  if(S.editing && S.editing.k === k && S.editing.c === c) return;
-  if(S.editing) commitEditor(true);
+function edSet(src, kind, sel){
+  const ed = S.editing; if(!ed) return;
+  if(src !== ed.draft){ ed.draft = src; histPush(histFor(ed.c, ed.k), src, kind); }
+  edPaint(sel);
+}
+function edReplace(a, b, ins, kind){
+  const ed = S.editing, old = parseEd(ed.draft);
+  const neu = old.slice(0, a).map(bare).concat(ins, old.slice(b).map(bare));
+  ed.pending = null;
+  edSet(spliceEd(ed.draft, old, neu), kind, [a + ins.length, a + ins.length]);
+}
+function edInsertText(text, kind){
+  const ed = S.editing; if(!ed) return;
+  text = text.replace(/\r\n?/g, '\n');
+  if(ed.mode === 'raw'){ rawInsert(text); return; }
+  const [a, b] = edGetSel(), chars = parseEd(ed.draft), st = caretStyle(chars, a, b);
+  edReplace(a, b, [...text].flatMap(ch => [...ch].map(u => ({t:u, st}))), kind || 'type');
+}
+// pasted text keeps its § codes: they become colors instead of literal characters
+function edPasteText(text){
+  const ed = S.editing; if(!ed) return;
+  text = text.replace(/\r\n?/g, '\n');
+  if(ed.mode === 'raw'){ rawInsert(text); return; }
+  const [a, b] = edGetSel(), chars = parseEd(ed.draft), st = caretStyle(chars, a, b);
+  edReplace(a, b, parseEd(text, st).map(bare), 'paste');
+}
+function edDelete(dir){
+  const ed = S.editing, chars = parseEd(ed.draft);
+  let [a, b] = edGetSel();
+  if(a === b){
+    if(dir < 0){ if(!a) return; a--; if(a > 0 && /[\udc00-\udfff]/.test(chars[a].t) && /[\ud800-\udbff]/.test(chars[a-1].t)) a--; }
+    else { if(b >= chars.length) return; b++; if(b < chars.length && /[\udc00-\udfff]/.test(chars[b].t) && /[\ud800-\udbff]/.test(chars[b-1].t)) b++; }
+  }
+  edReplace(a, b, [], 'type');
+}
+function syncFromDom(){
+  const ed = S.editing, root = $('#ed-ce'); if(!ed || !root) return;
+  const sel = edGetSel();
+  const old = parseEd(ed.draft), neu = readEd(root);
+  edSet(spliceEd(ed.draft, old, neu), 'type', sel);
+}
+// color / format from the toolbar
+function edColor(ch){
+  const ed = S.editing; if(!ed) return;
+  if(ed.mode === 'raw'){ rawCode(ch); return; }
+  const [a, b] = edGetSel(), chars = parseEd(ed.draft);
+  const mod = st => ch === 'r' ? {} : {...st, c:ch};
+  if(a === b){ ed.pending = mod(caretStyle(chars, a, b)); edSetSel(a); renderEdbar(); return; }
+  const neu = chars.map((x, i) => i >= a && i < b ? {...bare(x), st: mod(x.st)} : bare(x));
+  ed.pending = null;
+  edSet(spliceEd(ed.draft, chars, neu), 'style', [a, b]);
+}
+function edFormat(f){
+  const ed = S.editing; if(!ed) return;
+  if(ed.mode === 'raw'){ rawCode(f); return; }
+  const [a, b] = edGetSel(), chars = parseEd(ed.draft);
+  if(a === b){ const st = {...caretStyle(chars, a, b)}; if(st[f]) delete st[f]; else st[f] = 1; ed.pending = st; edSetSel(a); renderEdbar(); return; }
+  const all = chars.slice(a, b).every(x => x.st[f]);
+  const neu = chars.map((x, i) => { if(i < a || i >= b) return bare(x); const st = {...x.st}; if(all) delete st[f]; else st[f] = 1; return {...bare(x), st}; });
+  ed.pending = null;
+  edSet(spliceEd(ed.draft, chars, neu), 'style', [a, b]);
+}
+function edPlaceholder(){
+  const ed = S.editing; if(!ed) return;
+  if(ed.mode === 'raw'){ rawInsert('%s'); return; }
+  const [a, b] = edGetSel(), chars = parseEd(ed.draft);
+  edReplace(a, b, [{t:'%s', atom:true, st:caretStyle(chars, a, b)}], 'style');
+}
+function rawInsert(text){
+  const ed = S.editing, ta = $('#cell-editor'); if(!ta) return;
+  const a = ta.selectionStart, b = ta.selectionEnd;
+  edSet(ed.draft.slice(0, a) + text + ed.draft.slice(b), 'style', [a + text.length, a + text.length]);
+}
+// raw mode: a color right after the caret's color code replaces that code; a selection gets wrapped
+function rawCode(ch){
+  const ed = S.editing, ta = $('#cell-editor'); if(!ta) return;
+  const v = ed.draft, a = ta.selectionStart, b = ta.selectionEnd, P = pfxOf(v);
+  if(a === b && a >= 2 && /[§&]/.test(v[a-2]) && /[0-9a-fk-or]/i.test(v[a-1]) && (COLOR[v[a-1].toLowerCase()] || v[a-1].toLowerCase() === 'r') && (COLOR[ch] || ch === 'r')){
+    edSet(v.slice(0, a-2) + v[a-2] + ch + v.slice(a), 'style', [a, a]); return;
+  }
+  if(a !== b){ const w = P + ch + v.slice(a, b) + (ch === 'r' ? '' : P + 'r'); edSet(v.slice(0, a) + w + v.slice(b), 'style', [a, a + w.length]); return; }
+  // a color resets formatting in the game, so it goes in front of format codes that sit right before the caret
+  let at = a;
+  if(COLOR[ch]) while(at >= 2 && /[§&]/.test(v[at-2]) && /[k-o]/i.test(v[at-1])) at -= 2;
+  edSet(v.slice(0, at) + P + ch + v.slice(at), 'style', [a + 2, a + 2]);
+}
+function baseValue(k){ const b = S.langs[S.base] && S.langs[S.base].entries.get(k); return b ? b.v : null; }
+function edFillBase(){
+  const ed = S.editing; if(!ed) return;
+  const v = baseValue(ed.k); if(v == null || ed.c === S.base) return;
+  const n = ed.mode === 'raw' ? v.length : parseEd(v).length;
+  ed.pending = null; edSet(v, 'fill', [n, n]);
+}
+function fillBase(k, c){
+  if(c === S.base || baseValue(k) == null) return;
+  openEditor(k, c); edFillBase(); toast(tr('已填入基準，Ctrl+Z 可以復原'));
+}
+
+function openEditor(k, c, caret){
+  if(S.editing){ if(S.editing.k === k && S.editing.c === c) return; commitEditor(true); }
   const e = S.langs[c] && S.langs[c].entries.get(k);
-  let draft = e ? e.v : '';
-  S.editing = {k, c, draft, focused:false, sel:null};
+  const draft = e ? e.v : '';
+  S.editing = {k, c, draft, saved: draft, mode: S.view === 'raw' ? 'raw' : 'wys', pending: null, caret: caret == null ? null : caret, sel: null};
+  histPush(histFor(c, k), draft, 'open');
   renderTable();
 }
 function commitEditor(silent){
-  if(!S.editing) return;
-  const {k, c, draft} = S.editing;
-  const lang = ensureLang(c);
-  const e = lang.entries.get(k);
-  if(e){ if(e.v !== draft){ e.v = draft; S.sticky.add(k); } }
-  else if(draft !== ''){ lang.entries.set(k, {v:draft, orig:undefined, file:fileFor(c)}); S.sticky.add(k); }
-  S.editing = null; closePop();
-    renderSide(); renderTable();
-  if(!silent) toast(tr('已儲存，記得匯出語言檔'));
+  const ed = S.editing; if(!ed) return;
+  if(ed.mode === 'wys' && ed.composing) syncFromDom();
+  const {k, c, draft} = ed;
+  const lang = ensureLang(c), e = lang.entries.get(k);
+  let changed = false;
+  if(e){ if(e.v !== draft){ e.v = draft; changed = true; } }
+  else if(draft !== ''){ lang.entries.set(k, {v:draft, orig:undefined, file:fileFor(c)}); changed = true; }
+  S.editing = null; hideFloat();
+  if(changed){ S.sticky.add(k); S.lastEdit = {k, c, t: Date.now()}; }
+  renderSide(); renderTable();
+  if(changed && !silent) toast(tr('已儲存，記得匯出語言檔'));
 }
-function cancelEditor(){ S.editing = null; closePop(); renderTable(); }
-function insertAtCursor(text, wrapEnd){
-  const ta = $('#cell-editor'); if(!ta) return;
-  const a = (S.editing.sel ? S.editing.sel[0] : ta.selectionStart), b = (S.editing.sel ? S.editing.sel[1] : ta.selectionEnd);
-  const sel = ta.value.slice(a, b);
-  const ins = sel && wrapEnd ? text + sel + wrapEnd : text;
-  ta.value = ta.value.slice(0, a) + ins + ta.value.slice(b);
-  const pos = a + ins.length; ta.focus(); ta.setSelectionRange(pos, pos); S.editing.sel = [pos, pos];
-  edRefresh();
+function cancelEditor(){
+  const ed = S.editing; if(!ed) return;
+  if(ed.draft !== ed.saved) histPush(histFor(ed.c, ed.k), ed.saved, 'cancel');
+  S.editing = null; hideFloat(); renderTable();
 }
 
-/* ---------- color popover ---------- */
-function openPop(anchor, mode){
-  const ta = $('#cell-editor'); if(!ta) return;
-  S.editing.sel = [ta.selectionStart, ta.selectionEnd];
-  const tok = tokenize(ta.value)[mode.ti]; if(!tok || tok.t !== 'code') return;
-  const title = T`更改 ${`<code>${esc(tok.raw)}</code>`}`;
-  S.pop = {mode, tok};
-  const pop = $('#pop');
-  const curCh = tok && tok.t === 'code' ? tok.ch : null;
-  pop.innerHTML = `<h4>${title}</h4>
-    <div class="pal">${MC.map(([ch,h,n]) => `<button type="button" class="swb${ch===curCh?' on':''}" style="--sw:#${h}" data-pal="${ch}" title="${ch} ${tr(n)}"></button>`).join('')}</div>
-    <p class="note">${tr('語言檔只能用這 16 種 § 色碼。要用 hex 顏色，請在下方「用在哪裡」修改地圖文字元件的 color。')}</p>`;
-  pop.hidden = false;
-  const r = anchor.getBoundingClientRect();
-  const w = 248, h = pop.offsetHeight;
-  let left = Math.min(Math.max(8, r.left), window.innerWidth - w - 8);
-  let top = r.bottom + 6; if(top + h > window.innerHeight - 8) top = Math.max(8, r.top - h - 6);
-  pop.style.left = left + 'px'; pop.style.top = top + 'px';
-  const first = pop.querySelector('.swb.on') || pop.querySelector('.swb'); if(first) first.focus();
+/* toolbar above the table */
+function buildEdbar(){
+  const pal = MC.map(([ch, h, n]) => `<button type="button" class="swb" style="--sw:#${h}" data-ec="${ch}" title="${S.pfx}${ch} ${tr(n)}" aria-label="${tr(n)}"></button>`).join('');
+  const fm = [['l','B','font-weight:700','Ctrl+B'],['o','I','font-style:italic','Ctrl+I'],['n','U','text-decoration:underline','Ctrl+U'],['m','S','text-decoration:line-through',''],['k','?','','']]
+    .map(([f, label, css, key]) => `<button type="button" class="fb" data-ef="${f}" title="${S.pfx}${f} ${tr(FMT[f])}${key ? ' · ' + key : ''}" aria-label="${tr(FMT[f])}" aria-pressed="false" style="${css}">${label}</button>`).join('');
+  $('#edbar').innerHTML = `<div class="eb-group eb-pal" role="group" aria-label="${tr('顏色')}">${pal}</div>
+    <div class="eb-group" role="group" aria-label="${tr('格式')}">${fm}<button type="button" class="fb" data-ec="r" title="${tr('清除顏色與格式')}" aria-label="${tr('清除顏色與格式')}">↺</button></div>
+    <div class="eb-group"><button type="button" class="fb mono" data-ea="ph" title="${tr('插入 %s 佔位符')}">%s</button></div>
+    <div class="eb-group"><button type="button" class="fb" data-ea="undo" title="${tr('復原')} · Ctrl+Z" aria-label="${tr('復原')}">${ico('undo')}</button><button type="button" class="fb" data-ea="redo" title="${tr('重做')} · Ctrl+Y" aria-label="${tr('重做')}">${ico('redo')}</button></div>
+    <div class="eb-group"><button type="button" class="fb wide" data-ea="fill" title="${tr('用基準語言的文字取代')}">${ico('fill')}<span>${tr('填入基準')}</span></button></div>
+    <span class="eb-hint" id="eb-hint"></span>`;
+  renderEdbar();
 }
+function renderEdbar(){
+  const bar = $('#edbar'); if(!bar || !bar.firstChild) return;
+  const ed = S.editing;
+  bar.classList.toggle('off', !ed);
+  bar.querySelectorAll('button').forEach(b => { b.disabled = !ed; b.classList.remove('on'); if(b.dataset.ef) b.setAttribute('aria-pressed', 'false'); });
+  const hint = $('#eb-hint');
+  if(!ed){ hint.textContent = tr('點一下格子開始編輯'); return; }
+  const h = histFor(ed.c, ed.k);
+  bar.querySelector('[data-ea="undo"]').disabled = h.i <= 0;
+  bar.querySelector('[data-ea="redo"]').disabled = h.i >= h.stack.length - 1;
+  const bv = baseValue(ed.k);
+  bar.querySelector('[data-ea="fill"]').disabled = ed.c === S.base || bv == null || bv === ed.draft;
+  if(ed.mode === 'raw'){ hint.textContent = tr('游標停在色碼後面時，點顏色會直接替換'); return; }
+  const chars = parseEd(ed.draft), L = chars.length, [a, b] = (ed.sel || [L, L]).map(x => Math.min(x, L));
+  const sts = a === b ? [caretStyle(chars, a, b)] : chars.slice(a, b).map(x => x.st);
+  const c0 = sts.length ? sts[0].c : null;
+  if(c0 && sts.every(s => s.c === c0)){ const sw = bar.querySelector(`[data-ec="${c0}"]`); if(sw) sw.classList.add('on'); }
+  for(const f of FLAGS){ if(sts.length && sts.every(s => s[f])){ const fb = bar.querySelector(`[data-ef="${f}"]`); fb.classList.add('on'); fb.setAttribute('aria-pressed', 'true'); } }
+  hint.textContent = a === b ? tr('反白文字後套用顏色或格式') : T`已選取 ${b - a} 個字`;
+}
+/* save / cancel buttons that follow the cell */
+function placeFloat(){
+  const fl = $('#edfloat'), td = document.querySelector('#grid td.cell.editing');
+  if(!S.editing || !td){ fl.hidden = true; return; }
+  fl.hidden = false;
+  const w = $('#grid-wrap').getBoundingClientRect(), r = td.getBoundingClientRect();
+  const fw = fl.offsetWidth, fh = fl.offsetHeight;
+  if(r.bottom < w.top + 30 || r.top > w.bottom - 10){ fl.style.visibility = 'hidden'; return; }
+  fl.style.visibility = '';
+  const top = Math.max(r.top + 4, Math.min(r.bottom + 4, w.bottom - fh - 6));
+  const left = Math.max(w.left + 4, Math.min(r.right - fw, w.right - fw - 6));
+  fl.style.top = top + 'px'; fl.style.left = left + 'px';
+}
+function hideFloat(){ const fl = $('#edfloat'); if(fl) fl.hidden = true; }
+// where in the text a click landed, so the caret starts there
+function caretFromPoint(td, x, y){
+  const box = td.querySelector('.chat:not(.none), .rawv'); if(!box) return null;
+  let node = null, off = 0;
+  if(document.caretPositionFromPoint){ const p = document.caretPositionFromPoint(x, y); if(p){ node = p.offsetNode; off = p.offset; } }
+  else if(document.caretRangeFromPoint){ const r = document.caretRangeFromPoint(x, y); if(r){ node = r.startContainer; off = r.startOffset; } }
+  if(!node || !box.contains(node)) return null;
+  const pre = document.createRange(); pre.setStart(box, 0);
+  try{ pre.setEnd(node, off); }catch(e){ return null; }
+  const d = document.createElement('div'); d.appendChild(pre.cloneContents());
+  if(box.classList.contains('rawv')) return d.textContent.length;
+  if(d.querySelector('.empty')) return 0;
+  let n = d.textContent.length;
+  d.querySelectorAll('.ph').forEach(p => { n -= p.textContent.length - 1; });
+  return n;
+}
+/* keep the viewed row in place when switching preview / raw */
+function rowOf(k){ return [...document.querySelectorAll('#grid tr[data-k]')].find(r => r.dataset.k === k); }
+function viewAnchor(){
+  const wrap = $('#grid-wrap'), w = wrap.getBoundingClientRect();
+  const head = wrap.querySelector('thead'); const top = w.top + (head ? head.offsetHeight : 0);
+  const le = S.lastEdit && Date.now() - S.lastEdit.t < 5 * 60000 ? S.lastEdit : null;
+  if(le){ const row = rowOf(le.k); if(row){ const r = row.getBoundingClientRect(); if(r.bottom > top && r.top < w.bottom) return {k:le.k, c:le.c, off:r.top - w.top, flash:true}; } }
+  for(const row of wrap.querySelectorAll('tr[data-k]')){ const r = row.getBoundingClientRect(); if(r.bottom > top + 4) return {k:row.dataset.k, off:r.top - w.top}; }
+  return null;
+}
+function restoreAnchor(a){
+  if(!a) return;
+  const wrap = $('#grid-wrap'), row = rowOf(a.k); if(!row) return;
+  wrap.scrollTop += row.getBoundingClientRect().top - wrap.getBoundingClientRect().top - a.off;
+  if(a.flash){ const td = [...row.querySelectorAll('td.cell')].find(t => t.dataset.c === a.c); if(td){ td.classList.remove('flash'); void td.offsetWidth; td.classList.add('flash'); setTimeout(() => td.classList.remove('flash'), 1400); } }
+}
+
 function closePop(){ $('#pop').hidden = true; S.pop = null; }
-function applyPop(choice){
-  const ta = $('#cell-editor'); if(!ta || !S.pop || !S.pop.tok) return;
-  const tok = S.pop.tok, newTok = tok.p + choice.ch;
-  const v = ta.value;
-  ta.value = v.slice(0, tok.i) + newTok + v.slice(tok.i + tok.raw.length);
-  const pos = tok.i + newTok.length; S.editing.sel = [pos, pos];
-  edRefresh(); closePop(); ta.focus(); ta.setSelectionRange(pos, pos);
-}
 
 /* ---------- export ---------- */
 const EXT = {json:'.json', yaml:'.yml', lang:'.lang'};
@@ -1717,10 +2093,11 @@ function addKey(){
   renderSide(); renderTable(); toast(T`已新增 ${k}`);
 }
 
-/* ---------- sessions: save / open / autosave ---------- */
+/* ---------- projects: autosave in this browser, export / import as .json ---------- */
 const SESSION_APP = 'translation-key-workbench';
 function snapshot(){
-  return {app: SESSION_APP, version: 1, savedAt: new Date().toISOString(),
+  const meta = PROJ.cur && projMeta(PROJ.cur);
+  return {app: SESSION_APP, version: 1, savedAt: new Date().toISOString(), name: meta ? meta.name : undefined,
     base: S.base, visible: S.visible, settings: {pfx: S.pfx, ignore: S.ignore, view: S.view},
     files: [...S.files.values()],
     langs: Object.fromEntries(Object.entries(S.langs).map(([c, l]) => [c, {defaultFile: l.defaultFile, entries: [...l.entries]}])),
@@ -1739,26 +2116,33 @@ function restoreSession(d){
   if(d.settings){ if(d.settings.pfx) S.pfx = d.settings.pfx; if(Array.isArray(d.settings.ignore)) S.ignore = d.settings.ignore; if(d.settings.view) S.view = d.settings.view; }
   S.base = S.langs[d.base] ? d.base : (Object.keys(S.langs)[0] || 'en_us');
   S.visible = (d.visible || []).filter(c => S.langs[c]); if(!S.visible.length) S.visible = Object.keys(S.langs).slice(0, 4);
-  S.sample = false; S.limit = 150; S.remindHidden = -1;
+  S.sample = false; S.limit = 150;
   renderAll();
 }
 const sessionStamp = () => { const d = new Date(), z = n => String(n).padStart(2, '0'); return `${d.getFullYear()}${z(d.getMonth()+1)}${z(d.getDate())}-${z(d.getHours())}${z(d.getMinutes())}`; };
 function sessionName(){
-  const names = computeSources().filter(s => s.type === 'map').map(s => s.name);
-  const base = (names[0] || tr('翻譯鍵')).replace(/[\\\/:*?"<>|]+/g, '_').slice(0, 40);
-  return `${base}-${tr('工作階段')}-${sessionStamp()}.json`;
+  const meta = PROJ.cur && projMeta(PROJ.cur);
+  const base = ((meta && meta.name) || tr('翻譯鍵')).replace(/[\\\/:*?"<>|]+/g, '_').slice(0, 40);
+  return `${base}-${tr('專案')}-${sessionStamp()}.json`;
 }
 async function saveSession(){
   if(S.sample){ toast(tr('目前是範例資料，先載入你的地圖或資源包')); return; }
-  const ok = await saveFile(sessionName(), JSON.stringify(snapshot()));
-  if(ok){ S.sessionSavedAt = Date.now(); S.sessionSavedDirty = dirtyCount(); renderRemind(); }
+  if(S.editing) commitEditor(true);
+  await saveFile(sessionName(), JSON.stringify(snapshot()));
 }
 async function openSessionText(text){
   let d; try{ d = JSON.parse(text); }catch(e){ toast(tr('無法讀取：檔案不是有效的 JSON')); return; }
-  try{ restoreSession(d); toast(tr('已開啟工作階段') + (d.savedAt ? T`（儲存於 ${new Date(d.savedAt).toLocaleString(uiLocale())}）` : '')); }
-  catch(e){ toast(e.message || tr('無法開啟工作階段')); }
+  if(!d || d.app !== SESSION_APP){ toast(tr('這不是翻譯鍵工作台的工作階段檔')); return; }
+  if(S.editing) commitEditor(true);
+  await projSave();
+  try{
+    restoreSession(d);
+    projCreate(d.name || '');
+    renderProjects(); scheduleAutosave();
+    toast(tr('已匯入成新專案') + (d.savedAt ? T`（儲存於 ${new Date(d.savedAt).toLocaleString(uiLocale())}）` : ''));
+  }catch(e){ toast(e.message || tr('無法開啟工作階段')); }
 }
-// autosave to this browser (IndexedDB)
+// IndexedDB
 function idb(){
   if(idb._p) return idb._p;
   idb._p = new Promise((res, rej) => {
@@ -1767,45 +2151,133 @@ function idb(){
   });
   return idb._p;
 }
-async function idbDo(mode, fn){ const db = await idb(); return new Promise((res, rej) => { const tx = db.transaction('kv', mode); const req = fn(tx.objectStore('kv')); tx.oncomplete = () => res(req && req.result); tx.onerror = () => rej(tx.error); }); }
+async function idbDo(mode, fn){ const db = await idb(); return new Promise((res, rej) => { const tx = db.transaction('kv', mode); const req = fn(tx.objectStore('kv')); tx.oncomplete = () => res(req && req.result); tx.onerror = () => rej(tx.error); tx.onabort = () => rej(tx.error); }); }
 const hasContent = () => S.files.size > 0 || S.usages.size > 0;
+
+const PROJ = {list: [], cur: null, last: null, renaming: null};
+const newId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const projMeta = id => PROJ.list.find(p => p.id === id);
+async function projLoadIndex(){
+  try{ const r = await idbDo('readonly', st => st.get('projects')); if(r){ PROJ.list = r.list || []; PROJ.last = r.last || null; } }catch(e){}
+}
+async function projSaveIndex(){ try{ await idbDo('readwrite', st => st.put({list: PROJ.list, last: PROJ.cur || PROJ.last}, 'projects')); }catch(e){} }
+function autoName(){
+  const src = computeSources();
+  const s = src.find(x => x.type === 'map') || src.find(x => x.type === 'pack') || src.find(x => x.type === 'datapack');
+  if(s) return s.name;
+  const f = [...S.files.values()].find(x => !x.isNew);
+  return f ? f.path.split('/').pop() : '';
+}
+function projCreate(name){
+  const p = {id: newId(), name: name || autoName() || tr('未命名專案'), auto: !name, savedAt: Date.now(), dirty: 0};
+  PROJ.list.unshift(p); PROJ.cur = p.id; PROJ.last = p.id;
+  projSaveIndex();
+  return p;
+}
+async function projSave(){
+  clearTimeout(S._as); S._as = null;
+  if(!PROJ.cur || S.sample) return;
+  const meta = projMeta(PROJ.cur); if(!meta) return;
+  if(meta.auto){ const n = autoName(); if(n) meta.name = n; }
+  const keep = new Set([...S.files.keys(), ...S.texts.keys()]);
+  const rec = {id: meta.id, data: snapshot(), handles: [...S.handles].filter(([p]) => keep.has(p)), dirs: [...S.dirs]};
+  meta.savedAt = Date.now(); meta.dirty = dirtyCount();
+  try{ await idbDo('readwrite', st => st.put(rec, 'p:' + meta.id)); S.autosaveFailed = false; }
+  catch(e){
+    // some browsers can't store folder permissions: keep the data anyway
+    try{ rec.handles = []; rec.dirs = []; await idbDo('readwrite', st => st.put(rec, 'p:' + meta.id)); S.autosaveFailed = false; }
+    catch(e2){ S.autosaveFailed = true; }
+  }
+  S.autosavedAt = Date.now();
+  await projSaveIndex(); renderProjects(); updateAutosaveStatus();
+}
 function scheduleAutosave(){
-  if(S.sample || S.busy || !hasContent()) return;
-  clearTimeout(S._as);
-  S._as = setTimeout(async () => {
-    try{ await idbDo('readwrite', st => st.put({savedAt: Date.now(), dirty: dirtyCount(), data: snapshot()}, 'session')); S.autosavedAt = Date.now(); S.autosaveFailed = false; }
-    catch(e){ S.autosaveFailed = true; }
-    updateAutosaveStatus();
-  }, 1200);
+  if(S.sample || S.busy || !PROJ.cur) return;
+  clearTimeout(S._as); S._as = setTimeout(projSave, 1000);
+}
+async function projOpen(id, skipSave){
+  if(S.editing) commitEditor(true);
+  if(!skipSave) await projSave();
+  let rec = null; try{ rec = await idbDo('readonly', st => st.get('p:' + id)); }catch(e){}
+  if(!rec || !rec.data){ toast(tr('無法開啟這個專案')); return false; }
+  PROJ.cur = id; PROJ.last = id;
+  restoreSession(rec.data);
+  for(const [p, h] of rec.handles || []) S.handles.set(p, h);
+  for(const [p, h] of rec.dirs || []) S.dirs.set(p, h);
+  clearTimeout(S._as); S._as = null;
+  projSaveIndex(); renderAll(); renderProjects(); updateAutosaveStatus();
+  return true;
+}
+async function projNew(){
+  if(S.editing) commitEditor(true);
+  await projSave();
+  resetAll(); projCreate(tr('未命名專案')).auto = true;
+  renderAll(); renderProjects(); scheduleAutosave();
+  toast(tr('已建立新專案，載入地圖或資源包開始'));
+}
+async function projDelete(id){
+  PROJ.list = PROJ.list.filter(p => p.id !== id);
+  try{ await idbDo('readwrite', st => st.delete('p:' + id)); }catch(e){}
+  if(PROJ.cur === id){
+    PROJ.cur = null; clearTimeout(S._as); S._as = null; S.editing = null;
+    if(!(PROJ.list.length && await projOpen(PROJ.list[0].id, true))){ resetAll(); loadSample(); renderAll(); }
+  }
+  await projSaveIndex(); renderProjects(); toast(tr('已刪除專案'));
+}
+function projRename(id, name){
+  const p = projMeta(id); name = (name || '').trim();
+  PROJ.renaming = null;
+  if(p && name){ p.name = name; p.auto = false; projSaveIndex(); }
+  renderProjects();
+}
+function fmtWhen(t){
+  if(!t) return '';
+  const d = new Date(t), now = new Date();
+  return d.toDateString() === now.toDateString() ? d.toLocaleTimeString(uiLocale(), {hour:'2-digit', minute:'2-digit'}) : d.toLocaleDateString(uiLocale(), {month:'short', day:'numeric'});
+}
+function renderProjects(){
+  const el = $('#proj-list'); if(!el || PROJ.renaming) return;
+  $('#proj-count').textContent = PROJ.list.length || '';
+  el.innerHTML = PROJ.list.length ? PROJ.list.map(p => {
+    const cur = p.id === PROJ.cur;
+    return `<div class="proj${cur ? ' on' : ''}" data-pid="${esc(p.id)}">
+      <button type="button" class="proj-open" data-pact="open"${cur ? ' aria-current="true"' : ''} title="${cur ? tr('目前的專案') : tr('切換到這個專案')}"><span class="proj-name">${esc(p.name)}</span><span class="proj-meta">${fmtWhen(p.savedAt)}${p.dirty ? ' · ' + T`${p.dirty} 處未匯出` : ''}</span></button>
+      <button type="button" class="icon-btn" data-pact="rename" title="${tr('改名')}" aria-label="${tr('改名')}">${ico('edit')}</button>
+      <button type="button" class="icon-btn danger" data-pact="del" title="${tr('刪除專案')}" aria-label="${tr('刪除專案')}">${ico('trash')}</button>
+    </div>`;
+  }).join('') : `<p class="hint">${tr('載入地圖或資源包後，會自動建立專案並存在這個瀏覽器。')}</p>`;
 }
 function updateAutosaveStatus(){
   const el = $('#autosave-status'); if(!el) return;
-  if(S.sample || !hasContent()){ el.textContent = tr('工作階段檔（.json）包含所有語言、修改、地圖掃描結果與地圖檔的顏色修改，下次開啟就能接著做，不必重新掃描地圖。'); return; }
-  const t = S.autosavedAt ? new Date(S.autosavedAt).toLocaleTimeString(uiLocale(), {hour:'2-digit', minute:'2-digit'}) : '';
-  el.textContent = S.autosaveFailed ? tr('這個瀏覽器無法自動暫存，請手動「儲存工作階段」。')
-    : t ? T`已自動暫存在這個瀏覽器（${t}）。換電腦或清除瀏覽資料前，請儲存工作階段檔。` : tr('修改會自動暫存在這個瀏覽器。');
+  if(S.autosaveFailed){ el.textContent = tr('這個瀏覽器無法自動儲存，請用「匯出」把專案存成 .json。'); return; }
+  if(S.sample || !PROJ.cur){ el.textContent = ''; return; }
+  el.textContent = S.autosavedAt ? T`已自動儲存在這個瀏覽器（${fmtWhen(S.autosavedAt)}）` : tr('修改會自動儲存在這個瀏覽器。');
 }
-async function checkPreviousSession(){
-  let rec = null;
-  try{ rec = await idbDo('readonly', st => st.get('session')); }catch(e){ return; }
-  if(!rec || !rec.data || !S.sample) return;
-  const d = rec.data; const nFiles = (d.files || []).length, nUse = (d.usages || []).length;
-  if(!nFiles && !nUse) return;
-  const b = $('#banner'); b.hidden = false;
-  b.innerHTML = `<span>${T`${`<b>${tr('找到上次的工作階段')}</b>`}（${new Date(rec.savedAt).toLocaleString(uiLocale())}，${nFiles} 個語言檔${rec.dirty ? T`，${`<b>${T`${rec.dirty} 處修改還沒匯出`}</b>`}` : ''}）。`}</span><button class="btn sm primary" type="button" data-act="resume">${tr('繼續上次的工作')}</button><button class="btn sm" type="button" data-act="skip-resume">${tr('不用，看範例')}</button><span class="hint" style="flex-basis:100%">${tr('載入新的地圖或資源包後，自動暫存會被新的工作取代。')}</span>`;
-  S.prevSession = rec.data;
+// loading something while a project already has content: add to it, or start another project?
+function suggestNewProject(items){
+  const src = computeSources();
+  const hasMap = src.some(s => s.type === 'map');
+  const hasPack = src.some(s => s.type === 'pack');
+  const incomingMap = items.some(it => /(^|\/)level\.dat$/i.test(it.path) || /(^|\/)region\/[^\/]+\.mca$/i.test(it.path));
+  return {rec: (hasMap && hasPack) || (incomingMap && hasMap), why: incomingMap && hasMap ? 'map' : (hasMap && hasPack ? 'full' : '')};
 }
-function renderRemind(){
-  const el = $('#remind'); const n = dirtyCount();
-  const show = !S.sample && n > 0 && S.remindHidden !== n;
-  el.hidden = !show; document.body.classList.toggle('has-remind', show);
-  if(!show) return;
-  const saved = S.sessionSavedAt && S.sessionSavedDirty === n;
-  el.innerHTML = `<span>${T`${`<b>${T`${n} 處修改還沒匯出`}</b>`}，遊戲裡還看不到這些變更。`}</span><button class="btn sm primary" type="button" data-rm="export">${tr('匯出語言檔')}</button><button class="btn sm" type="button" data-rm="session">${saved ? tr('已儲存工作階段 ✓') : tr('儲存工作階段')}</button><button class="btn sm ghost" type="button" data-rm="hide" title="${tr('先隱藏，下次有新修改時再提醒')}">${tr('稍後')}</button>`;
+function askTarget(items){
+  const {rec, why} = suggestNewProject(items);
+  const meta = PROJ.cur && projMeta(PROJ.cur);
+  const m = $('#modal');
+  const addBtn = `<button type="button" class="btn${rec ? '' : ' primary'}" data-tg="add">${T`加入目前專案「${esc(meta ? meta.name : '')}」`}</button>`;
+  const newBtn = `<button type="button" class="btn${rec ? ' primary' : ''}" data-tg="new">${tr('開新專案')}</button>`;
+  m.innerHTML = `<div class="dialog" role="dialog" aria-modal="true" aria-labelledby="tg-title">
+    <h3 id="tg-title">${tr('要放進哪個專案？')}</h3>
+    <p class="hint">${why === 'map' ? tr('你載入的是另一張地圖，建議開新專案，兩張地圖的翻譯才不會混在一起。') : why === 'full' ? tr('目前專案已經有地圖和資源包了，建議開新專案。') : tr('加入目前專案可以把地圖和資源包放在一起比對；開新專案則從空白開始。')}</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">${rec ? newBtn + addBtn : addBtn + newBtn}<button type="button" class="btn ghost" data-tg="cancel">${tr('取消')}</button></div>
+  </div>`;
+  m.hidden = false; m._tg = items;
+  const first = m.querySelector('.btn.primary'); if(first) first.focus();
 }
 
 /* ---------- events ---------- */
-$('#ui-lang').onchange = e => { UI = e.target.value; try{ localStorage.setItem('lkw-ui', UI); }catch(err){} applyStatic(); closePop(); renderAll(); if(!$('#modal').hidden) $('#modal').hidden = true; };
+$('#ui-lang').onchange = e => { UI = e.target.value; try{ localStorage.setItem('lkw-ui', UI); }catch(err){} applyStatic(); closePop(); buildEdbar(); renderAll(); renderProjects(); updateAutosaveStatus(); if(!$('#modal').hidden) $('#modal').hidden = true; };
 const guessCode = name => { const m = name.match(/(?:^|[^a-z])([a-z]{2,3}_[a-z0-9]{2,4})(?=[^a-z0-9]|$)/i); return m ? m[1].toLowerCase() : ''; };
 const CODE_RE = /^[a-z]{2,3}(_[a-z0-9]{2,4})?$/;
 function loadLangFiles(files){
@@ -1837,6 +2309,7 @@ $('#btn-lang-files').onclick = () => $('#in-lang').click();
 $('#in-lang').onchange = e => { const f = [...e.target.files]; e.target.value = ''; loadLangFiles(f); };
 $('#modal').addEventListener('click', e => { const b = e.target.closest('[data-lc]'); if(!b) return; if(b.dataset.lc === 'ok') confirmLangCodes(); else $('#modal').hidden = true; });
 $('#modal').addEventListener('keydown', e => { if(e.key === 'Enter' && /^lc-\d+$/.test(e.target.id)){ e.preventDefault(); confirmLangCodes(); } });
+$('#modal').addEventListener('click', e => { const b = e.target.closest('[data-tg]'); if(!b) return; const m = $('#modal'), items = m._tg; m.hidden = true; m._tg = null; if(items && b.dataset.tg !== 'cancel') ingest(items, b.dataset.tg); });
 $('#btn-files').onclick = () => $('#in-files').click();
 $('#btn-folder').onclick = () => $('#in-folder').click();
 if(window.showDirectoryPicker) $('#btn-folder-rw').hidden = false;
@@ -1849,12 +2322,12 @@ async function openFolder(){
     if(e && e.name === 'AbortError'){ showRwHelp(); return; }
     try{ dir = await window.showDirectoryPicker(); }catch(e2){ showRwHelp(); return; }
   }
-  const items = [];
+  const items = [], dirs = new Map();
   const walk = async (h, prefix) => {
     for await (const [name, child] of h.entries()){
       const p = prefix + name;
       if(child.kind === 'directory'){
-        if(/\/lang$/i.test(p) || /^lang$/i.test(name)) S.dirs.set(p, child);
+        if(/\/lang$/i.test(p) || /^lang$/i.test(name)) dirs.set(p, child);
         await walk(child, p + '/');
       } else if(classify(p)){
         items.push({path: p, handle: child, bytes: async () => new Uint8Array(await (await child.getFile()).arrayBuffer())});
@@ -1863,12 +2336,13 @@ async function openFolder(){
   };
   progress(tr('正在列出資料夾內容'), dir.name, 0);
   await walk(dir, dir.name + '/');
-  S.rootName = dir.name;
+  items.dirs = dirs;
   ingest(items);
 }
 $('#in-files').onchange = e => { ingest(itemsFromFiles(e.target.files)); e.target.value = ''; };
 $('#in-folder').onchange = e => { ingest(itemsFromFiles(e.target.files)); e.target.value = ''; };
 $('#btn-export').onclick = () => { if(S.editing) commitEditor(true); openExport(); };
+$('#dirty').onclick = () => { if(S.editing) commitEditor(true); openExport(); };
 $('#btn-add-key').onclick = openAddKey;
 function showRwHelp(){
   const m = $('#modal');
@@ -1883,27 +2357,39 @@ function showRwHelp(){
 }
 $('#modal').addEventListener('click', e => { const b = e.target.closest('[data-rw]'); if(!b) return; $('#modal').hidden = true; if(b.dataset.rw === 'ro') $('#in-folder').click(); });
 $('#banner').addEventListener('click', e => { const a = e.target.closest('[data-act]'); if(!a) return;
-  if(a.dataset.act === 'resume'){ restoreSession(S.prevSession); S.prevSession = null; toast(tr('已回到上次的工作')); return; }
-  if(a.dataset.act === 'skip-resume'){ S.prevSession = null; renderBanner(); return; }
   if(a.dataset.act === 'pick-lang'){ $('#in-lang').click(); return; }
   if(a.dataset.act === 'pick-folder') $('#in-folder').click(); else $('#in-files').click(); });
 $('#btn-save-session').onclick = saveSession;
 $('#btn-open-session').onclick = () => $('#in-session').click();
+$('#btn-new-proj').onclick = projNew;
 $('#in-session').onchange = async e => { const f = e.target.files[0]; e.target.value = ''; if(f) openSessionText(await f.text()); };
-$('#remind').addEventListener('click', e => {
-  const b = e.target.closest('[data-rm]'); if(!b) return;
-  if(b.dataset.rm === 'export'){ if(S.editing) commitEditor(true); openExport(); }
-  else if(b.dataset.rm === 'session') saveSession();
-  else { S.remindHidden = dirtyCount(); renderRemind(); }
+$('#proj-list').addEventListener('click', e => {
+  const b = e.target.closest('[data-pact]'); if(!b) return;
+  const id = b.closest('[data-pid]').dataset.pid, a = b.dataset.pact;
+  if(a === 'open'){ if(id !== PROJ.cur) projOpen(id); return; }
+  if(a === 'rename'){
+    const p = projMeta(id); if(!p) return; PROJ.renaming = id;
+    const row = b.closest('.proj');
+    row.querySelector('.proj-open').outerHTML = `<input type="text" class="proj-input" value="${esc(p.name)}" aria-label="${tr('專案名稱')}" maxlength="80">`;
+    const inp = row.querySelector('.proj-input'); inp.focus(); inp.select();
+    inp.addEventListener('keydown', ev => { if(ev.key === 'Enter') projRename(id, inp.value); else if(ev.key === 'Escape'){ PROJ.renaming = null; renderProjects(); } });
+    inp.addEventListener('blur', () => { if(PROJ.renaming === id) projRename(id, inp.value); });
+    return;
+  }
+  if(a === 'del'){
+    if(!b.classList.contains('armed')){ b.classList.add('armed'); b.title = tr('再按一次刪除'); setTimeout(() => { if(b.isConnected){ b.classList.remove('armed'); b.title = tr('刪除專案'); } }, 3000); return; }
+    projDelete(id);
+  }
 });
-window.addEventListener('beforeunload', e => { if(!S.sample && dirtyCount()){ e.preventDefault(); e.returnValue = ''; } });
+window.addEventListener('beforeunload', e => { if(S._as) projSave(); if(!S.sample && dirtyCount()){ e.preventDefault(); e.returnValue = ''; } });
+window.addEventListener('pagehide', () => { if(S._as) projSave(); });
 $('#sources').addEventListener('click', e => {
   const b = e.target.closest('[data-sact]'); if(!b) return;
   const a = b.dataset.sact;
   if(a === 'load-pack' || a === 'load-map') $('#btn-folder').click();
   else if(a === 'filter-undef'){ S.filter = 'undef'; S.q = ''; $('#q').value = ''; S.prefix = ''; S.sticky.clear(); S.limit = 150; renderTable(); $('#grid-wrap').scrollIntoView({behavior:'smooth', block:'start'}); }
   else if(a === 'remove'){
-    if(!b.classList.contains('armed')){ b.classList.add('armed','danger'); b.textContent = tr('確定移除？'); setTimeout(() => { if(b.isConnected){ b.classList.remove('armed'); b.textContent = tr('移除'); } }, 3000); return; }
+    if(!b.classList.contains('armed')){ b.classList.add('armed','danger'); b.title = tr('確定移除？'); setTimeout(() => { if(b.isConnected){ b.classList.remove('armed'); b.title = tr('移除這個來源載入的內容'); } }, 3000); toast(tr('再按一次移除')); return; }
     const root = b.dataset.root; if(S.sample){ resetAll(); renderAll(); toast(tr('已清除範例資料')); return; }
     removeSource(root); toast(tr('已移除'));
   }
@@ -1911,7 +2397,7 @@ $('#sources').addEventListener('click', e => {
 $('#set-ignore').addEventListener('change', () => renderSide());
 $('#btn-clear').onclick = function(){
   if(!this.classList.contains('armed')){ const n = dirtyCount(); this.classList.add('armed'); this.textContent = n && !S.sample ? T`有 ${n} 處未匯出，再按一次清除` : tr('再按一次確認清除'); setTimeout(() => { this.classList.remove('armed'); this.textContent = tr('清除全部'); }, 3000); return; }
-  this.classList.remove('armed'); this.textContent = tr('清除全部'); resetAll(); renderAll(); idbDo('readwrite', st => st.delete('session')).catch(() => {}); toast(tr('已清除'));
+  this.classList.remove('armed'); this.textContent = tr('清除全部'); const wasSample = S.sample; resetAll(); renderAll(); if(!wasSample) scheduleAutosave(); toast(tr('已清除'));
 };
 $('#btn-new-lang').onclick = () => {
   const inp = $('#new-lang'); const c = inp.value.trim().toLowerCase();
@@ -1923,76 +2409,164 @@ $('#btn-new-lang').onclick = () => {
 $('#new-lang').addEventListener('keydown', e => { if(e.key === 'Enter') $('#btn-new-lang').click(); });
 $('#lang-list').addEventListener('change', e => {
   const c = e.target.dataset.vis; if(!c) return;
+  if(S.editing) commitEditor(true);
   if(e.target.checked){ if(!S.visible.includes(c)) S.visible.push(c); } else S.visible = S.visible.filter(x => x !== c);
   const order = Object.keys(S.langs); S.visible.sort((a,b) => a === S.base ? -1 : b === S.base ? 1 : order.indexOf(a) - order.indexOf(b));
-  if(S.editing && !S.visible.includes(S.editing.c)) S.editing = null;
-  renderTable();
+  renderTable(); scheduleAutosave();
 });
 $('#lang-list').addEventListener('click', e => {
   const c = e.target.dataset.base; if(!c) return;
+  if(S.editing) commitEditor(true);
   S.base = c; if(!S.visible.includes(c)) S.visible.unshift(c);
   S.visible.sort((a,b) => a === S.base ? -1 : b === S.base ? 1 : 0);
   renderSide(); renderTable();
 });
-$('#set-prefix').onchange = e => { S.pfx = e.target.value; saveSettings(); renderAll(); };
+$('#set-prefix').onchange = e => { S.pfx = e.target.value; saveSettings(); buildEdbar(); renderAll(); };
 $('#set-ignore').oninput = e => { S.ignore = e.target.value.split('\n').map(x => x.trim()).filter(Boolean); saveSettings(); clearTimeout(S._ig); S._ig = setTimeout(renderTable, 300); };
-$('#q').oninput = e => { S.q = e.target.value; S.limit = 150; S.sticky.clear(); clearTimeout(S._q); S._q = setTimeout(renderTable, 160); };
-$('#prefix').onchange = e => { S.prefix = e.target.value; S.limit = 150; S.sticky.clear(); renderTable(); };
-$('#chips').addEventListener('click', e => { const b = e.target.closest('[data-filter]'); if(!b) return; S.filter = b.dataset.filter; S.limit = 150; S.sticky.clear(); renderTable(); });
-document.querySelector('.seg').addEventListener('click', e => { const b = e.target.closest('[data-view]'); if(!b) return; S.view = b.dataset.view; saveSettings(); renderAll(); });
+$('#q').oninput = e => { S.q = e.target.value; S.limit = 150; S.sticky.clear(); clearTimeout(S._q); S._q = setTimeout(() => { if(S.editing) commitEditor(true); renderTable(); }, 160); };
+$('#prefix').onchange = e => { if(S.editing) commitEditor(true); S.prefix = e.target.value; S.limit = 150; S.sticky.clear(); renderTable(); };
+$('#chips').addEventListener('click', e => { const b = e.target.closest('[data-filter]'); if(!b) return; if(S.editing) commitEditor(true); S.filter = b.dataset.filter; S.limit = 150; S.sticky.clear(); renderTable(); });
+document.querySelector('.seg').addEventListener('click', e => {
+  const b = e.target.closest('[data-view]'); if(!b || b.dataset.view === S.view) return;
+  if(S.editing) commitEditor(true);
+  const a = viewAnchor();
+  S.view = b.dataset.view; saveSettings(); renderAll(); restoreAnchor(a);
+});
 
+// grid: a press on a cell opens the editor with the caret where you pressed
+$('#grid').addEventListener('mousedown', e => {
+  if(e.button !== 0) return;
+  const td = e.target.closest('td.cell'); if(!td || td.classList.contains('editing')) return;
+  if(e.target.closest('button, a, input, textarea, select')) return;
+  const row = td.closest('tr[data-k]'); if(!row) return;
+  const caret = caretFromPoint(td, e.clientX, e.clientY);
+  e.preventDefault();
+  openEditor(row.dataset.k, td.dataset.c, caret);
+});
+// a press anywhere else saves, like a spreadsheet (a drag that starts inside the cell doesn't count)
+document.addEventListener('mousedown', e => {
+  if(!S.editing || e.button !== 0) return;
+  if(e.target === $('#grid-wrap')) return;   // scrollbar
+  if(e.target.closest('#grid td.cell, #edbar, #edfloat, #pop, #modal, #toast')) return;
+  // buttons inside the table: save on click instead, so the click still reaches the button after the table redraws
+  if(e.target.closest('#grid button')){ S.editing.commitOnClick = true; return; }
+  commitEditor(false);
+}, true);
 $('#grid').addEventListener('click', async e => {
-  const actEl = e.target.closest('[data-act]');
-  const rowEl = e.target.closest('tr[data-k]'); const k = rowEl && rowEl.dataset.k;
-  if(actEl){
-    const act = actEl.dataset.act;
-    if(act === 'more'){ S.limit += 150; renderTable(); return; }
-    if(act === 'uses'){ S.expanded.has(k) ? S.expanded.delete(k) : S.expanded.add(k); renderTable(); return; }
-    if(act === 'ucolor'){ const uk = actEl.closest('tr[data-uses]').dataset.uses; openCompPop(actEl, uk, +actEl.dataset.ui); return; }
-    if(act === 'notr'){
-      if(S.noTr.has(k)) S.noTr.delete(k); else S.noTr.add(k);
-      S.sticky.add(k); renderSide(); renderTable(); toast(S.noTr.has(k) ? tr('已標記為不需翻譯') : tr('已取消「不需翻譯」')); return;
+  let actEl = e.target.closest('[data-act]');
+  if(!actEl) return;
+  if(S.editing && S.editing.commitOnClick && !actEl.closest('td.cell.editing')){
+    const row = actEl.closest('tr'), td = actEl.closest('td.cell'), act = actEl.dataset.act, ui = actEl.dataset.ui;
+    const isUses = !!(row && row.dataset.uses !== undefined), rk = row ? (isUses ? row.dataset.uses : row.dataset.k) : null, c = td && td.dataset.c;
+    commitEditor(true);
+    let scope = $('#grid');
+    if(rk != null){
+      const r = [...document.querySelectorAll(isUses ? '#grid tr[data-uses]' : '#grid tr[data-k]')].find(x => (isUses ? x.dataset.uses : x.dataset.k) === rk);
+      if(!r) return;
+      scope = c ? ([...r.querySelectorAll('td.cell')].find(t => t.dataset.c === c) || r) : r;
     }
-    if(act === 'copykey'){ try{ await navigator.clipboard.writeText(k); toast(T`已複製 ${k}`); }catch(err){ toast(tr('無法複製，請手動選取鍵名')); } return; }
-    if(act === 'del'){
-      if(!actEl.classList.contains('armed')){ actEl.classList.add('armed'); actEl.textContent = tr('確定？'); setTimeout(() => { if(actEl.isConnected){ actEl.classList.remove('armed'); actEl.textContent = tr('刪除'); } }, 3000); return; }
-      let n = 0; for(const l of Object.values(S.langs)) if(l.entries.delete(k)) n++;
-      S.deleted += n; if(S.editing && S.editing.k === k) S.editing = null;
-      renderSide(); renderTable(); toast(T`已從 ${n} 個語言刪除 ${k}`); return;
-    }
-    if(act === 'ins'){ const ch = actEl.dataset.code; insertAtCursor(S.pfx + ch, ch === 'r' ? '' : S.pfx + 'r'); return; }
-    if(act === 'insph'){ insertAtCursor('%s'); return; }
-    if(act === 'pop'){ openPop(actEl, {type:'replace', ti:+actEl.dataset.ti}); return; }
-    if(act === 'save'){ edRefresh(); commitEditor(false); return; }
-    if(act === 'cancel'){ cancelEditor(); return; }
-    if(act === 'revert'){ const en = S.langs[S.editing.c].entries.get(S.editing.k); $('#cell-editor').value = en.orig; edRefresh(); return; }
+    actEl = scope.querySelector(`[data-act="${act}"]${ui != null ? `[data-ui="${ui}"]` : ''}`);
+    if(!actEl) return;
   }
-  const mk = e.target.closest('#ed-pv [data-ti]');
-  if(mk){ openPop(mk, {type:'replace', ti:+mk.dataset.ti}); return; }
-  const td = e.target.closest('td.cell');
-  if(td && !td.classList.contains('editing') && rowEl) openEditor(k, td.dataset.c);
+  const rowEl = actEl.closest('tr[data-k]'); const k = rowEl && rowEl.dataset.k;
+  const act = actEl.dataset.act;
+  if(act === 'more'){ S.limit += 150; renderTable(); return; }
+  if(act === 'uses'){ S.expanded.has(k) ? S.expanded.delete(k) : S.expanded.add(k); renderTable(); return; }
+  if(act === 'ucolor'){ const uk = actEl.closest('tr[data-uses]').dataset.uses; openCompPop(actEl, uk, +actEl.dataset.ui); return; }
+  if(act === 'fill'){ fillBase(k, actEl.closest('td.cell').dataset.c); return; }
+  if(act === 'notr'){
+    if(S.noTr.has(k)) S.noTr.delete(k); else S.noTr.add(k);
+    S.sticky.add(k); renderSide(); renderTable(); toast(S.noTr.has(k) ? tr('已標記為不需翻譯') : tr('已取消「不需翻譯」')); return;
+  }
+  if(act === 'copykey'){ try{ await navigator.clipboard.writeText(k); toast(T`已複製 ${k}`); }catch(err){ toast(tr('無法複製，請手動選取鍵名')); } return; }
+  if(act === 'del'){
+    if(!actEl.classList.contains('armed')){ actEl.classList.add('armed'); actEl.title = tr('再按一次刪除'); toast(tr('再按一次刪除這個鍵')); setTimeout(() => { if(actEl.isConnected){ actEl.classList.remove('armed'); actEl.title = tr('從所有語言刪除這個鍵'); } }, 3000); return; }
+    let n = 0; for(const l of Object.values(S.langs)) if(l.entries.delete(k)) n++;
+    S.deleted += n; if(S.editing && S.editing.k === k){ S.editing = null; hideFloat(); }
+    renderSide(); renderTable(); toast(T`已從 ${n} 個語言刪除 ${k}`); return;
+  }
 });
-$('#grid').addEventListener('input', e => { if(e.target.id === 'cell-editor') edRefresh(); });
-$('#grid').addEventListener('keydown', e => {
-  if(e.target.id !== 'cell-editor') return;
-  if(e.key === 'Enter' && (e.ctrlKey || e.metaKey)){ e.preventDefault(); edRefresh(); commitEditor(false); }
-  else if(e.key === 'Escape'){ e.preventDefault(); cancelEditor(); }
+// game-preview editor
+const grid = $('#grid');
+grid.addEventListener('beforeinput', e => {
+  if(e.target.id !== 'ed-ce' || !S.editing || e.isComposing) return;
+  const t = e.inputType;
+  if(t === 'insertText' || t === 'insertReplacementText'){
+    const text = e.data != null ? e.data : (e.dataTransfer ? e.dataTransfer.getData('text/plain') : null);
+    if(text == null) return; e.preventDefault(); edInsertText(text, 'type');
+  }
+  else if(t === 'insertParagraph' || t === 'insertLineBreak'){ e.preventDefault(); edInsertText('\n', 'type'); }
+  else if(t === 'insertFromPaste' || t === 'insertFromDrop'){ const text = e.dataTransfer && e.dataTransfer.getData('text/plain'); if(text == null) return; e.preventDefault(); edPasteText(text); }
+  else if(t === 'deleteContentBackward'){ e.preventDefault(); edDelete(-1); }
+  else if(t === 'deleteContentForward'){ e.preventDefault(); edDelete(1); }
+  else if(t === 'historyUndo'){ e.preventDefault(); histGo(-1); }
+  else if(t === 'historyRedo'){ e.preventDefault(); histGo(1); }
+  else if(t === 'formatBold'){ e.preventDefault(); edFormat('l'); }
+  else if(t === 'formatItalic'){ e.preventDefault(); edFormat('o'); }
+  else if(t === 'formatUnderline'){ e.preventDefault(); edFormat('n'); }
+  else if(t === 'formatStrikeThrough'){ e.preventDefault(); edFormat('m'); }
 });
-$('#grid').addEventListener('mouseup', e => { if(e.target.id === 'cell-editor') S.editing.sel = [e.target.selectionStart, e.target.selectionEnd]; });
-$('#grid').addEventListener('keyup', e => { if(e.target.id === 'cell-editor') S.editing.sel = [e.target.selectionStart, e.target.selectionEnd]; });
+grid.addEventListener('input', e => {
+  if(!S.editing) return;
+  if(e.target.id === 'ed-ce'){ if(!e.isComposing && !S.editing.composing) syncFromDom(); return; }
+  if(e.target.id === 'cell-editor'){ const ed = S.editing; ed.draft = e.target.value; histPush(histFor(ed.c, ed.k), ed.draft, 'type'); autoGrow(e.target); $('#ed-pv').innerHTML = renderMC(ed.draft, false, baseHex(ed.k)); renderEdbar(); placeFloat(); }
+});
+grid.addEventListener('compositionstart', e => { if(e.target.id === 'ed-ce' && S.editing) S.editing.composing = true; });
+grid.addEventListener('compositionend', e => { if(e.target.id === 'ed-ce' && S.editing){ S.editing.composing = false; syncFromDom(); } });
+grid.addEventListener('paste', e => {
+  if(!S.editing || (e.target.id !== 'ed-ce' && !e.target.closest('#ed-ce'))) return;
+  e.preventDefault(); edPasteText(e.clipboardData ? e.clipboardData.getData('text/plain') : '');
+});
+const edCopy = (e, cut) => {
+  if(!S.editing || S.editing.mode !== 'wys' || !e.target.closest('#ed-ce')) return;
+  const [a, b] = edGetSel(); if(a === b) return;
+  const chars = parseEd(S.editing.draft);
+  e.preventDefault(); e.clipboardData.setData('text/plain', charsToSource(chars.slice(a, b), pfxOf(S.editing.draft)));
+  if(cut) edReplace(a, b, [], 'cut');
+};
+grid.addEventListener('copy', e => edCopy(e, false));
+grid.addEventListener('cut', e => edCopy(e, true));
+grid.addEventListener('keydown', e => {
+  if(!S.editing || (e.target.id !== 'ed-ce' && e.target.id !== 'cell-editor')) return;
+  const mod = e.ctrlKey || e.metaKey, key = e.key.toLowerCase();
+  if(e.key === 'Enter' && mod){ e.preventDefault(); commitEditor(false); return; }
+  if(e.key === 'Escape'){ e.preventDefault(); cancelEditor(); return; }
+  if(mod && !e.altKey && (key === 'z' || key === 'y')){ e.preventDefault(); histGo(key === 'y' || e.shiftKey ? 1 : -1); return; }
+  if(mod && !e.altKey && !e.shiftKey && (key === 'b' || key === 'i' || key === 'u')){ e.preventDefault(); edFormat({b:'l', i:'o', u:'n'}[key]); return; }
+});
+document.addEventListener('selectionchange', () => {
+  const ed = S.editing; if(!ed) return;
+  const el = ed.mode === 'raw' ? $('#cell-editor') : $('#ed-ce');
+  if(!el || !(document.activeElement === el || el.contains(document.activeElement))) return;
+  ed.sel = edGetSel(); renderEdbar();
+});
+$('#edbar').addEventListener('mousedown', e => { if(e.target.closest('button')) e.preventDefault(); });
+$('#edbar').addEventListener('click', e => {
+  const b = e.target.closest('button'); if(!b || b.disabled || !S.editing) return;
+  if(b.dataset.ec) edColor(b.dataset.ec);
+  else if(b.dataset.ef) edFormat(b.dataset.ef);
+  else if(b.dataset.ea === 'ph') edPlaceholder();
+  else if(b.dataset.ea === 'undo') histGo(-1);
+  else if(b.dataset.ea === 'redo') histGo(1);
+  else if(b.dataset.ea === 'fill') edFillBase();
+});
+$('#edfloat').addEventListener('mousedown', e => e.preventDefault());
+$('#edfloat').addEventListener('click', e => { const b = e.target.closest('[data-fa]'); if(!b) return; if(b.dataset.fa === 'save') commitEditor(false); else cancelEditor(); });
+$('#grid-wrap').addEventListener('scroll', placeFloat, {passive:true});
+window.addEventListener('resize', placeFloat);
+window.addEventListener('scroll', placeFloat, {passive:true});
 
 $('#pop').addEventListener('click', e => {
   const cp = e.target.closest('[data-cpal]'); if(cp){ applyComp(cp.dataset.cpal); return; }
   if(e.target.closest('[data-pact="capply"]')){ applyComp($('#pop-hex').value.trim()); return; }
   if(e.target.closest('[data-pact="cremove"]')){ applyComp(null); return; }
-  const p = e.target.closest('[data-pal]'); if(p){ applyPop({ch:p.dataset.pal}); return; }
 });
 $('#pop').addEventListener('input', e => {
   if(e.target.id === 'pop-color') $('#pop-hex').value = e.target.value;
   if(e.target.id === 'pop-hex' && /^#?[0-9a-fA-F]{6}$/.test(e.target.value.trim())) $('#pop-color').value = '#' + e.target.value.trim().replace('#','').toLowerCase();
 });
 $('#pop').addEventListener('keydown', e => { if(e.key === 'Enter' && S.pop && S.pop.mode.type === 'comp'){ e.preventDefault(); applyComp($('#pop-hex').value.trim()); } if(e.key === 'Escape') closePop(); });
-document.addEventListener('mousedown', e => { if(!$('#pop').hidden && !e.target.closest('#pop') && !e.target.closest('[data-act="pop"],[data-act="ucolor"],#ed-pv [data-ti]')) closePop(); });
+document.addEventListener('mousedown', e => { if(!$('#pop').hidden && !e.target.closest('#pop') && !e.target.closest('[data-act="ucolor"]')) closePop(); });
 
 $('#modal').addEventListener('click', e => {
   if(e.target.id === 'modal'){ $('#modal').hidden = true; return; }
@@ -2003,16 +2577,34 @@ $('#modal').addEventListener('change', e => { if(e.target.id === 'exp-fmt'){ S.e
 $('#modal').addEventListener('keydown', e => { if(e.key === 'Escape') $('#modal').hidden = true; if(e.key === 'Enter' && e.target.id === 'ak-key') addKey(); });
 
 let dragDepth = 0;
-window.addEventListener('dragenter', e => { if(e.dataTransfer && [...e.dataTransfer.types].includes('Files')){ dragDepth++; $('#drop').hidden = false; } });
-window.addEventListener('dragleave', () => { dragDepth = Math.max(0, dragDepth-1); if(!dragDepth) $('#drop').hidden = true; });
-window.addEventListener('dragover', e => e.preventDefault());
-window.addEventListener('drop', async e => { e.preventDefault(); dragDepth = 0; $('#drop').hidden = true; if(!e.dataTransfer) return; const items = await itemsFromDrop(e.dataTransfer); ingest(items); });
+const hasFiles = e => e.dataTransfer && [...e.dataTransfer.types].includes('Files');
+window.addEventListener('dragenter', e => { if(hasFiles(e)){ dragDepth++; $('#drop').hidden = false; } });
+window.addEventListener('dragleave', e => { if(!hasFiles(e)) return; dragDepth = Math.max(0, dragDepth-1); if(!dragDepth) $('#drop').hidden = true; });
+window.addEventListener('dragover', e => { if(hasFiles(e)) e.preventDefault(); });
+window.addEventListener('drop', async e => { if(!hasFiles(e)) return; e.preventDefault(); dragDepth = 0; $('#drop').hidden = true; const items = await itemsFromDrop(e.dataTransfer); ingest(items); });
 
 /* ---------- boot ---------- */
+document.querySelectorAll('i[data-ic]').forEach(el => { el.outerHTML = ico(el.dataset.ic); });
 applyStatic();
+buildEdbar();
 loadSample();
 renderAll();
-checkPreviousSession();
+renderProjects();
+(async () => {
+  await projLoadIndex();
+  // the single autosave from earlier versions becomes a project
+  try{
+    const old = await idbDo('readonly', st => st.get('session'));
+    if(old && old.data && ((old.data.files || []).length || (old.data.usages || []).length)){
+      restoreSession(old.data); projCreate(''); await projSave();
+      await idbDo('readwrite', st => st.delete('session'));
+      renderProjects(); toast(tr('上次的自動暫存已轉成專案'));
+      return;
+    }
+  }catch(e){}
+  if(PROJ.last && projMeta(PROJ.last)) await projOpen(PROJ.last, true);
+  renderProjects(); updateAutosaveStatus();
+})();
 S.dl = { native: true, save: async ({filename, data}) => {
   const blob = data instanceof Blob ? data : new Blob([data], {type: /\.json$/i.test(filename) ? 'application/json' : 'text/plain'});
   const url = URL.createObjectURL(blob); const a = document.createElement('a');
